@@ -1,7 +1,7 @@
 .responsive-slider {
   width: 100%;
   position: relative;
-  margin-top:-20px;
+  /*margin-top:-20px;*/
 
 }
 .responsive-slider .touch-surface {
@@ -25,6 +25,7 @@
 .responsive-slider .slides ul li {
   display: inline-block;
   max-width: 100%;
+  list-style-type: none;
 }
 .responsive-slider .slides ul li .slide-body {
   display: inline-block;

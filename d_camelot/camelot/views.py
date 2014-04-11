@@ -19,9 +19,9 @@ from django.contrib.auth import authenticate, login, logout
 class HomeView(View):
     def get(self, request, *args, **kwargs):
         context = {}
-        return render(request, 'index.html',context)
+        return render(request, 'home.html',context)
 
 
 class IndexView(View):
     def get(self, request, *args, **kwargs):
-        return render(request, 'index.html', {})
+        return render(request, 'home.html', {})

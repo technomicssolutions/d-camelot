@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block title %}Home
+{% endblock title %}
+{% block extrahead%}
+{% endblock extrahead%}
+{% block controller %}
+  ng-controller="HomePageController" ng-init="init('{{csrf_token}}')"   
+{% endblock controller %}
+{% block body_id %}home{% endblock %}"
+{% block content %}
+    <div class="slide_container" >  
+        <div class="slider">
+            <div class="slide">
+                <div class="place_holder">
+                </div>
+                <div class="slide_content">
+                    <div class="responsive-slider" data-spy="responsive-slider" data-autoplay="true">
+                        <div class="slides" data-group="slides">
+                            <ul>
+                                <li>
+                              <div class="slide-body" data-group="slide">
+                                <img src="/static/img/slide/3.jpg">
+                              </div>
+                                </li>
+                                <li>
+                              <div class="slide-body" data-group="slide">
+                                <img src="/static/img/slide/2.jpg">
+                              </div>
+                                </li>
+                                <li>
+                              <div class="slide-body" data-group="slide">
+                                <img src="/static/img/slide/3.jpg">
+                              </div>
+                                </li>
+                                <li>
+                              <div class="slide-body" data-group="slide">
+                                <img src="/static/img/slide/2.jpg">
+                              </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <a class="slider-control left" href="#" data-jump="prev">Prev</a>
+                        <a class="slider-control right" href="#" data-jump="next">Next</a>
+                        <div class="pages">
+                          <a class="page" href="#" data-jump-to="1">1</a>
+                          <a class="page" href="#" data-jump-to="2">2</a>
+                          <a class="page" href="#" data-jump-to="3">3</a>
+                          <a class="page" href="#" data-jump-to="4">4</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide">
+                <div class="place_holder">
+                </div>
+                <div class="slide_content">
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

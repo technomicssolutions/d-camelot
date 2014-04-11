@@ -6,5 +6,4 @@ from views import (HomeView,IndexView)
 
 urlpatterns = patterns('',
 	url(r'^$', HomeView.as_view(), name="home"),
-    url(r'^index/$', IndexView.as_view(), name="index"),
-	)
+)

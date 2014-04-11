@@ -1,0 +1,304 @@
+body {
+    width: 100%;
+    height: auto;
+    font-family: 'Segoe UI';
+    margin: 0 auto;
+    background-color: #EBEBEB;
+    /*background-image: url(../img/cream_pixels.png);*/
+    /*border-left: 2px solid #EBEBEB;
+    border-right: 2px solid #EBEBEB;
+    moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    -webkit-box-shadow: 0 0 1em hsla(255, 90%, 90%, 0.9);
+    -moz-box-shadow: 0 0 1em hsla(255, 90%, 90%, 0.9);
+    box-shadow: 0 0 1em hsla(255, 90%, 90%, 0.9);*/
+    
+}
+@media (min-width: 1200px)
+{
+  .left_contents{min-height:600px;background-color:#fff;}
+  .middle_contents{min-height:600px;background-color:#eee;}
+  .right_contents{min-height:600px;}
+  .right_contents .right_contents_top{min-height:100px;height: auto;}
+  .right_contents .right_contents_middle{min-height:300px;height: auto;}
+  .right_contents .right_contents_bottom{min-height:100px;height: auto;}
+  .left_contents .left_contents_top{min-height:100px;height: auto;}
+  .left_contents .left_contents_middle{min-height:400px;height: auto;}
+  .left_contents .left_contents_bottom{min-height:100px;height: auto;}
+  .d_logo{padding: 18px 0px 0px 8px;}
+  .arrow-right{position:fixed;top:300px;right:10px;}
+  .arrow-left{position:fixed;top:300px;left:10px;}
+  .c_slide{margin-top: 10px;margin-left: -40px;}
+  .slider_img{height: 600px;}
+  .div_top{margin-top:-10px;}
+}
+@media (min-width: 992px)
+{
+  .left_contents{min-height:600px;background-color:#fff;}
+  .middle_contents{min-height:600px;background-color:#eee;}
+  .right_contents{min-height:600px;}
+  .right_contents .right_contents_top{min-height:100px;height: auto;}
+  .right_contents .right_contents_middle{min-height:300px;height: auto;}
+  .right_contents .right_contents_bottom{min-height:100px;height: auto;}
+  .left_contents .left_contents_top{min-height:100px;height: auto;}
+  .left_contents .left_contents_middle{min-height:400px;height: auto;}
+  .left_contents .left_contents_bottom{min-height:100px;height: auto;}
+  .d_logo{padding: 18px 0px 0px 8px;}
+  .arrow-right{position:fixed;top:300px;right:10px;}
+  .arrow-left{position:fixed;top:300px;left:10px;}
+  .c_slide{margin-top: 10px;margin-left: -40px;}
+  .slider_img{height: 600px;}
+  .div_top{margin-top:-10px;}
+}
+
+@media (min-width:768px)
+{
+  .left_contents{height:auto;background-color:#fff;}
+  .middle_contents{height:auto;background-color:#eee;}
+  .right_contents{height:auto;}
+  .right_contents .right_contents_top{height:auto;}
+  .right_contents .right_contents_middle{height:auto;}
+  .right_contents .right_contents_bottom{height:auto;}
+  .left_contents .left_contents_top{height:auto;}
+  .left_contents .left_contents_middle{height:auto;}
+  .left_contents .left_contents_bottom{height:auto;}
+  .d_logo{padding: 18px 0px 0px 8px;}
+  .arrow-right{position:fixed;top:300px;right:10px;}
+  .arrow-left{position:fixed;top:300px;left:10px;}
+  .d_logo{padding: 18px 0px 0px 8px;}
+  .slider_img{height: 600px;}
+  .div_top{margin-left: -5px;}
+
+    .sidebar-nav .navbar .navbar-collapse {
+      padding: 0;
+      max-height: none;
+    }
+  .sidebar-nav .navbar ul {
+    float: none;
+    display: block;
+  }
+  .sidebar-nav .navbar li {
+    float: none;
+    display: block;
+  }
+  .sidebar-nav .navbar li a {
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+}
+@media (max-width:767px)
+{
+  .left_contents{height:auto;background-color:#fff;}
+  .middle_contents{height:auto;background-color:#eee;}
+  .right_contents{height:auto;}
+  .right_contents .right_contents_top{height:auto;}
+  .right_contents .right_contents_middle{height:auto;}
+  .right_contents .right_contents_bottom{height:auto;}
+  .left_contents .left_contents_top{height:auto;}
+  .left_contents .left_contents_middle{height:auto;}
+  .left_contents .left_contents_bottom{height:auto;}
+  .d_logo{padding: 18px 0px 0px 8px;}
+  .arrow-right{position:fixed;top:300px;right:10px;}
+  .arrow-left{position:fixed;top:300px;left:10px;}
+  .slider_img{height: 600px;}
+   .div_top{margin-left: -5px;}
+  .sidebar-nav .navbar .navbar-collapse {
+    padding: 0;
+    max-height: none;
+  }
+  .sidebar-nav .navbar ul {
+    float: none;
+    display: block;
+  }
+  .sidebar-nav .navbar li {
+    float: none;
+    display: block;
+  }
+  .sidebar-nav .navbar li a {
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+}
+.shop1{
+   background-color:#4F5962;
+ }
+.shop1 h1{
+  color: #fff;
+}
+.shop1 p{
+  color: #99ABBB;
+}
+.shop2{
+   background-color:#FF9CAC;
+ }
+.shop2 h1{
+  color: #fff;
+}
+.shop2 p{
+  color: #AF5F6C;
+}
+.shop3{
+   background-color:#8FDFC4;
+ }
+.shop3 h1{
+  color: #fff;
+}
+.shop3 p{
+  color: #59907D;
+}
+.top_bar{
+  background: url(../img/body_bg.png) repeat-y #782249;
+  clear: both;
+  display: block;
+  border-bottom: 1px solid #000;
+  min-height: 50px;
+}
+.carousel-control{
+    border-radius: 0px;
+    display: inline-block;
+    font-size: 60px;
+    font-weight: 200;
+    line-height: 12px;
+    opacity: 0.5;
+    padding: 5px 0px 0 1px;
+    position: static;
+    height: 36px;
+    width: 75px;
+}
+.shop_heading {
+    /*stitching*/
+    outline-offset: -5px;
+    background-color: #556068;
+    height: auto;
+    width: 100%;
+    /*shadow*/
+    -webkit-box-shadow: 2px 2px 2px #000;
+    -moz-box-shadow: 2px 2px 2px #000;
+    box-shadow: 2px 2px 2px #000;
+}
+.shop2_heading {
+    /*stitching*/
+    outline-offset: -5px;
+    background-color: #E68796;
+    height: auto;
+    width: 100%;
+    /*shadow*/
+    -webkit-box-shadow: 2px 2px 2px #000;
+    -moz-box-shadow: 2px 2px 2px #000;
+    box-shadow: 2px 2px 2px #000;
+}
+.shop3_heading {
+    /*stitching*/
+    outline-offset: -5px;
+    background-color: #72CCAD;
+    height: auto;
+    width: 100%;
+    /*shadow*/
+    -webkit-box-shadow: 2px 2px 2px #000;
+    -moz-box-shadow: 2px 2px 2px #000;
+    box-shadow: 2px 2px 2px #000;
+}
+.shop_banner {
+  outline: 1px dashed rgba(59, 59, 60, 0.67);
+  outline-offset: -5px;
+  background-color: rgba(121, 152, 175, 0);
+  height: auto;
+  width: 100%;
+  -webkit-box-shadow: 2px 2px 2px #000;
+  -moz-box-shadow: 2px 2px 2px #000;
+  box-shadow: 2px 2px 2px #000;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+.shop_heading h2,.shop2_heading h2,.shop3_heading h2 {
+    /*text-align: center;
+    font-family: "League-Gothic", Courier;
+    font-size: 30px;
+    text-transform: uppercase;
+    color: #222;
+    line-height: 50px;
+    text-shadow: 0px 2px 3px #666;
+    font-weight: bold;*/
+
+    text-shadow: 0px 1px 1px #4d4d4d;
+    color: #222;
+    font: 30px 'LeagueGothicRegular';
+    /*line-height: 50px;*/
+    text-align: center;
+}
+.shop_heading:before {
+      position: absolute;
+      width: 80%;
+      height: 40%;
+      left: 10%;
+      border-radius: 50%;
+      z-index: -1;
+      top: 0%;
+      content: "";
+      box-shadow: 0 -7px 16px rgba(0,0,0,0.4);
+      }
+.shop_heading:after {
+      position: absolute;
+      width: 80%;
+      height: 40%;
+      left: 10%;
+      border-radius: 50%;
+      z-index: -1;
+      bottom: 0%;
+      content: "";
+      box-shadow: 0 7px 16px rgba(0,0,0,0.4);
+      }
+.social_media
+{
+padding-top: 30px;
+margin-left: -40px;
+}
+.social_media ul
+{
+  list-style-type: none;
+}
+.social_media li
+{
+  display: inline;
+  padding: 3px;
+}
+.test{
+  margin-top: 10px;
+}
+
+/* This code is tested with latest version of Firefox and Chrome */
+.box {
+  position: relative;
+  background-color: #fff;
+  box-shadow: 0 1px 5px rgba(0,0,0,0.25), 0 0 50px rgba(0,0,0,0.1) inset;
+  border-radius: 1%     1%     1%     1% /     1%     1%     1%     1%;
+}
+.box:before {
+      position: absolute;
+      width: 80%;
+      height: 40%;
+      left: 10%;
+      border-radius: 50%;
+      z-index: -1;
+      top: 0%;
+      content: "";
+      box-shadow: 0 -7px 16px rgba(0,0,0,0.4);
+      }
+.box:after {
+      position: absolute;
+      width: 80%;
+      height: 40%;
+      left: 10%;
+      border-radius: 50%;
+      z-index: -1;
+      bottom: 0%;
+      content: "";
+      box-shadow: 0 7px 16px rgba(0,0,0,0.4);
+      }
+.item ul,.item li{
+
+    list-style-type:none;
+}
+
+
