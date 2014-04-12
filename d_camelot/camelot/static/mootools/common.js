@@ -7,9 +7,10 @@ var Slider = new Class({
         controlDiv: '.carousel-indicators',
         delay: 5000,
         effectDuration: 500,
-        startMargin: -250,
-        minMargin: -888,
-        maxMargin: 888,
+        startMargin: 0,
+        minMargin: -820,
+        midMargin: 820,
+        maxMargin: 1640,
         activeOptions : {
             'transition' : 'linear',
             'duration' : 1000
@@ -21,93 +22,86 @@ var Slider = new Class({
         }
     },
     initialize: function(element) {
+        console.log(element);
         this.element = element;
-
-        this.images = this.element.getElements('.item');
-        this.controldiv = $$(this.options.controlDiv)[0];
-        /*this.controls = this.controldiv.getElements('li');*/
-        //this.activeSlide = $$('.active').set('morph', this.options.activeOptions);
-        //this.initialLeft = parseInt(this.activeSlide.getStyle('left'));
-        this.activeLeft = 35;
-        this.changeLeft = 0;
+        this.slides = this.element.getElements('.slide');
+        this.lastInd = this.slides.length - 1;
+        this.leftControl = this.element.getElement('.next_arrow');
+        this.rightControl = this.element.getElement('.prev_arrow');
         this.currentIndex = 0;
         this.nextIndex = 1;
+        this.thirdIndex = 2;
         this.timer = null;
         this.clicked = false;
-        this.currentImage = this.images[this.currentIndex];
-        this.currentImage.setStyle('margin-left', this.options.startMargin);
-        this.reset();
-        /*if (this.images.length == 2)
-            this.controls[2].setStyle('display','none');*/
-        if (this.images.length > 1) {
-            this.nextImage = this.images[this.nextIndex];
-            this.effects = new Fx.Elements(this.images, this.options.slideOptions);
-            this.effects.addEvent('complete', function() {
-                if (!this.clicked) {
-                    this.timer = this.autoSlide.delay(this.options.delay, this);            
-                }
-            }.bind(this));
-
-            /*this.controls.each(function(control, index) {
-                control.addEvent('click', function(ev) {
-                    ev.stop();
-                    if(index!=this.currentIndex) {
-                        this.clicked = true;
-                        this.slideOnClick(index);
-                    }
-                }.bind(this));  
-            }.bind(this));*/
-            this.timer = this.autoSlide.delay(this.options.delay, this);
-        }
-        /*else 
-            this.controldiv.setStyle('display','none');*/
-    },
-    transition: function(currentImage, nextImage, clicked) {
-        /*this.controls[this.currentIndex].removeClass('active').addClass('inactive');*/
-        var effect = {};
-        flag = 0
-        if(clicked) {
-            flag = (this.currentIndex > this.nextIndex) ? 1 : 0;
-            // this.effects.cancel();
-        } 
-        if (flag==0){
-            effect[this.currentIndex] = {'margin-left': [this.options.startMargin, this.options.minMargin]};
-            effect[this.nextIndex] = { 'margin-left': [this.options.maxMargin, this.options.startMargin]};
-        } else {
-            effect[this.currentIndex] = {'margin-left': [this.options.startMargin, this.options.maxMargin]};
-            effect[this.nextIndex] = { 'margin-left': [this.options.minMargin, this.options.startMargin]};    
-        }
-
-        this.effects.start(effect);
-        /*this.currentImage.removeClass('active');*/
-        this.currentIndex = this.nextIndex;
-        /*this.controls[this.currentIndex].addClass('active');*/	
-    },
-    autoSlide: function() {
-        this.currentImage = this.images[this.currentIndex];
-        /*this.controls[this.currentIndex].addClass('active');*/
-        this.nextIndex = (this.currentIndex<this.images.length-1)? (this.currentIndex+1): 0;
-        this.nextImage = this.images[this.nextIndex];
-        /*this.nextImage.addClass('active');*/
-        this.transition(this.currentImage, this.nextImage, false);        
-    },
-    slideOnClick: function(index) {
-        this.reset();
-        this.timer = $clear(this.timer);
-        this.nextIndex = index;
-        this.currentImage = this.images[this.currentIndex];
-        this.nextImage = this.images[this.nextIndex];
-        /*this.currentImage.removeClass('active');
-        this.nextImage.addClass('active');*/
-        this.transition(this.currentImage,this.nextImage,true);	
-    },
-    reset: function(){
-        this.images.each(function(image,index){
-            if(index!=this.currentIndex) {
-                image.setStyle('margin-left',this.options.minMargin);
-            }           
+        this.slideToLeft = true;
+        this.currentSlide = this.slides[this.currentIndex];
+        this.currentSlide.setStyle('margin-left', this.options.startMargin);
+        this.leftControl.addEvent('click', function(ev){
+            ev.stop();
+            this.slideLeft(this.currentIndex);
         }.bind(this));
-    }
+        this.rightControl.addEvent('click', function(ev){
+            ev.stop();
+            this.slideRight();
+        }.bind(this));
+        if (this.slides.length > 1) {
+            this.nextSlide = this.slides[this.nextIndex];
+            this.thirdSlide = this.slides[this.thirdIndex];
+            this.nextSlide.setStyle('margin-left', this.options.midMargin);
+            this.thirdSlide.setStyle('margin-left', this.options.maxMargin);
+            this.effects = new Fx.Elements(this.slides, this.options.slideOptions);
+        }
+        this.rightControl.setStyle('display', 'none');
+    },
+    
+    slideLeft: function(index) {
+        //this.reset();
+        var effect = {};
+
+        if(this.nextIndex == this.lastInd){
+            this.leftControl.setStyle('display', 'none');
+        } else {
+            this.leftControl.setStyle('display', 'block');
+        }
+        if(this.currentIndex == 0){
+            this.rightControl.setStyle('display', 'none');
+        } else {
+            this.rightControl.setStyle('display', 'block');
+        }
+        
+        effect[this.currentIndex] = {'margin-left': [this.options.startMargin, this.options.minMargin]};
+        effect[this.nextIndex] = { 'margin-left': [this.options.midMargin, this.options.startMargin]};
+        effect[this.thirdIndex] = { 'margin-left': [this.options.maxMargin, this.options.midMargin]};
+        this.currentIndex = this.nextIndex;
+        this.nextIndex = this.thirdIndex;
+        this.thirdIndex = this.thirdIndex  + 1;
+        this.timer = $clear(this.timer);              
+        this.effects.start(effect);
+    },
+    slideRight: function(index) {
+        //this.reset();
+        var effect = {};        
+        effect[this.nextIndex] = {'margin-left': [this.options.midMargin, this.options.maxMargin]};        
+        effect[this.currentIndex] = {'margin-left': [this.options.startMargin, this.options.midMargin]};
+        effect[this.currentIndex - 1] = {'margin-left': [this.options.minMargin, this.options.startMargin]};
+        this.thirdIndex = this.nextIndex;
+        this.nextIndex = this.currentIndex;
+        this.currentIndex = this.currentIndex - 1; 
+        this.slideToLeft = false;
+        this.timer = $clear(this.timer);     
+        if(this.currentIndex == 0){
+            this.rightControl.setStyle('display', 'none');
+        } else {
+            this.rightControl.setStyle('display', 'block');
+        }   
+        if(this.nextIndex == this.lastInd){
+            this.leftControl.setStyle('display', 'none');
+        } else {
+            this.leftControl.setStyle('display', 'block');
+        }        
+        this.effects.start(effect);
+    },
+    
 });
 // var geocodePosition =function(pos) {
 	
@@ -460,10 +454,10 @@ var CamelotSlider = new Class({
         this.backward_transition.delay(5000, this);
     }, 
     autoSlide: function() {
-        this.currentImage = this.images[this.currentIndex];
+        this.currentImage = this.slides[this.currentIndex];
         /*this.controls[this.currentIndex].addClass('active');*/
-        this.nextIndex = (this.currentIndex<this.images.length-1)? (this.currentIndex+1): 0;
-        this.nextImage = this.images[this.nextIndex];
+        this.nextIndex = (this.currentIndex<this.slides.length-1)? (this.currentIndex+1): 0;
+        this.nextImage = this.slides[this.nextIndex];
         /*this.nextImage.addClass('active');*/
         this.transition(this.currentImage, this.nextImage, false);        
     },
@@ -471,14 +465,14 @@ var CamelotSlider = new Class({
         this.reset();
         this.timer = $clear(this.timer);
         this.nextIndex = index;
-        this.currentImage = this.images[this.currentIndex];
-        this.nextImage = this.images[this.nextIndex];
+        this.currentImage = this.slides[this.currentIndex];
+        this.nextImage = this.slides[this.nextIndex];
         /*this.currentImage.removeClass('active');
         this.nextImage.addClass('active');*/
         this.transition(this.currentImage,this.nextImage,true);	
     },
     reset: function(){
-        this.images.each(function(image,index){
+        this.slides.each(function(image,index){
             if(index!=this.currentIndex) {
                 image.setStyle('margin-left',this.options.minMargin);
             }           
@@ -490,11 +484,10 @@ window.addEvent('domready',function() {
 	var myScroll = new Fx.SmoothScroll({
 		duration: 200,
 	},window);
-    
-    new CamelotSlider();
-	/*if($$('.carousel-inner').length > 0){
-		new DcamelotSlider($$('.carousel-inner')[0]);
+    /*new CamelotSlider();*/
+	if($$('.slide_container').length > 0){
+		new Slider($$('.slide_container')[0]);
 	}
-	*/
+	
 });
 

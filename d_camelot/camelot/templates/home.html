@@ -2,58 +2,94 @@
 {% block title %}Home
 {% endblock title %}
 {% block extrahead%}
+
 {% endblock extrahead%}
 {% block controller %}
   ng-controller="HomePageController" ng-init="init('{{csrf_token}}')"   
 {% endblock controller %}
 {% block body_id %}home{% endblock %}"
 {% block content %}
-    <div class="slide_container" >  
+    <div class="slide_container" > 
+        <div class="row arrow_div">
+             <a class="prev_arrow">‹</a>
+
+             <a class="next_arrow">›</a>
+        </div> 
         <div class="slider">
-            <div class="slide">
+            <div class="slide">                
+                <div class="responsive-slider" data-spy="responsive-slider" data-autoplay="true">
+                    <div class="slides" data-group="slides">
+                        <ul>
+                            <li>
+                          <div class="slide-body" data-group="slide">
+                            <img src="/static/img/slide/3.jpg" height="500">
+                          </div>
+                            </li>
+                            <li>
+                          <div class="slide-body" data-group="slide">
+                            <img src="/static/img/slide/2.jpg">
+                          </div>
+                            </li>
+                            <li>
+                          <div class="slide-body" data-group="slide">
+                            <img src="/static/img/slide/3.jpg">
+                          </div>
+                            </li>
+                            <li>
+                          <div class="slide-body" data-group="slide">
+                            <img src="/static/img/slide/2.jpg">
+                          </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <a class="slider-control left" href="#" data-jump="prev">Prev</a>
+                    <a class="slider-control right" href="#" data-jump="next">Next</a>
+                    <div class="pages">
+                      <a class="page" href="#" data-jump-to="1">1</a>
+                      <a class="page" href="#" data-jump-to="2">2</a>
+                      <a class="page" href="#" data-jump-to="3">3</a>
+                      <a class="page" href="#" data-jump-to="4">4</a>
+                    </div>
+                </div>                
+            </div>
+            <div class="slide" style="background-color: green;">
                 <div class="place_holder">
+                  <h1> First </h1>
                 </div>
                 <div class="slide_content">
-                    <div class="responsive-slider" data-spy="responsive-slider" data-autoplay="true">
-                        <div class="slides" data-group="slides">
-                            <ul>
-                                <li>
-                              <div class="slide-body" data-group="slide">
-                                <img src="/static/img/slide/3.jpg">
-                              </div>
-                                </li>
-                                <li>
-                              <div class="slide-body" data-group="slide">
-                                <img src="/static/img/slide/2.jpg">
-                              </div>
-                                </li>
-                                <li>
-                              <div class="slide-body" data-group="slide">
-                                <img src="/static/img/slide/3.jpg">
-                              </div>
-                                </li>
-                                <li>
-                              <div class="slide-body" data-group="slide">
-                                <img src="/static/img/slide/2.jpg">
-                              </div>
-                                </li>
-                            </ul>
-                        </div>
-                        <a class="slider-control left" href="#" data-jump="prev">Prev</a>
-                        <a class="slider-control right" href="#" data-jump="next">Next</a>
-                        <div class="pages">
-                          <a class="page" href="#" data-jump-to="1">1</a>
-                          <a class="page" href="#" data-jump-to="2">2</a>
-                          <a class="page" href="#" data-jump-to="3">3</a>
-                          <a class="page" href="#" data-jump-to="4">4</a>
-                        </div>
-                    </div>
+                  <h1> First Content</h1>
                 </div>
             </div>
-            <div class="slide">
+            <div class="slide" style="background-color: blue;">
                 <div class="place_holder">
+                  <h1> SEcond </h1>
                 </div>
                 <div class="slide_content">
+                  <h1> Secons Content </h1>
+                </div>
+            </div>
+            <div class="slide" style="background-color: yellow;">
+                <div class="place_holder">
+                  <h1> Third  </h1>
+                </div>
+                <div class="slide_content">
+                  <h1> Third content </h1>
+                </div>
+            </div>
+            <div class="slide" style="background-color: orange;">
+                <div class="place_holder">
+                  <h1> Fourth </h1>
+                </div>
+                <div class="slide_content">
+                  <h1> Fourth Content </h1>
+                </div>
+            </div>
+            <div class="slide" style="background-color: red;">
+                <div class="place_holder">
+                  <h1> Fifth </h1>
+                </div>
+                <div class="slide_content">
+                  <h1> Fifth Content </h1>
                 </div>
             </div>
         </div>
