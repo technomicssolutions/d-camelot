@@ -503,6 +503,13 @@ window.addEvent('domready',function() {
 	if($$('.slide_container').length > 0){
 		new Slider($$('.slide_container')[0]);
 	}
+
+    var reg = $$('.registration_wrapper')[0];
+    reg.getElement('.link.login').addEvent('click', function(ev) {
+        ev.stop();
+        reg.getElement('.login_body').toggleClass('show');
+    });
 	
 });
+
 

@@ -21,6 +21,9 @@ class HomeView(View):
         context = {}
         return render(request, 'home.html',context)
 
+    def post(self, request, *args, **kwargs):
+        context = {}
+        return render(request, 'home.html',context)
 
 class IndexView(View):
     def get(self, request, *args, **kwargs):
