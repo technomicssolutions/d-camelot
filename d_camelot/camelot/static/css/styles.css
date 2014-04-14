@@ -492,6 +492,7 @@ width:100%;
 .prev_arrow {
   float: left;
   display: block;
+  cursor: pointer;
   background-color: red;
   width: 20px;
   height: 20px;
@@ -501,6 +502,7 @@ width:100%;
 .next_arrow {
   float: right;
   display: block;
+  cursor: pointer;
   background-color: red;
   width: 20px;
   height: 20px;

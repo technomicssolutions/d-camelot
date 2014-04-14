@@ -18,16 +18,16 @@ var Slider = new Class({
         slideOptions: {   
             'transition' : 'linear', 
             'duration' : 1000,
-            //'link': 'cancel'
         }
     },
     initialize: function(element) {
-        console.log(element);
+        var self = this;
         this.element = element;
         this.slides = this.element.getElements('.slide');
         this.lastInd = this.slides.length - 1;
         this.leftControl = this.element.getElement('.next_arrow');
         this.rightControl = this.element.getElement('.prev_arrow');
+        this.slideLock = false;  
         this.currentIndex = 0;
         this.nextIndex = 1;
         this.thirdIndex = 2;
@@ -38,25 +38,47 @@ var Slider = new Class({
         this.currentSlide.setStyle('margin-left', this.options.startMargin);
         this.leftControl.addEvent('click', function(ev){
             ev.stop();
-            this.slideLeft(this.currentIndex);
+            if (!this.slideLock) this.slideLeft(this.currentIndex);
         }.bind(this));
         this.rightControl.addEvent('click', function(ev){
             ev.stop();
-            this.slideRight();
+            if (!this.slideLock) this.slideRight();
         }.bind(this));
         if (this.slides.length > 1) {
             this.nextSlide = this.slides[this.nextIndex];
             this.thirdSlide = this.slides[this.thirdIndex];
             this.nextSlide.setStyle('margin-left', this.options.midMargin);
             this.thirdSlide.setStyle('margin-left', this.options.maxMargin);
-            this.effects = new Fx.Elements(this.slides, this.options.slideOptions);
+
+            var lock = { 
+                onStart: function() {
+                    self.slideLock = true;
+                },
+                onComplete: function(){
+                    self.slideLock = false;
+                }
+            }; 
+            var mergedOptions = Object.merge(this.options.slideOptions, lock);
+
+            this.effects = new Fx.Elements(this.slides, mergedOptions);
+
         }
         this.rightControl.setStyle('display', 'none');
     },
     
     slideLeft: function(index) {
+
         //this.reset();
         var effect = {};
+
+        effect[this.currentIndex] = {'margin-left': [this.options.startMargin, this.options.minMargin]};
+        effect[this.nextIndex] = { 'margin-left': [this.options.midMargin, this.options.startMargin]};
+        effect[this.thirdIndex] = { 'margin-left': [this.options.maxMargin, this.options.midMargin]};
+        this.currentIndex = this.nextIndex;
+        this.nextIndex = this.thirdIndex;
+        this.thirdIndex = this.thirdIndex  + 1;
+        this.timer = $clear(this.timer);              
+        this.effects.start(effect);
 
         if(this.nextIndex == this.lastInd){
             this.leftControl.setStyle('display', 'none');
@@ -68,15 +90,7 @@ var Slider = new Class({
         } else {
             this.rightControl.setStyle('display', 'block');
         }
-        
-        effect[this.currentIndex] = {'margin-left': [this.options.startMargin, this.options.minMargin]};
-        effect[this.nextIndex] = { 'margin-left': [this.options.midMargin, this.options.startMargin]};
-        effect[this.thirdIndex] = { 'margin-left': [this.options.maxMargin, this.options.midMargin]};
-        this.currentIndex = this.nextIndex;
-        this.nextIndex = this.thirdIndex;
-        this.thirdIndex = this.thirdIndex  + 1;
-        this.timer = $clear(this.timer);              
-        this.effects.start(effect);
+
     },
     slideRight: function(index) {
         //this.reset();
@@ -373,114 +387,115 @@ var SimpleMap = new Class({
     	google.maps.event.trigger(this.map, 'resize'); 
     },    
 });*/
-var CamelotSlider = new Class({
-	Implements: [Options],
-    options:{
-        container: '.slide_container',
-        slider: '.slider',
-        start_margin: 250,
-        slide_width: 1088,
-        activeOptions : {
-            'transition' : 'linear',
-            'duration' : 1000
-        },
-        slideOptions: {   
-            'transition' : 'linear', 
-            'duration' : 1000,
-            //'link': 'cancel'
-        }
-    },
-    initialize: function(element) {
-    	
-    	this.margin_interval = this.options.slide_width - this.options.start_margin
-        this.current_margin = 0 - this.options.start_margin;
-        this.slider = $$(this.options.slider)[0];
-        this.slider.setStyle('margin-left', this.current_margin);
-        this.start_margin = this.current_margin;
-        this.slides = this.slider.getElements('.slide');
-        this.slider_width = this.options.slide_width * this.slides.length;
-        this.slider.setStyle('width', this.slider_width);
-        this.effects= new Fx.Tween(this.slider, {
-		    duration: 'long',
-		    transition: 'linear',
-		    link: 'cancel',
-		    property: 'margin-left'
-		});
-        console.log(this.effects, this.slider);
-    	/*this.effects.addEvent('complete', function() {
-            if (!this.clicked) {
-                this.timer = this.autoSlide.delay(this.options.delay, this);            
-            }
-        }.bind(this));*/
-        this.forward_transition.delay(1000, this);
-    },
-    forward_transition: function() {
-    	console.log("transition", this.current_margin, this.slider_width, this.margin_interval);
-        var effect = {};
-        if(Math.abs(this.current_margin) >= this.slider_width) {
-        	console.log('moving to backward', Math.abs(this.current_margin), this.current_margin);
-        	this.new_margin = this.current_margin;
-        	this.backward_transition.delay(5000, this);
-        } else {
-        	var new_margin = parseInt(this.current_margin) - parseInt(this.margin_interval);
-        }
-        flag = 0
-        /*if(clicked) {
-            flag = (this.currentIndex > this.nextIndex) ? 1 : 0;
-            // this.effects.cancel();
-        } */
-        //this.slider.tween('margin-left', this.current_margin, new_margin);
-        /*if (flag==0){
-            effect[this.currentIndex] = {'margin-left': [this.current_margin, new_margin]};
-        } else {
-            effect[this.currentIndex] = {'margin-left': [this.current_margin, new_margin]};
-        }*/
-        this.effects.start(this.current_margin, new_margin);
-        this.current_margin = new_margin;
-        this.forward_transition.delay(5000, this);
-    },
-    backward_transition: function() {
-    	this.current_margin = this.new_margin;
-    	console.log("adding", this.current_margin, this.start_margin);
-        var new_margin = parseInt(this.current_margin) + parseInt(this.margin_interval);
-                console.log(this.current_margin, new_margin);
 
-        if(this.current_margin <= this.start_margin){
-        	this.forward_transition.delay(5000, this);
-        }
+// var CamelotSlider = new Class({
+// 	Implements: [Options],
+//     options:{
+//         container: '.slide_container',
+//         slider: '.slider',
+//         start_margin: 250,
+//         slide_width: 1088,
+//         activeOptions : {
+//             'transition' : 'linear',
+//             'duration' : 1000
+//         },
+//         slideOptions: {   
+//             'transition' : 'linear', 
+//             'duration' : 1000,
+//             //'link': 'cancel'
+//         }
+//     },
+//     initialize: function(element) {
+    	
+//     	this.margin_interval = this.options.slide_width - this.options.start_margin
+//         this.current_margin = 0 - this.options.start_margin;
+//         this.slider = $$(this.options.slider)[0];
+//         this.slider.setStyle('margin-left', this.current_margin);
+//         this.start_margin = this.current_margin;
+//         this.slides = this.slider.getElements('.slide');
+//         this.slider_width = this.options.slide_width * this.slides.length;
+//         this.slider.setStyle('width', this.slider_width);
+//         this.effects= new Fx.Tween(this.slider, {
+// 		    duration: 'long',
+// 		    transition: 'linear',
+// 		    link: 'cancel',
+// 		    property: 'margin-left'
+// 		});
+//         console.log(this.effects, this.slider);
+//     	/*this.effects.addEvent('complete', function() {
+//             if (!this.clicked) {
+//                 this.timer = this.autoSlide.delay(this.options.delay, this);            
+//             }
+//         }.bind(this));*/
+//         this.forward_transition.delay(1000, this);
+//     },
+//     forward_transition: function() {
+//     	console.log("transition", this.current_margin, this.slider_width, this.margin_interval);
+//         var effect = {};
+//         if(Math.abs(this.current_margin) >= this.slider_width) {
+//         	console.log('moving to backward', Math.abs(this.current_margin), this.current_margin);
+//         	this.new_margin = this.current_margin;
+//         	this.backward_transition.delay(5000, this);
+//         } else {
+//         	var new_margin = parseInt(this.current_margin) - parseInt(this.margin_interval);
+//         }
+//         flag = 0
+//         /*if(clicked) {
+//             flag = (this.currentIndex > this.nextIndex) ? 1 : 0;
+//             // this.effects.cancel();
+//         } */
+//         //this.slider.tween('margin-left', this.current_margin, new_margin);
+//         /*if (flag==0){
+//             effect[this.currentIndex] = {'margin-left': [this.current_margin, new_margin]};
+//         } else {
+//             effect[this.currentIndex] = {'margin-left': [this.current_margin, new_margin]};
+//         }*/
+//         this.effects.start(this.current_margin, new_margin);
+//         this.current_margin = new_margin;
+//         this.forward_transition.delay(5000, this);
+//     },
+//     backward_transition: function() {
+//     	this.current_margin = this.new_margin;
+//     	console.log("adding", this.current_margin, this.start_margin);
+//         var new_margin = parseInt(this.current_margin) + parseInt(this.margin_interval);
+//                 console.log(this.current_margin, new_margin);
+
+//         if(this.current_margin <= this.start_margin){
+//         	this.forward_transition.delay(5000, this);
+//         }
         
-        this.effects.start(this.current_margin, new_margin);
-        this.current_margin = new_margin;
-        this.backward_transition.delay(5000, this);
-    }, 
-    autoSlide: function() {
-        this.currentImage = this.slides[this.currentIndex];
-        /*this.controls[this.currentIndex].addClass('active');*/
-        this.nextIndex = (this.currentIndex<this.slides.length-1)? (this.currentIndex+1): 0;
-        this.nextImage = this.slides[this.nextIndex];
-        /*this.nextImage.addClass('active');*/
-        this.transition(this.currentImage, this.nextImage, false);        
-    },
-    slideOnClick: function(index) {
-        this.reset();
-        this.timer = $clear(this.timer);
-        this.nextIndex = index;
-        this.currentImage = this.slides[this.currentIndex];
-        this.nextImage = this.slides[this.nextIndex];
-        /*this.currentImage.removeClass('active');
-        this.nextImage.addClass('active');*/
-        this.transition(this.currentImage,this.nextImage,true);	
-    },
-    reset: function(){
-        this.slides.each(function(image,index){
-            if(index!=this.currentIndex) {
-                image.setStyle('margin-left',this.options.minMargin);
-            }           
-        }.bind(this));
-    }
-});
+//         this.effects.start(this.current_margin, new_margin);
+//         this.current_margin = new_margin;
+//         this.backward_transition.delay(5000, this);
+//     }, 
+//     autoSlide: function() {
+//         this.currentImage = this.slides[this.currentIndex];
+//         /*this.controls[this.currentIndex].addClass('active');*/
+//         this.nextIndex = (this.currentIndex<this.slides.length-1)? (this.currentIndex+1): 0;
+//         this.nextImage = this.slides[this.nextIndex];
+//         /*this.nextImage.addClass('active');*/
+//         this.transition(this.currentImage, this.nextImage, false);        
+//     },
+//     slideOnClick: function(index) {
+//         this.reset();
+//         this.timer = $clear(this.timer);
+//         this.nextIndex = index;
+//         this.currentImage = this.slides[this.currentIndex];
+//         this.nextImage = this.slides[this.nextIndex];
+//         /*this.currentImage.removeClass('active');
+//         this.nextImage.addClass('active');*/
+//         this.transition(this.currentImage,this.nextImage,true);	
+//     },
+//     reset: function(){
+//         this.slides.each(function(image,index){
+//             if(index!=this.currentIndex) {
+//                 image.setStyle('margin-left',this.options.minMargin);
+//             }           
+//         }.bind(this));
+//     }
+// });
+
 window.addEvent('domready',function() {
-	console.log("gfjgkjdkj");
 	var myScroll = new Fx.SmoothScroll({
 		duration: 200,
 	},window);
