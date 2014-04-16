@@ -11,13 +11,9 @@ var Slider = new Class({
         minMargin: -820,
         midMargin: 820,
         maxMargin: 1640,
-        activeOptions : {
-            'transition' : 'linear',
-            'duration' : 1000
-        },
         slideOptions: {   
             'transition' : 'linear', 
-            'duration' : 1000,
+            'duration' : 500,
         }
     },
     initialize: function(element) {
@@ -80,7 +76,7 @@ var Slider = new Class({
         this.timer = $clear(this.timer);              
         this.effects.start(effect);
 
-        if(this.nextIndex == this.lastInd){
+        if(this.currentIndex == this.lastInd){
             this.leftControl.setStyle('display', 'none');
         } else {
             this.leftControl.setStyle('display', 'block');

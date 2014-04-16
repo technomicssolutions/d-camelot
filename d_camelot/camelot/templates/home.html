@@ -10,10 +10,10 @@
 {% block body_id %}home{% endblock %}"
 {% block content %}
     <div class="slide_container" > 
-        <div class="row arrow_div">
-             <a class="prev_arrow">‹</a>
+        <div class="arrow_div">
+             <a class="prev_arrow"><img src="/static/img/arrow_left.png" /></a>
 
-             <a class="next_arrow">›</a>
+             <a class="next_arrow"><img src="/static/img/arrow_right.png" /></a>
         </div> 
         <div class="slider">
             <div class="slide" >   
@@ -22,22 +22,22 @@
                         <ul>
                             <li>
                           <div class="slide-body" data-group="slide">
-                            <img src="/static/img/slide/3.jpg" height="500">
+                            <img src="/static/img/slide/dc-slide-1.jpg" height="500">
                           </div>
                             </li>
                             <li>
                           <div class="slide-body" data-group="slide">
-                            <img src="/static/img/slide/2.jpg">
+                            <img src="/static/img/slide/dc-slide-2.jpg" height="500">
                           </div>
                             </li>
                             <li>
                           <div class="slide-body" data-group="slide">
-                            <img src="/static/img/slide/3.jpg">
+                            <img src="/static/img/slide/dc-slide-3.jpg" height="500">
                           </div>
                             </li>
                             <li>
                           <div class="slide-body" data-group="slide">
-                            <img src="/static/img/slide/2.jpg">
+                            <img src="/static/img/slide/dc-slide-4.jpg" height="500">
                           </div>
                             </li>
                         </ul>
@@ -62,15 +62,20 @@
                     <div class="offers_notifications">
                       {% for offer in offers %}
                       {% endfor %}
+                      <h4> 20% discount for new Customers </h4>
                     </div>
                     <div class="shop_main_links">
-                      {% for brand in shop.brands.all %} 
-                        <a href="{{brand.brand_name}}"> {{brand.brand_name}} </a>
-                      {% endfor %}
+                      {% if shop.brands %}
+                        <ul> <i>Our Main Brands </i>
+                          {% for brand in shop.brands.all %} 
+                            <li><a href="{{brand.brand_name}}"> {{brand.brand_name}} </a> </br></li>
+                          {% endfor %}
+                        </ul>
+                      {% endif %}
                     </div>
                   </div>
                   <div class="slide_content">
-                    <img src="/site_media/{{shop.slider_image}}" />
+                    <img src="/site_media/{{shop.slider_image}}" height="550" />
                   </div>
               </div>
             {% endfor %}
