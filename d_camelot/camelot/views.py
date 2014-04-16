@@ -16,9 +16,14 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import authenticate, login, logout
 
+from shop.models import Shop
+
 class HomeView(View):
     def get(self, request, *args, **kwargs):
-        context = {}
+    	shops = Shop.objects.all()
+        context = {
+        	'shops': shops
+        }
         return render(request, 'home.html',context)
 
     def post(self, request, *args, **kwargs):
