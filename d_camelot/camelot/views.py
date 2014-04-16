@@ -28,3 +28,5 @@ class HomeView(View):
 class IndexView(View):
     def get(self, request, *args, **kwargs):
         return render(request, 'home.html', {})
+
+
