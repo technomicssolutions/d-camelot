@@ -20,7 +20,7 @@ from shop.models import Shop
 
 class HomeView(View):
     def get(self, request, *args, **kwargs):
-    	shops = Shop.objects.all()
+    	shops = Shop.objects.all().order_by('id')
         context = {
         	'shops': shops
         }
@@ -33,3 +33,5 @@ class HomeView(View):
 class IndexView(View):
     def get(self, request, *args, **kwargs):
         return render(request, 'home.html', {})
+
+

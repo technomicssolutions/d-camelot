@@ -11,13 +11,9 @@ var Slider = new Class({
         minMargin: -820,
         midMargin: 820,
         maxMargin: 1640,
-        activeOptions : {
-            'transition' : 'linear',
-            'duration' : 1000
-        },
         slideOptions: {   
             'transition' : 'linear', 
-            'duration' : 1000,
+            'duration' : 500,
         }
     },
     initialize: function(element) {
@@ -80,7 +76,7 @@ var Slider = new Class({
         this.timer = $clear(this.timer);              
         this.effects.start(effect);
 
-        if(this.nextIndex == this.lastInd){
+        if(this.currentIndex == this.lastInd){
             this.leftControl.setStyle('display', 'none');
         } else {
             this.leftControl.setStyle('display', 'block');
@@ -495,21 +491,73 @@ var SimpleMap = new Class({
 //     }
 // });
 
-window.addEvent('domready',function() {
-	var myScroll = new Fx.SmoothScroll({
-		duration: 200,
-	},window);
-    /*new CamelotSlider();*/
-	if($$('.slide_container').length > 0){
-		new Slider($$('.slide_container')[0]);
-	}
+// window.addEvent('domready',function() {
+// 	var myScroll = new Fx.SmoothScroll({
+// 		duration: 200,
+// 	},window);
+//     /*new CamelotSlider();*/
+// 	if($$('.slide_container').length > 0){
+// 		new Slider($$('.slide_container')[0]);
+// 	}
 
-    var reg = $$('.registration_wrapper')[0];
-    reg.getElement('.link.login').addEvent('click', function(ev) {
-        ev.stop();
-        reg.getElement('.login_body').toggleClass('show');
-    });
+//     var login = $$('.login_body')[0];
+
+//     window.addEvent('click', function(ev) {
+//         var p = ev.target.getParents();
+//         if (ev.target.hasClass('login')) {
+//             ev.stop();
+//             login.toggleClass('show');
+//         }
+//         else if (!(ev.target==login || p.contains(login))) {
+//             login.removeClass('show');
+//         }
+//     });
 	
+// });
+
+
+var Registration = new Class({
+    Implements: [Options],
+    options: {},
+    initialize: function () {
+        var login = $$('.login_body')[0];
+        window.addEvent('click', function(ev) {
+            var p = ev.target.getParents();
+            if (ev.target.hasClass('login')) {
+                ev.stop();
+                login.toggleClass('show');
+            }
+            else if (!(ev.target==login || p.contains(login))) {
+                login.removeClass('show');
+            }
+        });  
+    }
 });
 
 
+var UI = new Class({
+    Implements: [Events, Options],
+    Binds: [],
+    
+    initialize: function() {
+        window.addEvent("load", this.loader.bind(this));
+        window.addEvent("domready", this.ready.bind(this));
+    },
+
+    loader: function() {
+    },
+    
+    ready: function() {
+        var myScroll = new Fx.SmoothScroll({
+            duration: 200,
+        },window);
+        /*new CamelotSlider();*/
+        if($$('.slide_container').length > 0){
+            new Slider($$('.slide_container')[0]);
+        }
+        new Registration();
+    }
+});
+
+
+var UI = new UI();

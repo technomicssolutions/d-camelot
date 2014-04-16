@@ -254,7 +254,7 @@ input[type=text], input[type=password], select, textarea {
 /*************** Slider styles ********************/
 
 .slide_container {
-  width: 80%;
+  width: 83%;
   height: 500px;
   overflow: hidden;
   float: left;
@@ -273,23 +273,22 @@ input[type=text], input[type=password], select, textarea {
 }
 
 .place_holder {
-  width: 35%;
+  width: 36%;
   float: left;
   height: 100%;
 }
 
 .slide_content {
-  width: 65%;
+  width: 64%;
   float: left;
   overflow: hidden;
 }
 
 .arrow_div {
-  padding: 50px;
   position: absolute;
-  width: 80%;
+  width: 76%;
   z-index: 100;
-  top: 40%;
+  top: 70%;
 }
 
 .prev_arrow {
@@ -299,35 +298,60 @@ input[type=text], input[type=password], select, textarea {
   width: 20px;
   height: 20px;
   text-decoration: none;
-  background-color: red;
+  background: url('../img/arrow_left.png') no-repeat;
 }
 
 .next_arrow {
   float: right;
   display: block;
   cursor: pointer;
-  background-color: red;
   width: 20px;
   height: 20px;
   text-decoration: none;
+  background: url('../img/arrow_right.png') no-repeat;
 }
 
 .shop_logo {
   width: 100%;
   overflow: hidden;
+  padding: 5px;
+  height: 30%;
+  float: left;
 }
-.baby {
-  background: -webkit-linear-gradient(white, pink); /* For Safari 5.1 to 6.0 */
-  background: -o-linear-gradient(white, pink); /* For Opera 11.1 to 12.0 */
-  background: -moz-linear-gradient(white, pink); /* For Firefox 3.6 to 15 */
-  background: linear-gradient(white, pink); /* Standard syntax (must be last) */
+.offers_notifications {
+  height: 30%;
+  float: left;
 }
 
+i{
+ color: #E66665;
+}
+
+.baby {
+  background: -webkit-linear-gradient(#8ACFF0, #F4C2C5); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(#8ACFF0, #F4C2C5); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(#8ACFF0, #F4C2C5); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(#8ACFF0, #F4C2C5); /* Standard syntax (must be last) */
+}
+
+.shop_main_links {
+  padding: 20px;
+}
+
+.shop_main_links a {
+  color: #E66665;
+  font-weight: bold;
+  padding-left: 20px;
+}
+
+h4 {
+  padding: 10px;
+}
 .ladies {
-  background: -webkit-linear-gradient(white, blue); /* For Safari 5.1 to 6.0 */
-  background: -o-linear-gradient(white, blue); /* For Opera 11.1 to 12.0 */
-  background: -moz-linear-gradient(white, blue); /* For Firefox 3.6 to 15 */
-  background: linear-gradient(white, blue); /* Standard syntax (must be last) */
+  background: -webkit-linear-gradient(white, #A58749); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(white, #A58749); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(white, #A58749); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(white, #A58749); /* Standard syntax (must be last) */
 
 }
 .mens {
@@ -337,4 +361,31 @@ input[type=text], input[type=password], select, textarea {
   background: linear-gradient(white, black); /* Standard syntax (must be last) */
 
 }
+.responsive-slider .slider-control.left, .responsive-slider .slider-control.right { 
+    font-size: 12px;
+    padding: 5px;
+}
+.responsive-slider .slider-control.left:hover, .responsive-slider .slider-control.right:hover { 
+    font-size: 12px;
+    padding: 5px;
+}
+.responsive-slider .slider-control {
+  opacity: 0.5;
+}
+.container-fluid {
+  padding : 0px !important;
+}
+.row {
+  margin: 0px !important;
+}
 /***************** slider styles end ***************/
+
+
+/*************** header styles ************/
+
+header {
+  float: left;
+  width: 17%;
+}
+
+/*************** header styles end *************/
