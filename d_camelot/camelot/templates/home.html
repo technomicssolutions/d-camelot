@@ -53,46 +53,27 @@
                 </div>  
             
             </div>
-            <div class="slide" style="background-color: green;">
-                <div class="place_holder">
-                  <h1> First </h1>
-                </div>
-                <div class="slide_content">
-                  <h1> First Content</h1>
-                </div>
-            </div>
-            <div class="slide" style="background-color: blue;">
-                <div class="place_holder">
-                  <h1> Second </h1>
-                </div>
-                <div class="slide_content">
-                  <h1> Second Content </h1>
-                </div>
-            </div>
-            <div class="slide" style="background-color: yellow;">
-                <div class="place_holder">
-                  <h1> Third  </h1>
-                </div>
-                <div class="slide_content">
-                  <h1> Third content </h1>
-                </div>
-            </div>
-            <div class="slide" style="background-color: orange;">
-                <div class="place_holder">
-                  <h1> Fourth </h1>
-                </div>
-                <div class="slide_content">
-                  <h1> Fourth Content </h1>
-                </div>
-            </div>
-            <div class="slide" style="background-color: red;">
-                <div class="place_holder">
-                  <h1> Fifth </h1>
-                </div>
-                <div class="slide_content">
-                  <h1> Fifth Content </h1>
-                </div>
-            </div>
+            {% for shop in shops %}
+              <div class="slide {{shop.shop_type}}">
+                  <div class="place_holder">
+                    <div class="shop_logo">
+                      <img src="/site_media/{{shop.logo}}">
+                    </div>
+                    <div class="offers_notifications">
+                      {% for offer in offers %}
+                      {% endfor %}
+                    </div>
+                    <div class="shop_main_links">
+                      {% for brand in shop.brands.all %} 
+                        <a href="{{brand.brand_name}}"> {{brand.brand_name}} </a>
+                      {% endfor %}
+                    </div>
+                  </div>
+                  <div class="slide_content">
+                    <img src="/site_media/{{shop.slider_image}}" />
+                  </div>
+              </div>
+            {% endfor %}
         </div>
     </div>
 {% endblock content %}
