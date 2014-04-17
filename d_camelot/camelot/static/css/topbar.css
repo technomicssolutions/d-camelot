@@ -28,11 +28,21 @@
 	min-height: 50px;
 	background-color: #FFF;
 	box-shadow: 2px 4px 5px #333;
-	z-index: 101;
+	z-index: 200;
 }
 
 .top_bar .top_menu_wrapper .login_body.show {
 	display: block;
+}
+
+.login_body .validation {
+    font-size: 11px;
+    color: red;
+    display: none;
+}
+
+.login_body .validation.error {
+    display: block;
 }
 
 .top_bar .top_menu_wrapper .login_body input {

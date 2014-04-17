@@ -1,4 +1,4 @@
-function validateEmail(email) { 
+function validateEmail(email) {
     var re = /\S+@\S+\.\S+/;
     return re.test(email);
 }
@@ -47,7 +47,7 @@ function show_popup(name, $scope){
           'top': '100px',
           'height': 370,
           'content_div': '#write_reference'
-        });        
+        });
         var height = $(document).height();
         $scope.popup.set_overlay_height(height);
         $scope.popup.show_content();
@@ -59,7 +59,7 @@ function show_popup(name, $scope){
             'top': '100px',
             'height': 450,
             'content_div': '#payout_popup_container'
-          });        
+          });
           var height = $(document).height();
           $scope.popup.set_overlay_height(height);
           $scope.popup.show_content();
@@ -71,7 +71,7 @@ function show_popup(name, $scope){
             'top': '100px',
             'height': 450,
             'content_div': '#payout_popup_edit_container'
-          });        
+          });
           var height = $(document).height();
           $scope.popup.set_overlay_height(height);
           $scope.popup.show_content();
@@ -83,7 +83,7 @@ function show_popup(name, $scope){
             'top': '100px',
             'height': 450,
             'content_div': '#direct_method_popup_edit_container'
-          });        
+          });
           var height = $(document).height();
           $scope.popup.set_overlay_height(height);
           $scope.popup.show_content();
@@ -95,10 +95,10 @@ function show_popup(name, $scope){
             'top': '100px',
             'height': 450,
             'content_div': '#show_sample_listing_container'
-          });        
+          });
           var height = $(document).height();
           $scope.popup.set_overlay_height(height);
-          $scope.popup.show_content();      
+          $scope.popup.show_content();
     } else if(name == 'show_sample_listing_groupworkout'){
         $scope.popup = new DialogueModelWindow({
             'dialogue_popup_width': '900px',
@@ -107,185 +107,185 @@ function show_popup(name, $scope){
             'top': '100px',
             'height': 450,
             'content_div': '#show_sample_listing_groupworkout_container'
-          });        
+          });
           var height = $(document).height();
           $scope.popup.set_overlay_height(height);
           $scope.popup.show_content();
     }
 }
 function get_time_zone($scope){
-  $scope.time_zone = 
-  { 
-    'France': [ 
-      'UTC−10:00 — most of French Polynesia', 
-      'UTC−09:30 — Marquesas Islands', 
-      'UTC−09:00 — Gambier Islands', 
+  $scope.time_zone =
+  {
+    'France': [
+      'UTC−10:00 — most of French Polynesia',
+      'UTC−09:30 — Marquesas Islands',
+      'UTC−09:00 — Gambier Islands',
       'UTC−08:00 — Clipperton Island',
-      'UTC−04:00 (AST) — Guadeloupe, Martinique, Saint Barthelemy, Saint Martin', 
-      'UTC−03:00 (PMST) — French Guiana, Saint Pierre and Miquelon', 
-      'UTC+01:00 (CET) — Metropolitan France', 
-      'UTC+03:00 — Mayotte', 
-      'UTC+04:00 — Réunion', 
-      'UTC+05:00 — Kerguelen Islands', 
-      'UTC+11:00 — New Caledonia', 
+      'UTC−04:00 (AST) — Guadeloupe, Martinique, Saint Barthelemy, Saint Martin',
+      'UTC−03:00 (PMST) — French Guiana, Saint Pierre and Miquelon',
+      'UTC+01:00 (CET) — Metropolitan France',
+      'UTC+03:00 — Mayotte',
+      'UTC+04:00 — Réunion',
+      'UTC+05:00 — Kerguelen Islands',
+      'UTC+11:00 — New Caledonia',
       'UTC+12:00 — Wallis and Futuna',
-      ], 
+      ],
 
     'United States': [
-      'UTC−12:00 (unofficial) — Baker Island and Howland Island', 
-      'UTC−11:00 (ST) — American Samoa, Jarvis Island, Kingman Reef, Midway Atoll and Palmyra Atoll', 
-      'UTC−10:00 (HAT) — Hawaii, most of the Aleutian Islands, and Johnston Atoll', 
-      'UTC−09:00 (AKT) — most of the state of Alaska', 
-      'UTC−08:00 (PT) — the states on the Pacific coast plus Nevada and parts of Idaho', 
+      'UTC−12:00 (unofficial) — Baker Island and Howland Island',
+      'UTC−11:00 (ST) — American Samoa, Jarvis Island, Kingman Reef, Midway Atoll and Palmyra Atoll',
+      'UTC−10:00 (HAT) — Hawaii, most of the Aleutian Islands, and Johnston Atoll',
+      'UTC−09:00 (AKT) — most of the state of Alaska',
+      'UTC−08:00 (PT) — the states on the Pacific coast plus Nevada and parts of Idaho',
       'UTC−07:00 (MT) — Arizona, Colorado, Montana, New Mexico, Utah, parts of Idaho, Kansas, Oregon, North Dakota, South Dakota, and Texas',
-      'UTC−06:00 (CT) — Gulf Coast, Tennessee Valley, U.S. Interior Highlands, Great Plains, and most of Texas', 
+      'UTC−06:00 (CT) — Gulf Coast, Tennessee Valley, U.S. Interior Highlands, Great Plains, and most of Texas',
       'UTC−05:00 (ET) — the states on the Atlantic coast, the eastern two-thirds of the Ohio Valley, most of Michigan, Bajo Nuevo Bank, Navassa Island and Serranilla Bank',
       'UTC−04:00 (AT) — Puerto Rico, the U.S. Virgin Islands and Palmer Station',
-      'UTC+10:00 (ChT) — Guam and the Northern Mariana Islands', 
-      'UTC+12:00 (unofficial) — Wake Island, McMurdo Station, and Amundsen–Scott South Pole Station' 
+      'UTC+10:00 (ChT) — Guam and the Northern Mariana Islands',
+      'UTC+12:00 (unofficial) — Wake Island, McMurdo Station, and Amundsen–Scott South Pole Station'
       ],
     'American Samoa': [
-      'UTC−11:00 (ST)',  
+      'UTC−11:00 (ST)',
     ],
 
     'Russia': [
       'UTC+03:00 (Kaliningrad Time) — Kaliningrad Oblast',
-      'UTC+04:00 (Moscow Time) — Most of European Russia and all railroads throughout Russia', 
-      'UTC+06:00 (Yekaterinburg Time) — Bashkortostan, Chelyabinsk Oblast, Khanty–Mansia, Kurgan Oblast, Orenburg Oblast, Perm Krai, Sverdlovsk Oblast, Tyumen Oblast, and Yamalia', 
-      'UTC+07:00 (Omsk Time) — Altai Krai, Altai Republic, Kemerovo Oblast, Novosibirsk Oblast, Omsk Oblast and Tomsk Oblast', 
-      'UTC+08:00 (Krasnoyarsk Time) — Khakassia, Krasnoyarsk Krai and Tuva', 
-      'UTC+09:00 (Irkutsk Time) — Buryatia and Irkutsk Oblast', 
-      'UTC+10:00 (Yakutsk Time) — Amur Oblast, western Sakha Republic and Zabaykalsky Krai', 
-      'UTC+11:00 (Vladivostok Time) — The Jewish Autonomous Oblast, Khabarovsk Krai, Primorsky Krai, central Sakha Republic and Sakhalin Island', 
+      'UTC+04:00 (Moscow Time) — Most of European Russia and all railroads throughout Russia',
+      'UTC+06:00 (Yekaterinburg Time) — Bashkortostan, Chelyabinsk Oblast, Khanty–Mansia, Kurgan Oblast, Orenburg Oblast, Perm Krai, Sverdlovsk Oblast, Tyumen Oblast, and Yamalia',
+      'UTC+07:00 (Omsk Time) — Altai Krai, Altai Republic, Kemerovo Oblast, Novosibirsk Oblast, Omsk Oblast and Tomsk Oblast',
+      'UTC+08:00 (Krasnoyarsk Time) — Khakassia, Krasnoyarsk Krai and Tuva',
+      'UTC+09:00 (Irkutsk Time) — Buryatia and Irkutsk Oblast',
+      'UTC+10:00 (Yakutsk Time) — Amur Oblast, western Sakha Republic and Zabaykalsky Krai',
+      'UTC+11:00 (Vladivostok Time) — The Jewish Autonomous Oblast, Khabarovsk Krai, Primorsky Krai, central Sakha Republic and Sakhalin Island',
       'UTC+12:00 (Magadan Time) — Magadan Oblast, eastern Sakha, Kuril Islands, Chukotka and Kamchatka Krai'
       ],
- 
+
     'United Kingdom': [
-      'UTC−08:00 — Pitcairn Islands', 
-      'UTC−05:00 — Cayman Islands, Turks and Caicos Islands', 
-      'UTC−04:00 (AST) — Anguilla, Bermuda, British Virgin Islands, Montserrat', 
-      'UTC−03:00 (FKST) — Falkland Islands', 
-      'UTC−02:00 — South Georgia and the South Sandwich Islands', 
-      'UTC (GMT) — main territory of the United Kingdom, Saint Helena, Ascension and Tristan da Cunha, Guernsey, Isle of Man, Jersey', 
-      'UTC+01:00 (CET) — Gibraltar', 
-      'UTC+02:00 (EET) — Akrotiri and Dhekelia', 
+      'UTC−08:00 — Pitcairn Islands',
+      'UTC−05:00 — Cayman Islands, Turks and Caicos Islands',
+      'UTC−04:00 (AST) — Anguilla, Bermuda, British Virgin Islands, Montserrat',
+      'UTC−03:00 (FKST) — Falkland Islands',
+      'UTC−02:00 — South Georgia and the South Sandwich Islands',
+      'UTC (GMT) — main territory of the United Kingdom, Saint Helena, Ascension and Tristan da Cunha, Guernsey, Isle of Man, Jersey',
+      'UTC+01:00 (CET) — Gibraltar',
+      'UTC+02:00 (EET) — Akrotiri and Dhekelia',
       'UTC+06:00 — British Indian Ocean Territory'
       ],
-  
+
     'Australia': [
-      'UTC+05:00 — Heard and McDonald Islands', 
-      'UTC+06:30 — Cocos (Keeling) Islands', 
-      'UTC+07:00 (CXT) — Christmas Island', 
-      'UTC+08:00 (AWST) — Western Australia', 
-      'UTC+09:30 (ACST) — South Australia, Northern Territory', 
-      'UTC+10:00 (AEST) — Queensland, New South Wales, Australian Capital Territory, Victoria, Tasmania', 
-      'UTC+10:30 — Lord Howe Island', 'UTC+11:30 (NFT) — Norfolk Island' 
+      'UTC+05:00 — Heard and McDonald Islands',
+      'UTC+06:30 — Cocos (Keeling) Islands',
+      'UTC+07:00 (CXT) — Christmas Island',
+      'UTC+08:00 (AWST) — Western Australia',
+      'UTC+09:30 (ACST) — South Australia, Northern Territory',
+      'UTC+10:00 (AEST) — Queensland, New South Wales, Australian Capital Territory, Victoria, Tasmania',
+      'UTC+10:30 — Lord Howe Island', 'UTC+11:30 (NFT) — Norfolk Island'
       ],
-  
+
     'Canada': [
-      'UTC−08:00 (PST) — larger western part of British Columbia, Tungsten and the associated Cantung Mine in Northwest Territories, Yukon', 
-      'UTC−07:00 (MST) — Alberta, some eastern parts of British Columbia, most of Northwest Territories, Nunavut (west of 102°W and all communities in the Kitikmeot Region), Lloydminster and surrounding area in Saskatchewan', 
-      'UTC−06:00 (CST) — Manitoba, Nunavut (between 85° West and 102°W except western Southampton Island), Ontario (Northwestern Ontario west of 90°W with some exceptions and Big Trout Lake area east of 90°W), Saskatchewan except Lloydminster', 
-      'UTC−05:00 (EST) — Nunavut east of 85°W and entire Southampton Island, Ontario east of 90°W (except Big Trout Lake area) plus several more western areas, Quebec (most of province)', 
-      'UTC−04:00 (AST) — Labrador (all but southeastern tip), New Brunswick, Nova Scotia, Prince Edward Island, eastern part of Quebec', 
+      'UTC−08:00 (PST) — larger western part of British Columbia, Tungsten and the associated Cantung Mine in Northwest Territories, Yukon',
+      'UTC−07:00 (MST) — Alberta, some eastern parts of British Columbia, most of Northwest Territories, Nunavut (west of 102°W and all communities in the Kitikmeot Region), Lloydminster and surrounding area in Saskatchewan',
+      'UTC−06:00 (CST) — Manitoba, Nunavut (between 85° West and 102°W except western Southampton Island), Ontario (Northwestern Ontario west of 90°W with some exceptions and Big Trout Lake area east of 90°W), Saskatchewan except Lloydminster',
+      'UTC−05:00 (EST) — Nunavut east of 85°W and entire Southampton Island, Ontario east of 90°W (except Big Trout Lake area) plus several more western areas, Quebec (most of province)',
+      'UTC−04:00 (AST) — Labrador (all but southeastern tip), New Brunswick, Nova Scotia, Prince Edward Island, eastern part of Quebec',
       'UTC−03:30 (NST) — Labrador (southeastern), Newfoundland'
       ],
-  
+
     'Kingdom of Denmark': [
-      'UTC−04:00 — Thule Air Base in Greenland', 
-      'UTC−03:00 — most of Greenland, including inhabited south coast and west coast', 
-      'UTC−01:00 — Ittoqqortoormiit and surrounding area in Greenland s Tunu county', 
-      'UTC — (GMT) — Danmarkshavn weather station and surrounding area in Greenland s Tunu county, Faroe Islands', 
+      'UTC−04:00 — Thule Air Base in Greenland',
+      'UTC−03:00 — most of Greenland, including inhabited south coast and west coast',
+      'UTC−01:00 — Ittoqqortoormiit and surrounding area in Greenland s Tunu county',
+      'UTC — (GMT) — Danmarkshavn weather station and surrounding area in Greenland s Tunu county, Faroe Islands',
       'UTC+01:00 — (CET) — metropolitan Denmark'
     ],
-  
+
     'New Zealand': [
-      'UTC−11:00 — Niue', 
-      'UTC−10:00 — Cook Islands', 
-      'UTC+12:00 — main territory of New Zealand', 
+      'UTC−11:00 — Niue',
+      'UTC−10:00 — Cook Islands',
+      'UTC+12:00 — main territory of New Zealand',
       'UTC+12:45 — Chatham Islands', 'UTC+13:00 — Tokelau'
       ],
-  
+
     'Brazil': [
-      'UTC−05:00 (Brasília time −2) — Acre and Southwestern Amazonas', 
-      'UTC−04:00 (Brasília time −1) — Most part of the Amazonas State, Mato Grosso, Mato Grosso do Sul, Rondônia, Roraima', 
-      'UTC−03:00 (Brasília time) — the Southeast Region, the South Region, the Northeast Region (except some islands), Goias, Distrito Federal, Tocantins, Pará, Amapa', 
+      'UTC−05:00 (Brasília time −2) — Acre and Southwestern Amazonas',
+      'UTC−04:00 (Brasília time −1) — Most part of the Amazonas State, Mato Grosso, Mato Grosso do Sul, Rondônia, Roraima',
+      'UTC−03:00 (Brasília time) — the Southeast Region, the South Region, the Northeast Region (except some islands), Goias, Distrito Federal, Tocantins, Pará, Amapa',
       'UTC−02:00 (Brasília time +1) — few islands on the east coast of Brazil (Fernando de Noronha, Trindade, Martin Vaz, Atol das Rocas, Saint Peter and Paul Rocks)'
       ],
-  
+
     'Indonesia': [
-      'UTC+07:00 (Western Indonesian Standard Time) — islands of Sumatra, Java, provinces of West Kalimantan and Central Kalimantan', 
-      'UTC+08:00 (Central Indonesian Standard Time) — islands of Sulawesi, Bali, provinces of East Nusa Tenggara, West Nusa Tenggara, East Kalimantan and South Kalimantan', 
+      'UTC+07:00 (Western Indonesian Standard Time) — islands of Sumatra, Java, provinces of West Kalimantan and Central Kalimantan',
+      'UTC+08:00 (Central Indonesian Standard Time) — islands of Sulawesi, Bali, provinces of East Nusa Tenggara, West Nusa Tenggara, East Kalimantan and South Kalimantan',
       'UTC+09:00 (Eastern Indonesian Standard Time) — provinces of Maluku, North Maluku, Papua and West Papua'
       ],
- 
+
     'Kiribati': [
-      'UTC+12:00 — Gilbert Islands', 
-      'UTC+13:00 — Phoenix Islands', 
+      'UTC+12:00 — Gilbert Islands',
+      'UTC+13:00 — Phoenix Islands',
       'UTC+14:00 — Line Islands'
       ],
-  
+
     'Mexico': [
-      'UTC−08:00 (Zone 3 or Northwest Zone) — the state of Baja California', 
-      'UTC−07:00 (Zone 2 or Pacific Zone) — the states of Baja California Sur, Chihuahua, Nayarit, Sinaloa and Sonora', 
+      'UTC−08:00 (Zone 3 or Northwest Zone) — the state of Baja California',
+      'UTC−07:00 (Zone 2 or Pacific Zone) — the states of Baja California Sur, Chihuahua, Nayarit, Sinaloa and Sonora',
       'UTC−06:00 (Zone 1 or Central Zone) — most of Mexico'
       ],
- 
+
     'Chile': ['UTC−06:00 — Easter Island', 'UTC−04:00 — main territory'],
-  
+
     'Democratic Republic of the Congo': [
-      'UTC+01:00 (WAT) — western part of the country', 
+      'UTC+01:00 (WAT) — western part of the country',
       'UTC+02:00 (CAT) — eastern part of the country'
       ],
-  
+
     'Ecuador': [
-      'UTC−06:00 (GALT) — Galápagos Province', 
+      'UTC−06:00 (GALT) — Galápagos Province',
       'UTC−05:00 (Ecuador Time) — main territory of Ecuador'
     ],
 
     'Federated States of Micronesia': [
-      'UTC+10:00 — the states of Chuuk and Yap', 
+      'UTC+10:00 — the states of Chuuk and Yap',
       'UTC+11 — the states of Kosrae and Pohnpei'
     ],
-  
+
     'Kazakhstan': [
-      'UTC+05:00 — western Kazakhstan', 
+      'UTC+05:00 — western Kazakhstan',
       'UTC+06:00 — eastern Kazakhstan'
     ],
-  
+
     'Kingdom of the Netherlands': [
-      'UTC−04:00 (AST) — Caribbean municipalities and constituent countries', 
+      'UTC−04:00 (AST) — Caribbean municipalities and constituent countries',
       'UTC+01:00 (CET) — main territory of the Netherlands'
     ],
- 
+
     'Mongolia': [
-      'UTC+07:00 — the provinces of Khovd, Uvs and Bayan-Ölgii', 
+      'UTC+07:00 — the provinces of Khovd, Uvs and Bayan-Ölgii',
       'UTC+08:00 — most of the country'
     ],
-  
+
     'Portugal': [
       'UTC−01:00 — Azores', 'UTC (WET) — Madeira and the main territory of Portugal'
     ],
- 
+
     'Spain': [
-      'UTC (WET) — Canary Islands', 
+      'UTC (WET) — Canary Islands',
       'UTC+01:00 (CET) — main territory of Spain'
     ],
-  
+
     'Afghanistan': ['UTC+04:30'],
-  
+
     'Albania': ['UTC+01:00 (CET)'],
-  
+
     'Algeria': ['UTC+01:00 (CET)'],
-  
+
     'Andorra': ['UTC+01:00 (CET)'],
-  
+
     'Angola': ['UTC+01:00 (WAT)'],
-  
+
     'Antigua and Barbuda': ['UTC−04:00 (AST)'],
-  
+
     'Argentina': ['UTC−03:00 (ART)'],
-  
+
     'Armenia': ['UTC+04:00'],
 
     'Austria': ['UTC+01:00 (CET)'],
@@ -625,7 +625,7 @@ function get_time_zone($scope){
 
     'Papua New Guinea': ['UTC+10:00'],
   }
-} 
+}
 function get_countries($scope){
     $scope.countries = [
           'Afghanistan',
@@ -844,49 +844,49 @@ function get_countries($scope){
           // 'Western Sahara',
           'Yemen',
           'Zambia',
-          'Zimbabwe ', 
+          'Zimbabwe ',
     ]
 }
 function get_languages($scope) {
   $scope.languages = [
-    'Mandarin', 
-    'Spanish', 
+    'Mandarin',
+    'Spanish',
     'English',
-    'Hindi', 
-    'Arabic', 
-    'Portuguese', 
-    'Bengali', 
-    'Russian', 
-    'Japanese', 
-    'Punjabi', 
-    'German', 
-    'Javanese', 
-    'Wu', 
-    'Malay/Indonesian', 
-    'Telugu', 
-    'Vietnamese', 
-    'Korean', 
-    'French', 
-    'Marathi', 
-    'Tamil', 
-    'Urdu', 
-    'Persian', 
-    'Turkish', 
-    'Italian', 
-    'Cantonese', 
-    'Thai', 
-    'Gujarati', 
+    'Hindi',
+    'Arabic',
+    'Portuguese',
+    'Bengali',
+    'Russian',
+    'Japanese',
+    'Punjabi',
+    'German',
+    'Javanese',
+    'Wu',
+    'Malay/Indonesian',
+    'Telugu',
+    'Vietnamese',
+    'Korean',
+    'French',
+    'Marathi',
+    'Tamil',
+    'Urdu',
+    'Persian',
+    'Turkish',
+    'Italian',
+    'Cantonese',
+    'Thai',
+    'Gujarati',
   ]
 }
 
 function login_form_validation($scope){
     if($scope.username == undefined || $scope.username == '') {
         $scope.error_message = 'Please Enter your username';
-        $scope.error_flag = true;
+        $scope.error_flag = 'error';
         return false;
     } else if($scope.password == undefined || $scope.password == '') {
         $scope.error_message = 'Please Enter Password';
-        $scope.error_flag = true;
+        $scope.error_flag = 'error';
         return false;
     }
     return true;
@@ -923,12 +923,12 @@ function login($scope, $http, $timeout) {
                     $scope.popup.hide_popup();
                     $scope.error_message = '';
                 }, 3000);
-            }             
+            }
         }).error(function(data, status)
         {
             $scope.error_message = data.error_value;
             $scope.error_flag = true;
-        }); 
+        });
     }
 }
 
@@ -979,18 +979,18 @@ function signup($scope, $http, $timeout){
                     $scope.error_message = '';
                 }, 5000);
             }
-            
+
         }).error(function(data, status)
         {
             $scope.error_message = data.message;
             $scope.error_flag = true;
-        }); 
+        });
     }
 }
 
 function subscribe_now($scope, $http, $timeout){
 
-    $scope.subscribe_message_error = false; 
+    $scope.subscribe_message_error = false;
     $scope.subscribe_error = "Please use the correct email format: example@emailprovider.com"
     if(validateEmail($scope.subscribe_email)) {
         params = {
@@ -1007,8 +1007,8 @@ function subscribe_now($scope, $http, $timeout){
         }).success(function(data, status)
         {
             if(data.result == 'error'){
-               $scope.subscribe_message_error = true; 
-               $scope.subscribe_error = data.error; 
+               $scope.subscribe_message_error = true;
+               $scope.subscribe_error = data.error;
             } else {
                 $scope.subscribe_email = ''
                 $scope.subscribe_message = true;
@@ -1016,40 +1016,49 @@ function subscribe_now($scope, $http, $timeout){
                     $scope.subscribe_message = false;
                 }, 5000);
             }
-            
+
         }).error(function(data, status)
         {
             console.log(data);
-        }); 
+        });
     } else {
-       $scope.subscribe_message_error = true; 
-    }       
+       $scope.subscribe_message_error = true;
+    }
 }
 
 function HomeController($scope, $element, $http, $timeout, share, $location)
 {
-    $scope.signup_flag = false;
-    $scope.popup = '';
-    $scope.init = function(csrf_token)
-    {
-        $scope.csrf_token = csrf_token;
-    }
-    $scope.show_popup = function(name){
-      show_popup(name, $scope);
-    }
-    $scope.hide_popup = function(name){
-      $scope.email = '';
-      $scope.password = '';
-      $scope.username = '';
-    }
-    $scope.subscribe_now = function(){
-        subscribe_now($scope, $http, $timeout);
-    }
-    $scope.signup = function(){
-      signup($scope, $http, $timeout);  
-    }
-    $scope.login = function(passws_element){
-      login($scope, $http, $timeout);
+    console.log($scope);
+    $scope.error_message = '';
+    $scope.error_flag = '';
+    // $scope.signup_flag = false;
+    // $scope.popup = '';
+    // $scope.init = function(csrf_token)
+    // {
+    //     $scope.csrf_token = csrf_token;
+    // }
+    // $scope.show_popup = function(name){
+    //   show_popup(name, $scope);
+    // }
+    // $scope.hide_popup = function(name){
+    //   $scope.email = '';
+    //   $scope.password = '';
+    //   $scope.username = '';
+    // }
+    // $scope.subscribe_now = function(){
+    //     subscribe_now($scope, $http, $timeout);
+    // }
+    // $scope.signup = function(){
+    //   signup($scope, $http, $timeout);
+    // }
+    // $scope.login = function(passws_element){
+    //   login($scope, $http, $timeout);
+    // }
+    $scope.login = function() {
+      if (login_form_validation($scope)) {
+          $scope.error_message = '';
+          $scope.error_flag = '';
+      }
     }
 }
 function BlogController($scope, $element, $http, $timeout, share, $location)
@@ -1067,13 +1076,13 @@ function BlogController($scope, $element, $http, $timeout, share, $location)
         //$scope.get_blog_list();
         $scope.get_archive();
         $scope.archive_flag = false;
-        $scope.get_top_writers(); 
+        $scope.get_top_writers();
         if(id != ''){
             $scope.detail_view = true;
-        } 
+        }
         if(blog_board != ''){
             $scope.blog_board = true;
-        }       
+        }
     }
     $scope.get_archive = function(){
         $http.get('/blog/archive/').success(function(data)
@@ -1129,11 +1138,11 @@ function BlogController($scope, $element, $http, $timeout, share, $location)
                 }
                 $("body,html").animate({scrollTop: pos}, 1000);
             }, 1000);
-             
+
         }).error(function(data, status)
         {
             console.log(data || "Request failed");
-        });  
+        });
     }
     $scope.search_blog = function(){
         var search_key = $scope.blog_search_key;
@@ -1171,8 +1180,8 @@ function BlogController($scope, $element, $http, $timeout, share, $location)
         }).error(function(data, status)
         {
             console.log(data || "Request failed");
-        });  
-    }  
+        });
+    }
     $scope.get_blog_tags = function(id){
         var url = '/blog/'+id+'/tags/';
         $http.get(url).success(function(data)
@@ -1184,7 +1193,7 @@ function BlogController($scope, $element, $http, $timeout, share, $location)
         }).error(function(data, status)
         {
             console.log(data || "Request failed");
-        });  
+        });
     }
     $scope.get_top_writers = function(){
         var url = '/blog/top_writers/';
@@ -1194,8 +1203,8 @@ function BlogController($scope, $element, $http, $timeout, share, $location)
         }).error(function(data, status)
         {
             console.log(data || "Request failed");
-        }); 
-    }    
+        });
+    }
 }
 
 function AboutUsController($scope, $element, $http, $timeout, share, $location)
@@ -1210,7 +1219,7 @@ function AboutUsController($scope, $element, $http, $timeout, share, $location)
         }).error(function(data, status)
         {
             console.log(data || "Request failed");
-        }); 
+        });
         var url = '/leadership_team/';
         $http.get(url).success(function(data)
         {
@@ -1218,7 +1227,7 @@ function AboutUsController($scope, $element, $http, $timeout, share, $location)
         }).error(function(data, status)
         {
             console.log(data || "Request failed");
-        });  
+        });
     }
 }
 
@@ -1297,7 +1306,7 @@ function ContactUsController($scope, $element, $http, $timeout, share, $location
                         $scope.success_flag = false;
                     }, 5000);
                 }
-                
+
             }).error(function(data, status)
             {
                 $scope.error_message = data.message;
@@ -1377,18 +1386,16 @@ function SellerController($scope, $element, $http, $timeout, share, $location)
                         $scope.popup.hide_popup();
                     }, 5000);
                 }
-                
+
             }).error(function(data, status)
             {
                 $scope.error_message = data.message;
                 $scope.error_flag = true;
-            }); 
+            });
         }
-        
+
     }
 }
-
-
 
 function RegisterYourInterestController($scope, $element, $http, $timeout, share, $location)
 {
@@ -1431,7 +1438,7 @@ function RegisterYourInterestController($scope, $element, $http, $timeout, share
             $scope.error_message = 'Please Choose the profession';
             $scope.error_flag = true;
             return false;
-        } 
+        }
         return true;
     };
     $scope.send = function(){
@@ -1455,7 +1462,7 @@ function RegisterYourInterestController($scope, $element, $http, $timeout, share
                }
             }).success(function(data, status)
             {
-                
+
                 if(data.result == 'error'){
                     console.log('error');
                 } else {
@@ -1477,7 +1484,7 @@ function RegisterYourInterestController($scope, $element, $http, $timeout, share
                     $timeout(function() {
                         $scope.success_flag = false;
                     }, 5000);
-                }                
+                }
             }).error(function(data, status)
             {
                 // $scope.progressing_flag = false;
@@ -1489,7 +1496,7 @@ function RegisterYourInterestController($scope, $element, $http, $timeout, share
 }
 
 function ProfileController($scope, $element, $http, $timeout, share, $location)
-{   
+{
     $scope.init = function(csrf_token, user_id, user_slug, user_type)
     {
         $scope.csrf_token = csrf_token;

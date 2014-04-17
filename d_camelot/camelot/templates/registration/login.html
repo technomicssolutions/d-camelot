@@ -1,16 +1,17 @@
 <div class="login_body">
     <form method="post" action="">
     {% csrf_token %}
+        <p class="validation [[ error_flag ]]">[[ error_message ]]</p>
         <div>
             <label for="id_username">Username</label>
-            <input id="id_username" type="text" name="username" maxlength="254">        
+            <input ng-model="username" id="id_username" type="text" name="username" maxlength="254">
         </div>
         <div>
             <label for="id_password">Password</label>
-            <input id="id_password" type="password" name="password">
+            <input ng-model="password" id="id_password" type="password" name="password">
         </div>
 
-        <input type="submit" value="login" />
+        <input ng-click="login()" type="submit" value="login" />
         <input type="hidden" name="next" value="" />
     </form>
 </div>
@@ -20,3 +21,5 @@
 <p>Your username and password didn't match. Please try again.</p>
 {% endif %}
 {% endcomment %}
+
+
