@@ -276,7 +276,7 @@ a {
   width:100%;
 }
 
-/************** header style send ***********/
+/************** header styles end ***********/
 
 
 .main_container
@@ -439,6 +439,13 @@ h4 {
 header {
   float: left;
   width: 17%;
+}
+
+header .main_logo {
+  height: 40px;
+  line-height: 40px;
+  color: #782249;
+  padding-left: 15px;
 }
 
 /*************** header styles end *************/

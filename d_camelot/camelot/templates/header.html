@@ -1,5 +1,6 @@
 <header>
   <!-- <div class="col-xs-12 col-md-12 col-md-2 col-lg-2 menu_content" style="background-color:#fff;"> -->
+      <div class="main_logo">D-Camelot Logo</div>
       <div class="sidebar-nav">
         <div class="navbar navbar-default" role="navigation">
           <div class="navbar-header">
@@ -13,11 +14,12 @@
           </div>
           <div class="navbar-collapse collapse sidebar-navbar-collapse">
             <ul class="nav navbar-nav">
-              <li class="active"><a href="#">Menu Item 1</a></li>
-              <li><a href="#">Menu Item 2</a></li>
-              <li><a href="#">Menu Item 3</a></li>
-              <li><a href="#">Menu Item 4</a></li>
+              {% for shop in shops %}
+                <li class="{% if forloop.first %}active{% endif %}"><a href="#">{{ shop.shop_name }}</a></li>
+              {% endfor %}
               <li><a href="#">Reviews</a></li>
+              <li><a href="#">About</a></li>
+              <li><a href="#">Contact</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>
