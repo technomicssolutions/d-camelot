@@ -3,9 +3,9 @@ body {
     height: auto;
     font-family: 'Segoe UI';
     margin: 0 auto;
-    background-color: #EBEBEB;   
+    background-color: #EBEBEB;
 }
- /* make sidebar nav vertical */ 
+ /* make sidebar nav vertical */
 @media (min-width: 1200px)
 {
 .bottom_arrow{ margin-top:-37px;}
@@ -166,11 +166,43 @@ background-color: rgba(201, 201, 201, 0.15);
     background: -ms-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%); /* IE10+ */
     background: linear-gradient(to bottom,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%); /* W3C */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#a6000000',GradientType=0 ); /* IE6-9 */
-
+    position: relative;
 }
-.footer ul{
+.footer ul {
   padding-top: 20px;
 }
+
+.social_icons {
+  position: absolute;
+  top: -60px;
+}
+
+.social_icons a {
+  width: 30px;
+  height: 30px;
+  display: block;
+  float: left;
+  margin: 0px 5px;
+}
+
+.social_icons .fb {
+    margin-left: 15px;
+    background: url(../img/social/fb.png) no-repeat;
+}
+
+.social_icons .twitter {
+    background: url(../img/social/twitter.png) no-repeat;
+}
+
+.social_icons .gplus {
+    background: url(../img/social/gplus.png) no-repeat;
+}
+
+.social_icons .pin {
+    background: url(../img/social/pin.png) no-repeat;
+}
+
+
 /**************** footer styles end *************/
 
 /* Carousel Control */
@@ -219,6 +251,10 @@ input[type=text], input[type=password], select, textarea {
     -webkit-border-radius: 0;
 }
 
+a {
+   outline: 0px;
+}
+
 /* ************************************************************************************************
         NAV MENU
 ************************************************************************************************ */
@@ -229,7 +265,7 @@ input[type=text], input[type=password], select, textarea {
   background: url(../img/body_bg.png) repeat-y #782249;
   clear: both;
   width:100%;
-  display:block;
+  display: block;
   border-bottom:1px solid #000;
   height: 52px;
 }
@@ -240,7 +276,7 @@ input[type=text], input[type=password], select, textarea {
   width:100%;
 }
 
-/************** header style send ***********/
+/************** header styles end ***********/
 
 
 .main_container
@@ -258,6 +294,7 @@ input[type=text], input[type=password], select, textarea {
   height: 500px;
   overflow: hidden;
   float: left;
+  position: relative;
 }
 .slider {
   height: 500px !important;
@@ -286,9 +323,9 @@ input[type=text], input[type=password], select, textarea {
 
 .arrow_div {
   position: absolute;
-  width: 76%;
+  width: 92%;
   z-index: 100;
-  top: 70%;
+  top: 40%;
 }
 
 .prev_arrow {
@@ -298,7 +335,17 @@ input[type=text], input[type=password], select, textarea {
   width: 20px;
   height: 20px;
   text-decoration: none;
-  background: url('../img/arrow_left.png') no-repeat;
+  /*background: url('../img/arrow_left.png') no-repeat;*/
+}
+
+.next_arrow img,
+.prev_arrow img {
+  opacity: 0.3;
+}
+
+.next_arrow:hover img,
+.prev_arrow:hover img {
+  opacity: 1;
 }
 
 .next_arrow {
@@ -308,7 +355,7 @@ input[type=text], input[type=password], select, textarea {
   width: 20px;
   height: 20px;
   text-decoration: none;
-  background: url('../img/arrow_right.png') no-repeat;
+  /*background: url('../img/arrow_right.png') no-repeat;*/
 }
 
 .shop_logo {
@@ -320,7 +367,11 @@ input[type=text], input[type=password], select, textarea {
 }
 .offers_notifications {
   height: 30%;
+  width: 92%;
+  margin: 0px 4%;
   float: left;
+  margin-bottom: 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.46);
 }
 
 i{
@@ -361,16 +412,18 @@ h4 {
   background: linear-gradient(white, black); /* Standard syntax (must be last) */
 
 }
-.responsive-slider .slider-control.left, .responsive-slider .slider-control.right { 
+.responsive-slider .slider-control.left, .responsive-slider .slider-control.right {
     font-size: 12px;
     padding: 5px;
 }
-.responsive-slider .slider-control.left:hover, .responsive-slider .slider-control.right:hover { 
+.responsive-slider .slider-control.left:hover, .responsive-slider .slider-control.right:hover {
     font-size: 12px;
     padding: 5px;
 }
 .responsive-slider .slider-control {
   opacity: 0.5;
+  top: 45%;
+  z-index: 105;
 }
 .container-fluid {
   padding : 0px !important;
@@ -386,6 +439,13 @@ h4 {
 header {
   float: left;
   width: 17%;
+}
+
+header .main_logo {
+  height: 40px;
+  line-height: 40px;
+  color: #782249;
+  padding-left: 15px;
 }
 
 /*************** header styles end *************/

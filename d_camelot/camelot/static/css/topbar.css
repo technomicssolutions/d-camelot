@@ -1,0 +1,77 @@
+.top_bar .top_menu_wrapper {
+    position: relative;
+    width: 80%;
+    height: 100%;
+    margin: auto;
+}
+
+.top_bar .top_menu_wrapper .link {
+    outline: 0px;
+    float: right;
+    color: #58B7EA;
+    padding: 0px 10px;
+    padding-top: 15px;
+}
+
+.top_bar .top_menu_wrapper .link:hover {
+    color: #FFF;
+    text-decoration: none;
+}
+
+.top_bar .top_menu_wrapper .login_body {
+	display: none;
+	position: absolute;
+	padding: 20px;
+	top: 50px;
+	right: 0px;
+	width: 250px;
+	min-height: 50px;
+	background-color: #FFF;
+	box-shadow: 2px 4px 5px #333;
+	z-index: 200;
+}
+
+.top_bar .top_menu_wrapper .login_body.show {
+	display: block;
+}
+
+.login_body .validation {
+    font-size: 11px;
+    color: red;
+    display: none;
+}
+
+.login_body .validation.error {
+    display: block;
+}
+
+.top_bar .top_menu_wrapper .login_body input {
+	margin-bottom: 10px;
+	border: 1px solid #000;
+	border-radius: 2px;
+	width: 100%;
+	padding: 0px 5%;
+	height: 30px;
+}
+
+.top_bar .top_menu_wrapper .login_body input[type="submit"] {
+	color: #FFF;
+	background-color: #782249;
+	margin-top: 10px;
+	border: 0px;
+}
+
+.top_bar .shop_cart {
+    outline: 0px;
+    width: 36px;
+    height: 23px;
+    display: block;
+    background: url('../img/cart_icon.png') no-repeat bottom;
+    position: absolute;
+    right: -45px;
+    top: 12px;
+}
+
+.top_bar .shop_cart:hover {
+    background-position: top;
+}

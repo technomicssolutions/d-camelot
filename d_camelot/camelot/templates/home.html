@@ -5,18 +5,18 @@
 
 {% endblock extrahead%}
 {% block controller %}
-  ng-controller="HomePageController" ng-init="init('{{csrf_token}}')"   
+  ng-controller="HomeController" ng-init="init('{{csrf_token}}')"
 {% endblock controller %}
 {% block body_id %}home{% endblock %}"
 {% block content %}
-    <div class="slide_container" > 
+    <div class="slide_container" >
         <div class="arrow_div">
              <a class="prev_arrow"><img src="/static/img/arrow_left.png" /></a>
 
              <a class="next_arrow"><img src="/static/img/arrow_right.png" /></a>
-        </div> 
+        </div>
         <div class="slider">
-            <div class="slide" >   
+            <div class="slide" >
                 <div class="responsive-slider" data-spy="responsive-slider" data-autoplay="true">
                     <div class="slides" data-group="slides">
                         <ul>
@@ -50,8 +50,8 @@
                       <a class="page" href="#" data-jump-to="3">3</a>
                       <a class="page" href="#" data-jump-to="4">4</a>
                     </div>
-                </div>  
-            
+                </div>
+
             </div>
             {% for shop in shops %}
               <div class="slide {{shop.shop_type}}">
@@ -67,7 +67,7 @@
                     <div class="shop_main_links">
                       {% if shop.brands %}
                         <ul> <i>Our Main Brands </i>
-                          {% for brand in shop.brands.all %} 
+                          {% for brand in shop.brands.all %}
                             <li><a href="{{brand.brand_name}}"> {{brand.brand_name}} </a> </br></li>
                           {% endfor %}
                         </ul>

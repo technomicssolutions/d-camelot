@@ -1,32 +1,26 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="dcamelot">
+<html lang="en" ng-app="fbm">
  <head>
 	<meta charset="UTF-8" />
 	<title>{% block title %}{% endblock title%} | D-Camelot </title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link href="/static/css/bootstrap.min.css" rel="stylesheet">
 	<link href="/static/css/responsive-slider.css" rel="stylesheet">
 	<link href="/static/css/styles.css" rel="stylesheet">
-	<link href="/static/css/registration.css" rel="stylesheet">
-	<link href="/static/css/font-awesome.min.css" rel="stylesheet">   
+	<link href="/static/css/topbar.css" rel="stylesheet">
+	<link href="/static/css/font-awesome.min.css" rel="stylesheet">
 	{% block extrahead %}
-	{% endblock extrahead %}	
+	{% endblock extrahead %}
  </head>
  <body id="{% block body_id %}base{% endblock %}"  {% block controller %}{% endblock controller %}>
 	<div class="container-fluid">
-    	<div class="row top_bar">
-    		<div class="registration_wrapper">
-    			<a class="link login" href="#">Login</a>
-    			<a class="link signup" href="#">Sign Up</a>
-    			{% include 'registration/login.html' %}
-    		</div>
-    	</div>
+		{% include 'topbar.html' %}
 	</div>
 	<div class="container-fluid">
 	{% block header %}
 		{% include 'header.html' %}
 	{% endblock header %}
-  
+
   {% block content %}
   {% endblock content %}
 	</div>
@@ -39,7 +33,15 @@
 	<script type="text/javascript" src="/static/mootools/library/mootools-core-1.4.5-full-compat-yc.js"></script>
 	<script type="text/javascript" src="/static/mootools/library/mootools-more-1.4.0.1.js"></script>
 	<script type="text/javascript" src="/static/mootools/common.js"></script>
-	
+
+    <script src="/static/angular_app/library/angular/angular.js"></script>
+    <script src="/static/angular_app/library/angular/angular-resource.js"></script>
+    <script src="/static/angular_app/app.js"></script>
+    <script src="/static/angular_app/services.js"></script>
+    <script src="/static/angular_app/directives.js"></script>
+    <script src="/static/angular_app/router.js"></script>
+    <script src="/static/angular_app/controllers.js"></script>
+
 	<script src="/static/js/jquery.min.js"></script>
 	<script src="/static/js/bootstrap.min.js"></script>
 	<script src="/static/js/responsive-slider.js"></script>
@@ -52,8 +54,8 @@
 	})
 	});
 	</script>
-	{% block optional_scripts %}					
-	{% endblock optional_scripts %}	 
+	{% block optional_scripts %}
+	{% endblock optional_scripts %}
  </body>
 </html>
 

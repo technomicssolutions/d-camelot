@@ -11,8 +11,8 @@ var Slider = new Class({
         minMargin: -820,
         midMargin: 820,
         maxMargin: 1640,
-        slideOptions: {   
-            'transition' : 'linear', 
+        slideOptions: {
+            'transition' : 'linear',
             'duration' : 500,
         }
     },
@@ -23,7 +23,7 @@ var Slider = new Class({
         this.lastInd = this.slides.length - 1;
         this.leftControl = this.element.getElement('.next_arrow');
         this.rightControl = this.element.getElement('.prev_arrow');
-        this.slideLock = false;  
+        this.slideLock = false;
         this.currentIndex = 0;
         this.nextIndex = 1;
         this.thirdIndex = 2;
@@ -46,14 +46,14 @@ var Slider = new Class({
             this.nextSlide.setStyle('margin-left', this.options.midMargin);
             this.thirdSlide.setStyle('margin-left', this.options.maxMargin);
 
-            var lock = { 
+            var lock = {
                 onStart: function() {
                     self.slideLock = true;
                 },
                 onComplete: function(){
                     self.slideLock = false;
                 }
-            }; 
+            };
             var mergedOptions = Object.merge(this.options.slideOptions, lock);
 
             this.effects = new Fx.Elements(this.slides, mergedOptions);
@@ -61,10 +61,10 @@ var Slider = new Class({
         }
         this.rightControl.setStyle('display', 'none');
     },
-    
-    slideLeft: function(index) {
 
+    slideLeft: function(index) {
         //this.reset();
+        console.log('in slide left');
         var effect = {};
 
         effect[this.currentIndex] = {'margin-left': [this.options.startMargin, this.options.minMargin]};
@@ -73,8 +73,10 @@ var Slider = new Class({
         this.currentIndex = this.nextIndex;
         this.nextIndex = this.thirdIndex;
         this.thirdIndex = this.thirdIndex  + 1;
-        this.timer = $clear(this.timer);              
+        this.timer = $clear(this.timer);
         this.effects.start(effect);
+
+        console.log('curr, last',this.currentIndex, this.lastInd);
 
         if(this.currentIndex == this.lastInd){
             this.leftControl.setStyle('display', 'none');
@@ -90,36 +92,37 @@ var Slider = new Class({
     },
     slideRight: function(index) {
         //this.reset();
-        var effect = {};        
-        effect[this.nextIndex] = {'margin-left': [this.options.midMargin, this.options.maxMargin]};        
+        var effect = {};
+        effect[this.nextIndex] = {'margin-left': [this.options.midMargin, this.options.maxMargin]};
         effect[this.currentIndex] = {'margin-left': [this.options.startMargin, this.options.midMargin]};
         effect[this.currentIndex - 1] = {'margin-left': [this.options.minMargin, this.options.startMargin]};
         this.thirdIndex = this.nextIndex;
         this.nextIndex = this.currentIndex;
-        this.currentIndex = this.currentIndex - 1; 
+        this.currentIndex = this.currentIndex - 1;
         this.slideToLeft = false;
-        this.timer = $clear(this.timer);     
+        this.timer = $clear(this.timer);
+
         if(this.currentIndex == 0){
             this.rightControl.setStyle('display', 'none');
         } else {
             this.rightControl.setStyle('display', 'block');
-        }   
+        }
+
         if(this.nextIndex == this.lastInd){
-            this.leftControl.setStyle('display', 'none');
-        } else {
             this.leftControl.setStyle('display', 'block');
-        }        
+        }
+
         this.effects.start(effect);
     },
-    
+
 });
 // var geocodePosition =function(pos) {
-	
+
 // }
 var Archive = new Class({
 	Implements: [Options],
 	options: {
-		
+
 	},
 	initialize: function(elements) {
 		this.elementss = elements;
@@ -132,10 +135,10 @@ var Archive = new Class({
 						this.open_close_service(ev.target);
 					} else {
 						this.open_close_service(ev.target.getParent());
-					}					
+					}
 				}.bind(this));
 			}.bind(this));
-		}.bind(this));	
+		}.bind(this));
 	},
 	open_close_service: function(el){
 		var uls = el.getElements('ul');
@@ -154,8 +157,8 @@ var Archive = new Class({
 			el.removeClass('active');
 		} else if(!el.hasClass('blog_name')) {
 			el.addClass('active');
-		}		
-	}	
+		}
+	}
 });
 
 /*var DialogueModelWindow = new Class({
@@ -180,7 +183,7 @@ var Archive = new Class({
 		this.set_overlay_height(height);
 		this.set_message(this.message);
 		this.hide_popup();
-		this.close_pop_up = this.pop_window.getElement('.close_pop');		
+		this.close_pop_up = this.pop_window.getElement('.close_pop');
 		this.close_pop_up.addEvent('click', function(ev){
 			ev.stop();
 			this.hide_popup();
@@ -201,8 +204,8 @@ var Archive = new Class({
 		// 	'width': this.options.dialogue_popup_width,
 		// 	'height': this.options.height,
 		// });
-	},	
-	show_content: function(){		
+	},
+	show_content: function(){
 		$$(this.options.content_div)[0].setStyle('display', 'block');
 		this.show_popup();
 	},
@@ -226,7 +229,7 @@ var Archive = new Class({
 	},
 	set_top: function(){
 		this.pop_window.setStyle('margin-top', this.options.top);
-	},	
+	},
 });
 
 var TabView = new Class({
@@ -241,24 +244,24 @@ var TabView = new Class({
 		this.tab_headers = $$(this.options.tab_header);
 		this.tabs = $$(this.options.tabs);
 		if(this.tab_headers.length > 0) {
-			this.tabs.each(function(tab, index){	
-				if(index!=0)			
+			this.tabs.each(function(tab, index){
+				if(index!=0)
 					tab.setStyle('display', 'none');
 			}.bind(this));
 			this.current_index = 0;
 			this.tabs[this.current_index].setStyle('display', 'block');
 			this.tab_headers.each(function(header, ind){
 				if(header.hasClass('current')){
-					this.tabs[this.current_index].setStyle('display', 'none');			
+					this.tabs[this.current_index].setStyle('display', 'none');
 					this.current_index = ind;
-					this.tabs[this.current_index].setStyle('display', 'block');			
+					this.tabs[this.current_index].setStyle('display', 'block');
 				}
 				header.addEvent('click', function(ev){
-					ev.stop();	
+					ev.stop();
 					this.change_tab(ind);
 				}.bind(this));
-			}.bind(this));		
-		}		
+			}.bind(this));
+		}
 	},
 	change_tab: function(ind){
 		var tab = this.tabs[ind];
@@ -278,7 +281,7 @@ var SimpleMap = new Class({
         'marker_url': '',
         'zoom_level': 4,
         'zoom_class': '',
-        'map_address_button': '.map_address', 
+        'map_address_button': '.map_address',
         'latitude': 'POINT (-27.87 134.34)',
         'multiple_markers': false,
         'coordinate_class': '#map_val',
@@ -294,11 +297,11 @@ var SimpleMap = new Class({
         this.geometry_value = this.geometry.val();
         if(this.geometry_value != '' && this.geometry_value != undefined) {
         	var latitude = this.geometry_value;
-            
+
         } else {
         	var latitude = this.options.latitude;
             this.geometry.value = this.options.latitude;
-        }  
+        }
         if(this.options.zoom_class == ''){
             this.zooms.push(this.options.zoom_level);
         } else {
@@ -306,7 +309,7 @@ var SimpleMap = new Class({
             zo.each(function(z, index){
                 this.zooms.push(parseInt(z.value));
             }.bind(this));
-        }  
+        }
         latitude = latitude.replace('POINT (','');
         latitude = latitude.replace(')','');
         latitude = latitude.replace(', ',' ');
@@ -318,7 +321,7 @@ var SimpleMap = new Class({
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };
         this.map = new google.maps.Map(this.element, this.mapOptions);
-        
+
         // $('#map_val').val('POINT(-24.87 134.34)');
         this.coordinates = $$(this.options.coordinate_class);
         this.address = $$(this.options.address_class);
@@ -337,14 +340,14 @@ var SimpleMap = new Class({
                 new google.maps.Size(35,35),
                 new google.maps.Point(0,0),
                 new google.maps.Point(17,28)
-            );               
+            );
 
             var marker = new google.maps.Marker({
                 position: latlng,
                 map: this.map,
                 draggable:true,
                 icon: image
-            }); 
+            });
             google.maps.event.addListener(marker, 'click', function(mouseEvent) {
                 var infowindow = new google.maps.InfoWindow({
                     content: this.address[index].value,
@@ -353,7 +356,7 @@ var SimpleMap = new Class({
             }.bind(this));
             google.maps.event.addListener(marker, 'dragend', function(mouseEvent) {
             	$(coordinate_class).val('POINT ('+mouseEvent.latLng.lat()+' '+mouseEvent.latLng.lng()+')');
-            	
+
             	geocoder.geocode({
 					latLng: mouseEvent.latLng
 				}, function(responses) {
@@ -370,18 +373,18 @@ var SimpleMap = new Class({
 	    //             });
 					// infowindow.open(this.map, marker);
 				});
-            }.bind(this)); 
+            }.bind(this));
             google.maps.event.addListener(marker, 'dragstart', function(mouseEvent){
 				$$('#current').set('text','Currently dragging marker...');
 			}.bind(this));
-        }.bind(this));         
+        }.bind(this));
         google.maps.event.addListener(this.map, 'zoom_changed', function(mouseEvent) {
             this.zoom_level.set('value',this.map.getZoom());
-        }.bind(this));          
-    }, 
+        }.bind(this));
+    },
     resizeMap: function() {
-    	google.maps.event.trigger(this.map, 'resize'); 
-    },    
+    	google.maps.event.trigger(this.map, 'resize');
+    },
 });*/
 
 // var CamelotSlider = new Class({
@@ -395,14 +398,14 @@ var SimpleMap = new Class({
 //             'transition' : 'linear',
 //             'duration' : 1000
 //         },
-//         slideOptions: {   
-//             'transition' : 'linear', 
+//         slideOptions: {
+//             'transition' : 'linear',
 //             'duration' : 1000,
 //             //'link': 'cancel'
 //         }
 //     },
 //     initialize: function(element) {
-    	
+
 //     	this.margin_interval = this.options.slide_width - this.options.start_margin
 //         this.current_margin = 0 - this.options.start_margin;
 //         this.slider = $$(this.options.slider)[0];
@@ -420,7 +423,7 @@ var SimpleMap = new Class({
 //         console.log(this.effects, this.slider);
 //     	/*this.effects.addEvent('complete', function() {
 //             if (!this.clicked) {
-//                 this.timer = this.autoSlide.delay(this.options.delay, this);            
+//                 this.timer = this.autoSlide.delay(this.options.delay, this);
 //             }
 //         }.bind(this));*/
 //         this.forward_transition.delay(1000, this);
@@ -459,18 +462,18 @@ var SimpleMap = new Class({
 //         if(this.current_margin <= this.start_margin){
 //         	this.forward_transition.delay(5000, this);
 //         }
-        
+
 //         this.effects.start(this.current_margin, new_margin);
 //         this.current_margin = new_margin;
 //         this.backward_transition.delay(5000, this);
-//     }, 
+//     },
 //     autoSlide: function() {
 //         this.currentImage = this.slides[this.currentIndex];
 //         /*this.controls[this.currentIndex].addClass('active');*/
 //         this.nextIndex = (this.currentIndex<this.slides.length-1)? (this.currentIndex+1): 0;
 //         this.nextImage = this.slides[this.nextIndex];
 //         /*this.nextImage.addClass('active');*/
-//         this.transition(this.currentImage, this.nextImage, false);        
+//         this.transition(this.currentImage, this.nextImage, false);
 //     },
 //     slideOnClick: function(index) {
 //         this.reset();
@@ -480,13 +483,13 @@ var SimpleMap = new Class({
 //         this.nextImage = this.slides[this.nextIndex];
 //         /*this.currentImage.removeClass('active');
 //         this.nextImage.addClass('active');*/
-//         this.transition(this.currentImage,this.nextImage,true);	
+//         this.transition(this.currentImage,this.nextImage,true);
 //     },
 //     reset: function(){
 //         this.slides.each(function(image,index){
 //             if(index!=this.currentIndex) {
 //                 image.setStyle('margin-left',this.options.minMargin);
-//             }           
+//             }
 //         }.bind(this));
 //     }
 // });
@@ -512,7 +515,7 @@ var SimpleMap = new Class({
 //             login.removeClass('show');
 //         }
 //     });
-	
+
 // });
 
 
@@ -530,7 +533,7 @@ var Registration = new Class({
             else if (!(ev.target==login || p.contains(login))) {
                 login.removeClass('show');
             }
-        });  
+        });
     }
 });
 
@@ -538,7 +541,7 @@ var Registration = new Class({
 var UI = new Class({
     Implements: [Events, Options],
     Binds: [],
-    
+
     initialize: function() {
         window.addEvent("load", this.loader.bind(this));
         window.addEvent("domready", this.ready.bind(this));
@@ -546,7 +549,7 @@ var UI = new Class({
 
     loader: function() {
     },
-    
+
     ready: function() {
         var myScroll = new Fx.SmoothScroll({
             duration: 200,
