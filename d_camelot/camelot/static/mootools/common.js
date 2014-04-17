@@ -63,8 +63,8 @@ var Slider = new Class({
     },
 
     slideLeft: function(index) {
-
         //this.reset();
+        console.log('in slide left');
         var effect = {};
 
         effect[this.currentIndex] = {'margin-left': [this.options.startMargin, this.options.minMargin]};
@@ -75,6 +75,8 @@ var Slider = new Class({
         this.thirdIndex = this.thirdIndex  + 1;
         this.timer = $clear(this.timer);
         this.effects.start(effect);
+
+        console.log('curr, last',this.currentIndex, this.lastInd);
 
         if(this.currentIndex == this.lastInd){
             this.leftControl.setStyle('display', 'none');
@@ -99,16 +101,17 @@ var Slider = new Class({
         this.currentIndex = this.currentIndex - 1;
         this.slideToLeft = false;
         this.timer = $clear(this.timer);
+
         if(this.currentIndex == 0){
             this.rightControl.setStyle('display', 'none');
         } else {
             this.rightControl.setStyle('display', 'block');
         }
+
         if(this.nextIndex == this.lastInd){
-            this.leftControl.setStyle('display', 'none');
-        } else {
             this.leftControl.setStyle('display', 'block');
         }
+
         this.effects.start(effect);
     },
 

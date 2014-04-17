@@ -265,7 +265,7 @@ a {
   background: url(../img/body_bg.png) repeat-y #782249;
   clear: both;
   width:100%;
-  display:block;
+  display: block;
   border-bottom:1px solid #000;
   height: 52px;
 }
@@ -294,6 +294,7 @@ a {
   height: 500px;
   overflow: hidden;
   float: left;
+  position: relative;
 }
 .slider {
   height: 500px !important;
@@ -322,7 +323,7 @@ a {
 
 .arrow_div {
   position: absolute;
-  width: 76%;
+  width: 92%;
   z-index: 100;
   top: 40%;
 }
@@ -366,9 +367,11 @@ a {
 }
 .offers_notifications {
   height: 30%;
+  width: 92%;
+  margin: 0px 4%;
   float: left;
   margin-bottom: 15px;
-  border-bottom: 1px solid #FFF;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.46);
 }
 
 i{

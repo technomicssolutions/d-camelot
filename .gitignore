@@ -49,6 +49,7 @@ coverage.xml
 *.log
 *.pot
 local_settings.py
+media/
 
 # Sphinx documentation
 docs/_build/
