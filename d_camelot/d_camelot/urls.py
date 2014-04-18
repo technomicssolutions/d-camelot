@@ -3,6 +3,7 @@ from django.conf.urls import patterns, include, url
 from django.conf import settings
 from django.contrib import admin
 
+
 admin.autodiscover()
 
 urlpatterns = patterns('',
@@ -12,8 +13,4 @@ urlpatterns = patterns('',
     url(r'^payment/$', include('payment.urls')),
     url(r'^report/$', include('report.urls')),
     url(r'^site_media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT, 'show_indexes': True}),
-	# url(r'^accounts/login/$', 'django.contrib.auth.views.login'),
 )
-
-
-

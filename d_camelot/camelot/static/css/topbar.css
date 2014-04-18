@@ -38,13 +38,13 @@
 .login_body .validation {
     font-size: 11px;
     color: red;
-    display: none;
+
 }
 
-.login_body .validation.error {
+/*.login_body .validation.error {
     display: block;
 }
-
+*/
 .top_bar .top_menu_wrapper .login_body input {
 	margin-bottom: 10px;
 	border: 1px solid #000;
@@ -74,4 +74,28 @@
 
 .top_bar .shop_cart:hover {
     background-position: top;
+}
+
+#signup_content {
+    margin-top: 30px;
+    height: 500px;
+    width: 83%;
+    float: left;
+}
+
+#signup_content .block {
+    width: 300px;
+}
+
+#signup_content .block label {
+    display: block;
+}
+
+#signup_content .block input{
+    margin-bottom: 10px;
+    border: 1px solid #000;
+    border-radius: 2px;
+/*    width: 100%;*/
+    padding: 0px 5%;
+    height: 30px;
 }

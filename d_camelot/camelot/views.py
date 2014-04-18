@@ -3,7 +3,7 @@ import urllib2
 import ast
 from datetime import datetime, timedelta
 from django.shortcuts import get_object_or_404, render
-from django.views.generic.base import View
+from django.views.generic import View, FormView
 from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.db import IntegrityError
@@ -15,23 +15,45 @@ from django.template.loader import render_to_string
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.forms import AuthenticationForm
 
 from shop.models import Shop
 
+
 class HomeView(View):
     def get(self, request, *args, **kwargs):
-    	shops = Shop.objects.all().order_by('id')
+        shops = Shop.objects.all().order_by('id')
         context = {
-        	'shops': shops
+            'shops': shops
         }
-        return render(request, 'home.html',context)
+        return render(request, 'home.html', context)
 
     def post(self, request, *args, **kwargs):
         context = {}
-        return render(request, 'home.html',context)
+        return render(request, 'home.html', context)
+
 
 class IndexView(View):
     def get(self, request, *args, **kwargs):
         return render(request, 'home.html', {})
 
 
+class LoginView(FormView):
+    form_class = AuthenticationForm
+
+    def form_invalid(self, form):
+        return HttpResponse('error')
+
+    def form_valid(self, form):
+        login(self.request, form.get_user())
+        return HttpResponse('success')
+
+
+class SignUpView(FormView):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'registration/signup.html', {})
+
+    def post(self, request, *args, **kwargs):
+        data = {}
+        data['result'] = 'error'
+        return HttpResponse(simplejson.dumps(data))

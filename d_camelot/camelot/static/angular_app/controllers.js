@@ -882,11 +882,11 @@ function get_languages($scope) {
 function login_form_validation($scope){
     if($scope.username == undefined || $scope.username == '') {
         $scope.error_message = 'Please Enter your username';
-        $scope.error_flag = 'error';
+        $scope.error_flag = true;
         return false;
     } else if($scope.password == undefined || $scope.password == '') {
         $scope.error_message = 'Please Enter Password';
-        $scope.error_flag = 'error';
+        $scope.error_flag = true;
         return false;
     }
     return true;
@@ -895,6 +895,8 @@ function login_form_validation($scope){
 function login($scope, $http, $timeout) {
     $scope.is_valid = login_form_validation($scope);
     if($scope.is_valid) {
+        $scope.error_message = '';
+        $scope.error_flag = false;
         params = {
             'username': $scope.username,
             'password': $scope.password,
@@ -909,25 +911,32 @@ function login($scope, $http, $timeout) {
             }
         }).success(function(data, status)
         {
-
-            if(data.result == 'error'){
-                $scope.error_message = data.error_value;
-                $scope.error_flag = true;
+            console.log('data',data);
+            if(data == 'success'){
+                document.location.href = '/';
             } else {
-                $scope.username = '';
-                $scope.password = '';
-                $scope.error_message = data.message;
+                console.log('error');
+                $scope.error_message = 'Username/Password incorrect';
                 $scope.error_flag = true;
-                $timeout(function() {
-                    $scope.error_flag = false;
-                    $scope.popup.hide_popup();
-                    $scope.error_message = '';
-                }, 3000);
             }
+
+            //     $scope.username = '';
+            //     $scope.password = '';
+            //     $scope.error_message = data.message;
+            //     $scope.error_flag = true;
+            //     $timeout(function() {
+            //         $scope.error_flag = false;
+            //         $scope.popup.hide_popup();
+            //         $scope.error_message = '';
+            //     }, 3000);
+            // }
         }).error(function(data, status)
         {
-            $scope.error_message = data.error_value;
+            console.log('error');
+            $scope.error_message = 'Username/Password incorrect';
             $scope.error_flag = true;
+            // $scope.error_message = data.error_value;
+            // $scope.error_flag = true;
         });
     }
 }
@@ -943,6 +952,14 @@ function validate_form($scope){
         return false;
     } else if($scope.password.length <=6) {
         $scope.error_message = 'Please use more than 6 letters in the password field';
+        $scope.error_flag = true;
+        return false;
+    } else if($scope.password_confirm == undefined || $scope.password_confirm == '') {
+        $scope.error_message = 'Both Password fields are required';
+        $scope.error_flag = true;
+        return false;
+    } else if($scope.password_confirm != $scope.password) {
+        $scope.error_message = 'Both passwords should match';
         $scope.error_flag = true;
         return false;
     }
@@ -971,13 +988,14 @@ function signup($scope, $http, $timeout){
                 $scope.error_flag = true;
 
             } else {
-                $scope.error_message = data.message;
-                $scope.error_flag = true;
-                $timeout(function() {
-                    $scope.error_flag = false;
-                    $scope.popup.hide_popup();
-                    $scope.error_message = '';
-                }, 5000);
+                document.location.href = '/';
+                // $scope.error_message = data.message;
+                // $scope.error_flag = true;
+                // $timeout(function() {
+                //     $scope.error_flag = false;
+                //     $scope.popup.hide_popup();
+                //     $scope.error_message = '';
+                // }, 5000);
             }
 
         }).error(function(data, status)
@@ -1028,18 +1046,17 @@ function subscribe_now($scope, $http, $timeout){
 
 function HomeController($scope, $element, $http, $timeout, share, $location)
 {
-    console.log($scope);
     $scope.error_message = '';
     $scope.error_flag = '';
-    // $scope.signup_flag = false;
-    // $scope.popup = '';
-    // $scope.init = function(csrf_token)
-    // {
-    //     $scope.csrf_token = csrf_token;
-    // }
-    // $scope.show_popup = function(name){
-    //   show_popup(name, $scope);
-    // }
+    $scope.signup_flag = false;
+    $scope.popup = '';
+    $scope.init = function(csrf_token)
+    {
+        $scope.csrf_token = csrf_token;
+    }
+    $scope.show_popup = function(name){
+      show_popup(name, $scope);
+    }
     // $scope.hide_popup = function(name){
     //   $scope.email = '';
     //   $scope.password = '';
@@ -1051,16 +1068,25 @@ function HomeController($scope, $element, $http, $timeout, share, $location)
     // $scope.signup = function(){
     //   signup($scope, $http, $timeout);
     // }
-    // $scope.login = function(passws_element){
-    //   login($scope, $http, $timeout);
-    // }
     $scope.login = function() {
-      if (login_form_validation($scope)) {
-          $scope.error_message = '';
-          $scope.error_flag = '';
-      }
+        login($scope, $http, $timeout);
     }
 }
+
+function SignupController($scope, $element, $http, $timeout, share, $location)
+{
+    $scope.error_message = '';
+    $scope.error_flag = '';
+    $scope.init = function(csrf_token)
+    {
+        $scope.csrf_token = csrf_token;
+    }
+    $scope.signup = function(){
+      signup($scope, $http, $timeout);
+    }
+}
+
+
 function BlogController($scope, $element, $http, $timeout, share, $location)
 {
     $scope.blog_list = [];
