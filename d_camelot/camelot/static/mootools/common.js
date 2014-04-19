@@ -523,6 +523,7 @@ var Registration = new Class({
     Implements: [Options],
     options: {},
     initialize: function () {
+        console.log('reg init');
         var login = $$('.login_body')[0];
         window.addEvent('click', function(ev) {
             var p = ev.target.getParents();
@@ -558,7 +559,7 @@ var UI = new Class({
         if($$('.slide_container').length > 0){
             new Slider($$('.slide_container')[0]);
         }
-        new Registration();
+        if ($$('.login')[0]) new Registration();
     }
 });
 

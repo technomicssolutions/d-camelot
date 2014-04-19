@@ -56,4 +56,14 @@ class SignUpView(FormView):
     def post(self, request, *args, **kwargs):
         data = {}
         data['result'] = 'error'
+        data['error'] = ''
+        password = request.POST.get('password')
+        email = request.POST.get('email')
+        try:
+            user = User.objects.create_user(email, email, password)
+            user.backend = "django.contrib.auth.backends.ModelBackend"
+            login(request, user)
+            data['result'] = 'success'
+        except:
+            data['error'] = 'Email already registered'
         return HttpResponse(simplejson.dumps(data))

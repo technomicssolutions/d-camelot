@@ -950,8 +950,8 @@ function validate_form($scope){
         $scope.error_message = 'Please Enter Password';
         $scope.error_flag = true;
         return false;
-    } else if($scope.password.length <=6) {
-        $scope.error_message = 'Please use more than 6 letters in the password field';
+    } else if($scope.password.length <=2) {
+        $scope.error_message = 'Please use more than 2 characters in the password field';
         $scope.error_flag = true;
         return false;
     } else if($scope.password_confirm == undefined || $scope.password_confirm == '') {
@@ -983,12 +983,11 @@ function signup($scope, $http, $timeout){
            }
         }).success(function(data, status)
         {
-            if(data.result == 'error'){
+            if(data.result == 'success'){
+                document.location.href = '/';
+            } else {
                 $scope.error_message = data.error;
                 $scope.error_flag = true;
-
-            } else {
-                document.location.href = '/';
                 // $scope.error_message = data.message;
                 // $scope.error_flag = true;
                 // $timeout(function() {

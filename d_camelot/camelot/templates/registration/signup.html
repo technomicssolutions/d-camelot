@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block title %}SignUp
+{% endblock title %}
+{% block extrahead%}
+
+{% endblock extrahead%}
+
+{% block body_id %}signup{% endblock %}"
+{% block content %}
+<div ng-controller="SignupController" ng-init="init('{{ csrf_token }}')" id="signup_content" class="signup_body">
+    <form method="post" action="">
+        <p hg-show="error_flag" class="validation">[[ error_message ]]</p>
+
+        <div class="block">
+            <label for="id_email">Email</label>
+            <input ng-model="email" id="id_email" type="text" name="email">
+        </div>
+
+        <div class="block">
+            <label for="id_password">Password</label>
+            <input ng-model="password" id="id_password" type="password" name="password">
+        </div>
+
+        <div class="block">
+            <label for="id_password">Confirm Password</label>
+            <input ng-model="password_confirm" id="id_password_confirm" type="password" name="password_confirm">
+        </div>
+        <input ng-click="signup()" type="submit" value="SignUp" />
+    </form>
+</div>
+{% endblock content %}
+
+
+
