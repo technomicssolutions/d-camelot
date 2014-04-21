@@ -1,14 +1,5 @@
-{% extends 'base.html' %}
-{% block title %}SignUp
-{% endblock title %}
-{% block extrahead%}
-
-{% endblock extrahead%}
-
-{% block body_id %}signup{% endblock %}"
-{% block content %}
-<div ng-controller="SignupController" ng-init="init('{{ csrf_token }}')" id="signup_content" class="signup_body">
-    <form method="post" action="">
+<div id="signup_content" class="signup_body">
+    <form class="signup" method="post" action="">
         <p hg-show="error_flag" class="validation">[[ error_message ]]</p>
 
         <div class="block">
@@ -27,8 +18,12 @@
         </div>
         <input ng-click="signup()" type="submit" value="SignUp" />
     </form>
+    <div class="social_login">
+            <p>Login With</p>
+            <a href="{% url "socialauth_begin" 'facebook' %}" class="button facebook">Facebook</a><br />
+            <a href="{% url "socialauth_begin" 'twitter' %}" class="button twitter">Twitter</a>
+    </div>
 </div>
-{% endblock content %}
 
 
 

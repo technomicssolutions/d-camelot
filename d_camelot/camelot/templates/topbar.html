@@ -2,7 +2,7 @@
 	<div class="top_menu_wrapper">
     {% if user.is_anonymous %}
         <a ng-click="show_popup('login')" class="link login" href="#">Login</a>
-        <a ng-click="show_popup('signup')" class="link signup" href="{% url 'signup' %}">Sign Up</a>
+        <a ng-click="show_popup('signup')" class="link signup" href="#">Sign Up</a>
         {% include 'registration/login.html' %}
     {% else %}
         <a ng-click="show_popup('profile')" class="link user" href="#">{{ user.username }}</a>
