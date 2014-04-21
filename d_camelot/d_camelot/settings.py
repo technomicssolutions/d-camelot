@@ -129,7 +129,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.admindocs',
     'south',
-    'social.apps.django_app.default',
+    'social_auth',
     'camelot',
     'shop',
     'payment',
@@ -137,22 +137,21 @@ INSTALLED_APPS = (
     'inventory'
 )
 
-
 AUTHENTICATION_BACKENDS = (
-    'social.backends.open_id.OpenIdAuth',
-    'social.backends.google.GoogleOpenId',
-    'social.backends.google.GoogleOAuth2',
-    'social.backends.google.GoogleOAuth',
-    'social.backends.twitter.TwitterOAuth',
-    'social.backends.facebook.FacebookOAuth2',
+    'social_auth.backends.twitter.TwitterBackend',
+    'social_auth.backends.facebook.FacebookBackend',
+    'social_auth.backends.google.GoogleOAuthBackend',
+    'social_auth.backends.google.GoogleOAuth2Backend',
+    'social_auth.backends.google.GoogleBackend',
     'django.contrib.auth.backends.ModelBackend',
 )
 
 
-
 TEMPLATE_CONTEXT_PROCESSORS = (
-    'social.apps.django_app.context_processors.backends',
-    'social.apps.django_app.context_processors.login_redirect',
+    'social_auth.context_processors.social_auth_by_name_backends',
+    'social_auth.context_processors.social_auth_backends',
+    'social_auth.context_processors.social_auth_by_type_backends',
+    'social_auth.context_processors.social_auth_login_redirect',
     'django.contrib.auth.context_processors.auth',
     'django.core.context_processors.debug',
     'django.core.context_processors.i18n',
@@ -164,6 +163,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 )
 
 LOGIN_REDIRECT_URL = '/'
+
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
@@ -195,8 +195,8 @@ LOGGING = {
 }
 
 
-FACEBOOK_APP_ID='629348583813867'
-FACEBOOK_API_SECRET='a506d2df777f04a7921cb941a3c21374'
+FACEBOOK_APP_ID = '629348583813867'
+FACEBOOK_API_SECRET = 'a506d2df777f04a7921cb941a3c21374'
 FACEBOOK_EXTENDED_PERMISSIONS = ['email']
 
 TWITTER_CONSUMER_KEY = 'yqSjzNtVqedtdnSeWZwXtMY3L'

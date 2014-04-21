@@ -911,11 +911,9 @@ function login($scope, $http, $timeout) {
             }
         }).success(function(data, status)
         {
-            console.log('data',data);
             if(data == 'success'){
                 document.location.href = '/';
             } else {
-                console.log('error');
                 $scope.error_message = 'Username/Password incorrect';
                 $scope.error_flag = true;
             }
@@ -932,7 +930,6 @@ function login($scope, $http, $timeout) {
             // }
         }).error(function(data, status)
         {
-            console.log('error');
             $scope.error_message = 'Username/Password incorrect';
             $scope.error_flag = true;
             // $scope.error_message = data.error_value;

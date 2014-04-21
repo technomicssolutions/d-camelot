@@ -14,12 +14,11 @@
     </form>
     <div>
         <div class="social_login">
-            <a href="{% url 'social:begin' 'facebook' %}" class="button facebook">Login with Facebook</a><br />
-            <a href="{% url 'social:begin' 'twitter' %}" class="button twitter">Login with Twitter</a>
+            <a href="{% url "socialauth_begin" 'facebook' %}" class="button facebook">Login with Facebook</a><br />
+            <a href="{% url "socialauth_begin" 'twitter' %}" class="button twitter">Login with Twitter</a>
         </div>
     </div>
 </div>
-
 {% comment %}
 {% if form.errors %}
 <p>Your username and password didn't match. Please try again.</p>

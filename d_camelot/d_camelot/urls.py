@@ -12,6 +12,6 @@ urlpatterns = patterns('',
     url(r'^shop/$', include('shop.urls')),
     url(r'^payment/$', include('payment.urls')),
     url(r'^report/$', include('report.urls')),
-    url(r'', include('social.apps.django_app.urls', namespace='social')),
+    url(r'', include('social_auth.urls')),
     url(r'^site_media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT, 'show_indexes': True}),
 )
