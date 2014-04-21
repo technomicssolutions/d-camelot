@@ -276,6 +276,8 @@ a {
   width:100%;
 }
 
+
+
 /************** header styles end ***********/
 
 
@@ -441,11 +443,61 @@ header {
   width: 17%;
 }
 
-header .main_logo {
+header #main_logo {
   height: 40px;
-  line-height: 40px;
-  color: #782249;
-  padding-left: 15px;
+  width: 100%;
+  overflow: hidden;
+}
+
+header #main_logo img {
+  height: 40px;
+  width: 100%;
 }
 
 /*************** header styles end *************/
+
+
+/*************** popup styles ******************/
+
+#overlay {
+  /*background-color: #000000;*/
+  opacity: 0.9;
+  z-index: 1;
+  position: absolute;
+  width: 100%;
+}
+
+
+#dialogue_popup_container {
+  z-index: 2;
+  position: absolute;
+  width: 100%;
+}
+#dialogue_popup {
+  height: auto !important;
+  border-radius: 0px 0px 0px 0px;
+  border: 2px solid #ADD8E6;
+
+  z-index: 2;
+  position: relative;
+  margin-top: 300px !important;
+  margin: auto;
+  background-color: #FFFFFF;
+  display: none;
+  overflow: hidden;
+  padding-bottom: 20px;
+  width: 384px;
+  padding: 1%;
+}
+#dialogue_popup form {
+  width: 100%;
+}
+#dialogue_popup .control {
+  width: 100%;
+}
+#dialogue_popup label {
+  width: 50% !important;
+  float: left;
+}
+
+/*************** popup styles end ******************/

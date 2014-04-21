@@ -76,8 +76,6 @@ var Slider = new Class({
         this.timer = $clear(this.timer);
         this.effects.start(effect);
 
-        console.log('curr, last',this.currentIndex, this.lastInd);
-
         if(this.currentIndex == this.lastInd){
             this.leftControl.setStyle('display', 'none');
         } else {
@@ -161,7 +159,7 @@ var Archive = new Class({
 	}
 });
 
-/*var DialogueModelWindow = new Class({
+var DialogueModelWindow = new Class({
 	Implements: [Options],
 	options: {
 		'pop_window': '#dialogue_popup',
@@ -175,6 +173,7 @@ var Archive = new Class({
 	},
 	initialize: function(options) {
 		window.scrollTo(0,0);
+        this.isVisible = false;
 		this.setOptions(options);
 		this.message = ""
 		this.overlay = $$(this.options.overlay);
@@ -190,6 +189,7 @@ var Archive = new Class({
 		}.bind(this));
 		//this.set_left();
 		this.set_top();
+        this.set_overlay_event();
 	},
 	show_popup: function(){
 		// this.overlay.setStyle('display', 'block');
@@ -200,6 +200,7 @@ var Archive = new Class({
         this.pop_window.setStyle('width', this.options.dialogue_popup_width);
         this.pop_window.setStyle('height', this.options.height);
         this.pop_window.setStyle('display', 'block');
+        this.isVisible = true;
 		// this.pop_window.morph({
 		// 	'width': this.options.dialogue_popup_width,
 		// 	'height': this.options.height,
@@ -214,6 +215,7 @@ var Archive = new Class({
 		this.pop_window.setStyle('display', 'none');
 		if($$(this.options.content_div).length > 0)
 			$$(this.options.content_div)[0].setStyle('display', 'none');
+        this.isVisible = false;
 	},
 	set_message: function(message){
 		this.message = message;
@@ -230,6 +232,11 @@ var Archive = new Class({
 	set_top: function(){
 		this.pop_window.setStyle('margin-top', this.options.top);
 	},
+    set_overlay_event: function() {
+        this.overlay.addEvent('click', function(ev){
+            if (this.isVisible) this.hide_popup();
+        }.bind(this));
+    }
 });
 
 var TabView = new Class({
@@ -385,7 +392,7 @@ var SimpleMap = new Class({
     resizeMap: function() {
     	google.maps.event.trigger(this.map, 'resize');
     },
-});*/
+});
 
 // var CamelotSlider = new Class({
 // 	Implements: [Options],
@@ -519,23 +526,24 @@ var SimpleMap = new Class({
 // });
 
 
-var Registration = new Class({
-    Implements: [Options],
-    options: {},
-    initialize: function () {
-        var login = $$('.login_body')[0];
-        window.addEvent('click', function(ev) {
-            var p = ev.target.getParents();
-            if (ev.target.hasClass('login')) {
-                ev.stop();
-                login.toggleClass('show');
-            }
-            else if (!(ev.target==login || p.contains(login))) {
-                login.removeClass('show');
-            }
-        });
-    }
-});
+// var Registration = new Class({
+//     Implements: [Options],
+//     options: {},
+//     initialize: function () {
+//         console.log('reg init');
+//         var login = $$('.login_body')[0];
+//         window.addEvent('click', function(ev) {
+//             var p = ev.target.getParents();
+//             if (ev.target.hasClass('login')) {
+//                 ev.stop();
+//                 login.toggleClass('show');
+//             }
+//             else if (!(ev.target==login || p.contains(login))) {
+//                 login.removeClass('show');
+//             }
+//         });
+//     }
+// });
 
 
 var UI = new Class({
@@ -558,7 +566,7 @@ var UI = new Class({
         if($$('.slide_container').length > 0){
             new Slider($$('.slide_container')[0]);
         }
-        new Registration();
+        // if ($$('.login')[0]) new Registration();
     }
 });
 

@@ -1,7 +1,6 @@
-<div class="login_body">
+<div id="login_content" class="login_body">
     <form method="post" action="">
-    {% csrf_token %}
-        <p class="validation [[ error_flag ]]">[[ error_message ]]</p>
+        <p hg-show="error_flag" class="validation">[[ error_message ]]</p>
         <div>
             <label for="id_username">Username</label>
             <input ng-model="username" id="id_username" type="text" name="username" maxlength="254">
@@ -12,10 +11,14 @@
         </div>
 
         <input ng-click="login()" type="submit" value="login" />
-        <input type="hidden" name="next" value="" />
     </form>
+    <div>
+        <div class="social_login">
+            <a href="{% url "socialauth_begin" 'facebook' %}" class="button facebook">Login with Facebook</a><br />
+            <a href="{% url "socialauth_begin" 'twitter' %}" class="button twitter">Login with Twitter</a>
+        </div>
+    </div>
 </div>
-
 {% comment %}
 {% if form.errors %}
 <p>Your username and password didn't match. Please try again.</p>

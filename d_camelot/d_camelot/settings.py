@@ -129,12 +129,41 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.admindocs',
     'south',
+    'social_auth',
     'camelot',
     'shop',
     'payment',
     'report',
     'inventory'
 )
+
+AUTHENTICATION_BACKENDS = (
+    'social_auth.backends.twitter.TwitterBackend',
+    'social_auth.backends.facebook.FacebookBackend',
+    'social_auth.backends.google.GoogleOAuthBackend',
+    'social_auth.backends.google.GoogleOAuth2Backend',
+    'social_auth.backends.google.GoogleBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'social_auth.context_processors.social_auth_by_name_backends',
+    'social_auth.context_processors.social_auth_backends',
+    'social_auth.context_processors.social_auth_by_type_backends',
+    'social_auth.context_processors.social_auth_login_redirect',
+    'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.debug',
+    'django.core.context_processors.i18n',
+    'django.core.context_processors.media',
+    'django.core.context_processors.static',
+    'django.core.context_processors.tz',
+#    'django.core.context_processors.request',
+    'django.contrib.messages.context_processors.messages',
+)
+
+LOGIN_REDIRECT_URL = '/'
+
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
@@ -164,6 +193,15 @@ LOGGING = {
         },
     }
 }
+
+
+FACEBOOK_APP_ID = '629348583813867'
+FACEBOOK_API_SECRET = 'a506d2df777f04a7921cb941a3c21374'
+FACEBOOK_EXTENDED_PERMISSIONS = ['email']
+
+TWITTER_CONSUMER_KEY = 'yqSjzNtVqedtdnSeWZwXtMY3L'
+TWITTER_CONSUMER_SECRET = 'clp5UcgDTYnOFIFTKWmlS4JlhqBLOTb4AldmRkG87YYZ9ttrno'
+
 
 try:
     from local_settings import *
