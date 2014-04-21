@@ -460,8 +460,8 @@ header #main_logo img {
 /*************** popup styles ******************/
 
 #overlay {
-  /*background-color: #000000;*/
-  opacity: 0.9;
+  background-color: #000000;
+  opacity: 0.5;
   z-index: 1;
   position: absolute;
   width: 100%;
@@ -473,6 +473,7 @@ header #main_logo img {
   position: absolute;
   width: 100%;
 }
+
 #dialogue_popup {
   height: auto !important;
   border-radius: 0px 0px 0px 0px;
@@ -489,12 +490,15 @@ header #main_logo img {
   width: 384px;
   padding: 1%;
 }
+
 #dialogue_popup form {
   width: 100%;
 }
+
 #dialogue_popup .control {
   width: 100%;
 }
+
 #dialogue_popup label {
   width: 50% !important;
   float: left;

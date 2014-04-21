@@ -63,7 +63,7 @@ class LogOutView(View):
 
 class SignUpView(FormView):
     def get(self, request, *args, **kwargs):
-        return render(request, 'registration/signup.html', {})
+        return HttpResponseRedirect(reverse('home'))
 
     def post(self, request, *args, **kwargs):
         data = {}

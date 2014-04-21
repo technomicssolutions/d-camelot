@@ -5,6 +5,7 @@ function validateEmail(email) {
 function show_popup(name, $scope){
     if(name == 'login'){
         $scope.popup = new DialogueModelWindow({
+            'pop_window': '',
             'dialogue_popup_width': '384px',
             'message_padding': '0px',
             'left': '28%',
@@ -15,78 +16,19 @@ function show_popup(name, $scope){
         var height = $(document).height();
         $scope.popup.set_overlay_height(height);
         $scope.popup.show_content();
-    } else if(name == 'signup_email'){
-        $scope.popup = new DialogueModelWindow({
-          'dialogue_popup_width': '384px',
-          'message_padding': '0px',
-          'left': '28%',
-          'top': '100px',
-          'height': 460,
-          'content_div': '#signup_email_container'
-        });
-        var height = $(document).height();
-        $scope.popup.set_overlay_height(height);
-        $scope.popup.show_content();
     } else if(name == 'signup'){
         $scope.popup = new DialogueModelWindow({
+          'pop_window': '',
           'dialogue_popup_width': '384px',
           'message_padding': '0px',
           'left': '28%',
           'top': '100px',
           'height': 520,
-          'content_div': '#signup_content'
+          'content_div': '#signup_popup_container'
         });
         var height = $(document).height();
         $scope.popup.set_overlay_height(height);
         $scope.popup.show_content();
-    } else if(name == 'write_reference'){
-        $scope.popup = new DialogueModelWindow({
-          'dialogue_popup_width': '384px',
-          'message_padding': '0px',
-          'left': '28%',
-          'top': '100px',
-          'height': 370,
-          'content_div': '#write_reference'
-        });
-        var height = $(document).height();
-        $scope.popup.set_overlay_height(height);
-        $scope.popup.show_content();
-    } else if(name == 'payout_methods'){
-        $scope.popup = new DialogueModelWindow({
-            'dialogue_popup_width': '900px',
-            'message_padding': '0px',
-            'left': '28%',
-            'top': '100px',
-            'height': 450,
-            'content_div': '#payout_popup_container'
-          });
-          var height = $(document).height();
-          $scope.popup.set_overlay_height(height);
-          $scope.popup.show_content();
-    } else if(name == 'paypal_payoutmethod_edit'){
-        $scope.popup = new DialogueModelWindow({
-            'dialogue_popup_width': '900px',
-            'message_padding': '0px',
-            'left': '28%',
-            'top': '100px',
-            'height': 450,
-            'content_div': '#payout_popup_edit_container'
-          });
-          var height = $(document).height();
-          $scope.popup.set_overlay_height(height);
-          $scope.popup.show_content();
-    } else if(name == 'directdeposit_payoutmethod_edit'){
-        $scope.popup = new DialogueModelWindow({
-            'dialogue_popup_width': '900px',
-            'message_padding': '0px',
-            'left': '28%',
-            'top': '100px',
-            'height': 450,
-            'content_div': '#direct_method_popup_edit_container'
-          });
-          var height = $(document).height();
-          $scope.popup.set_overlay_height(height);
-          $scope.popup.show_content();
     } else if(name == 'show_sample_listing'){
         $scope.popup = new DialogueModelWindow({
             'dialogue_popup_width': '900px',
@@ -1048,20 +990,6 @@ function subscribe_now($scope, $http, $timeout){
     }
 }
 
-// function show_popup_test($scope){
-//     $scope.popup = new DialogueModelWindow({
-//         'dialogue_popup_width': '384px',
-//         'message_padding': '0px',
-//         'left': '28%',
-//         'top': '100px',
-//         'height': 525,
-//         'content_div': '#login_content'
-//     });
-//     var height = $(document).height();
-//     $scope.popup.set_overlay_height(height);
-//     $scope.popup.show_content();
-// }
-
 function HomeController($scope, $element, $http, $timeout, share, $location)
 {
     $scope.error_message = '';
@@ -1073,7 +1001,6 @@ function HomeController($scope, $element, $http, $timeout, share, $location)
         $scope.csrf_token = csrf_token;
     }
     $scope.show_popup = function(name){
-      console.log('in popup');
       show_popup(name, $scope);
     }
     $scope.hide_popup = function(name){
@@ -1084,27 +1011,13 @@ function HomeController($scope, $element, $http, $timeout, share, $location)
     // $scope.subscribe_now = function(){
     //     subscribe_now($scope, $http, $timeout);
     // }
-    // $scope.signup = function(){
-    //   signup($scope, $http, $timeout);
-    // }
+    $scope.signup = function(){
+      signup($scope, $http, $timeout);
+    }
     $scope.login = function() {
         login($scope, $http, $timeout);
     }
 }
-
-function SignupController($scope, $element, $http, $timeout, share, $location)
-{
-    $scope.error_message = '';
-    $scope.error_flag = '';
-    $scope.init = function(csrf_token)
-    {
-        $scope.csrf_token = csrf_token;
-    }
-    $scope.signup = function(){
-      signup($scope, $http, $timeout);
-    }
-}
-
 
 function BlogController($scope, $element, $http, $timeout, share, $location)
 {

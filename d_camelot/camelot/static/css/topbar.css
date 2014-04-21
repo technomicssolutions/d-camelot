@@ -36,7 +36,7 @@
 	display: block;
 }
 
-.login_body .validation {
+.validation {
     font-size: 11px;
     color: red;
 
@@ -81,17 +81,39 @@
     background-position: top;
 }
 
+
 /***********Sign Up **************/
-#signup_content {
-    margin-top: 30px;
-    height: 500px;
-    width: 83%;
-    float: left;
+
+#signup_popup_container {
+    display: none;
+    background-color: #782249;
+    padding: 20px;
+    position: absolute;
+    left: 35%;
+    top: 20%;
+    box-shadow: 2px 4px 5px #000;
+    z-index: 200;
+    border-radius: 5px;
 }
+
+#signup_popup {}
+
+#signup_popup .close_pop {
+    display: none;
+}
+
+#signup_content {
+    padding: 20px;
+    width: 400px;
+    background-color: #FFF;
+    overflow: hidden;
+}
+
 
 #signup_content .block {
     width: 300px;
 }
+
 
 #signup_content .block label {
     display: block;
@@ -104,6 +126,32 @@
 /*    width: 100%;*/
     padding: 0px 5%;
     height: 30px;
+}
+
+#signup_content input[type="submit"] {
+    color: #FFF;
+    background-color: #782249;
+    margin-top: 10px;
+    border: 0px;
+    border-radius: 2px;
+    padding: 0px 5%;
+    height: 30px;
+}
+
+#signup_content .signup {
+    float: left;
+    width: 260px;
+    border-right: 1px solid #E5E0E0;
+}
+
+#signup_content .social_login {
+    margin-left: 20px;
+    margin-top: 80px;
+    float: left;
+}
+
+#signup_content .social_login p {
+    margin-bottom: 5px;
 }
 
 /***********Sign Up End**************/
