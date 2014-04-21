@@ -6,3 +6,5 @@ django-wsgiserver==0.6.9
 psycopg2==2.5.1
 simplejson==3.4.0
 wsgiref==0.1.2
+django-social-auth==0.7.28
+
