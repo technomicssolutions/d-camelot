@@ -18,13 +18,16 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
 
 from shop.models import Shop
+from camelot.models import DCamelot
 
 
 class HomeView(View):
     def get(self, request, *args, **kwargs):
         shops = Shop.objects.all().order_by('id')
+        d_camelot = DCamelot.objects.latest('id')
         context = {
-            'shops': shops
+            'shops': shops,
+            'd_camelot': d_camelot
         }
         return render(request, 'home.html', context)
 

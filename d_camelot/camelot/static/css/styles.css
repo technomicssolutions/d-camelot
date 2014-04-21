@@ -276,6 +276,8 @@ a {
   width:100%;
 }
 
+
+
 /************** header styles end ***********/
 
 
@@ -441,11 +443,14 @@ header {
   width: 17%;
 }
 
-header .main_logo {
+header #main_logo {
   height: 40px;
-  line-height: 40px;
-  color: #782249;
-  padding-left: 15px;
+  width: 100%;
+}
+
+header #main_logo img {
+  height: 40px;
+  width: 100%;
 }
 
 /*************** header styles end *************/
