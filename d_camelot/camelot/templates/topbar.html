@@ -1,12 +1,21 @@
 <div class="row top_bar">
 	<div class="top_menu_wrapper">
     {% if user.is_anonymous %}
-        <a class="link login" href="#">Login</a>
+        <a ng-click="show_popup('login')" class="link login" href="#">Login</a>
         <a ng-click="show_popup('signup')" class="link signup" href="{% url 'signup' %}">Sign Up</a>
         {% include 'registration/login.html' %}
     {% else %}
-        <a class="link user" href="#">{{ user.username }}</a>
+        <a ng-click="show_popup('profile')" class="link user" href="#">{{ user.username }}</a>
+        <div id="user_content" class="user_profile_body">
+            <ul>
+                <li><a href="#">Profile</a></li>
+                <li><a href="#">Orders</a></li>
+                <li><a href="{% url 'logout' %}">Log Out</a></li>
+            </ul>
+        </div>
     {% endif %}
         <a href="#" class="shop_cart"></a>
 	</div>
 </div>
+
+

@@ -18,6 +18,7 @@
     text-decoration: none;
 }
 
+/********* Login *********/
 .top_bar .top_menu_wrapper .login_body {
 	display: none;
 	position: absolute;
@@ -61,6 +62,10 @@
 	border: 0px;
 }
 
+
+/********* Login End *********/
+
+
 .top_bar .shop_cart {
     outline: 0px;
     width: 36px;
@@ -76,6 +81,7 @@
     background-position: top;
 }
 
+/***********Sign Up **************/
 #signup_content {
     margin-top: 30px;
     height: 500px;
@@ -98,4 +104,29 @@
 /*    width: 100%;*/
     padding: 0px 5%;
     height: 30px;
+}
+
+/***********Sign Up End**************/
+
+
+
+.top_bar .top_menu_wrapper .user_profile_body {
+    display: none;
+    position: absolute;
+    padding: 20px;
+    top: 50px;
+    right: 0px;
+    min-width: 50px;
+    min-height: 50px;
+    background-color: #FFF;
+    box-shadow: 2px 4px 5px #333;
+    z-index: 200;
+}
+
+.top_bar .top_menu_wrapper .user_profile_body a {
+    color: #58B7EA;
+}
+
+.top_bar .top_menu_wrapper .user_profile_body a:hover {
+    text-decoration: underline;
 }

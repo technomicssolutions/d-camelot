@@ -111,6 +111,18 @@ function show_popup(name, $scope){
           var height = $(document).height();
           $scope.popup.set_overlay_height(height);
           $scope.popup.show_content();
+    } else if (name == 'profile') {
+        $scope.popup = new DialogueModelWindow({
+            'dialogue_popup_width': '384px',
+            'message_padding': '0px',
+            'left': '28%',
+            'top': '100px',
+            'height': 525,
+            'content_div': '#user_content'
+        });
+        var height = $(document).height();
+        $scope.popup.set_overlay_height(height);
+        $scope.popup.show_content();
     }
 }
 function get_time_zone($scope){
@@ -916,18 +928,16 @@ function login($scope, $http, $timeout) {
             } else {
                 $scope.error_message = 'Username/Password incorrect';
                 $scope.error_flag = true;
+                $scope.username = '';
+                $scope.password = '';
+                // $scope.error_message = data.message;
+                $scope.error_flag = true;
+                $timeout(function() {
+                    $scope.error_flag = false;
+                    $scope.popup.hide_popup();
+                    $scope.error_message = '';
+                }, 3000);
             }
-
-            //     $scope.username = '';
-            //     $scope.password = '';
-            //     $scope.error_message = data.message;
-            //     $scope.error_flag = true;
-            //     $timeout(function() {
-            //         $scope.error_flag = false;
-            //         $scope.popup.hide_popup();
-            //         $scope.error_message = '';
-            //     }, 3000);
-            // }
         }).error(function(data, status)
         {
             $scope.error_message = 'Username/Password incorrect';
@@ -985,13 +995,11 @@ function signup($scope, $http, $timeout){
             } else {
                 $scope.error_message = data.error;
                 $scope.error_flag = true;
-                // $scope.error_message = data.message;
-                // $scope.error_flag = true;
-                // $timeout(function() {
-                //     $scope.error_flag = false;
-                //     $scope.popup.hide_popup();
-                //     $scope.error_message = '';
-                // }, 5000);
+                $timeout(function() {
+                    $scope.error_flag = false;
+                    $scope.popup.hide_popup();
+                    $scope.error_message = '';
+                }, 5000);
             }
 
         }).error(function(data, status)
@@ -1040,6 +1048,20 @@ function subscribe_now($scope, $http, $timeout){
     }
 }
 
+// function show_popup_test($scope){
+//     $scope.popup = new DialogueModelWindow({
+//         'dialogue_popup_width': '384px',
+//         'message_padding': '0px',
+//         'left': '28%',
+//         'top': '100px',
+//         'height': 525,
+//         'content_div': '#login_content'
+//     });
+//     var height = $(document).height();
+//     $scope.popup.set_overlay_height(height);
+//     $scope.popup.show_content();
+// }
+
 function HomeController($scope, $element, $http, $timeout, share, $location)
 {
     $scope.error_message = '';
@@ -1051,13 +1073,14 @@ function HomeController($scope, $element, $http, $timeout, share, $location)
         $scope.csrf_token = csrf_token;
     }
     $scope.show_popup = function(name){
+      console.log('in popup');
       show_popup(name, $scope);
     }
-    // $scope.hide_popup = function(name){
-    //   $scope.email = '';
-    //   $scope.password = '';
-    //   $scope.username = '';
-    // }
+    $scope.hide_popup = function(name){
+      $scope.email = '';
+      $scope.password = '';
+      $scope.username = '';
+    }
     // $scope.subscribe_now = function(){
     //     subscribe_now($scope, $http, $timeout);
     // }

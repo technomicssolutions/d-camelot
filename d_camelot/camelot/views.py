@@ -41,12 +41,21 @@ class IndexView(View):
 class LoginView(FormView):
     form_class = AuthenticationForm
 
+    def get(self, request, *args, **kwargs):
+        return HttpResponseRedirect(reverse('home'))
+
     def form_invalid(self, form):
         return HttpResponse('error')
 
     def form_valid(self, form):
         login(self.request, form.get_user())
         return HttpResponse('success')
+
+
+class LogOutView(View):
+    def get(self, request, *args, **kwargs):
+        logout(request)
+        return HttpResponseRedirect(reverse('home'))
 
 
 class SignUpView(FormView):
