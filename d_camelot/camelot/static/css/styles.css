@@ -446,6 +446,7 @@ header {
 header #main_logo {
   height: 40px;
   width: 100%;
+  overflow: hidden;
 }
 
 header #main_logo img {
