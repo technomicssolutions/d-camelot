@@ -36,6 +36,15 @@
 	display: block;
 }
 
+.top_bar .top_menu_wrapper .login_body label {
+    font-weight: normal;
+}
+
+.top_bar .top_menu_wrapper .login_body img {
+    width: 22px;
+    height: 22px;
+}
+
 .validation {
     font-size: 11px;
     color: red;
