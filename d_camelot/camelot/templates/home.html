@@ -65,10 +65,10 @@
                       <h4> 20% discount for new Customers </h4>
                     </div>
                     <div class="shop_main_links">
-                      {% if shop.brands %}
+                      {% if shop.get_brands_list %}
                         <ul> <i>Our Main Brands </i>
-                          {% for brand in shop.brands.all %}
-                            <li><a href="{{brand.brand_name}}"> {{brand.brand_name}} </a> </br></li>
+                          {% for brand in shop.get_brands_list %}
+                            <li><a href="#"> {{ brand }} </a> </br></li>
                           {% endfor %}
                         </ul>
                       {% endif %}
