@@ -38,45 +38,47 @@ class Item(models.Model):
         return self.name + ' - ' + self.code
 
 
-# class Warehouse(models.Model):
-#     name = models.CharField('Name of Warehouse', max_length=100, unique=True)
-#     location = models.CharField('Location of Warehouse', max_length=200, blank=True)
+class Warehouse(models.Model):
+    name = models.CharField('Name of Warehouse', max_length=100, unique=True)
+    location = models.CharField('Location of Warehouse', max_length=200, blank=True)
 
-#     def __unicode__(self):
-#         return self.name
-
-
-# class Inventory(models.Model):
-#     quantity = models.IntegerField('Quantity', default=0)
-#     unit_price = models.DecimalField('Unit Price', max_digits=14, decimal_places=2, default=0)
-#     selling_price = models.DecimalField('Selling Price', max_digits=14, decimal_places=2, default=0)
-#     discount_permit_percentage = models.DecimalField('Discount permitted percentage', max_digits=14, decimal_places=3, default=0, null=True, blank=True)
-#     discount_permit_amount = models.DecimalField('Discount permitted amount', max_digits=14, decimal_places=3, default=0, null=True, blank=True)
-
-#     class Meta:
-#         verbose_name_plural = 'Inventory'
-#         abstract = True
+    def __unicode__(self):
+        return self.name
 
 
-# class WarehouseInventory(Inventory):
-#     item = models.ForeignKey(Item, unique=True)
-#     warehouse = models.ForeignKey(Warehouse)
+class Inventory(models.Model):
+    quantity = models.IntegerField('Quantity', default=0)
+    unit_price = models.DecimalField('Unit Price', max_digits=14, decimal_places=2, default=0)
+    selling_price = models.DecimalField('Selling Price', max_digits=14, decimal_places=2, default=0)
+    discount_permit_percentage = models.DecimalField('Discount permitted percentage', max_digits=14, decimal_places=3, default=0, null=True, blank=True)
+    discount_permit_amount = models.DecimalField('Discount permitted amount', max_digits=14, decimal_places=3, default=0, null=True, blank=True)
 
-#     def __unicode__(self):
-#         return self.item.get_name()
-
-#     class Meta:
-#         verbose_name = 'Warehouse Inventory'
-#         verbose_name_plural = 'Warehouse Inventory'
+    class Meta:
+        verbose_name_plural = 'Inventory'
+        abstract = True
 
 
-# class ShopInventory(Inventory):
-#     item = models.ForeignKey(Item, unique=True)
-#     shop = models.ForeignKey(Shop)
+class WarehouseInventory(Inventory):
+    item = models.ForeignKey(Item)
+    warehouse = models.ForeignKey(Warehouse)
 
-#     def __unicode__(self):
-#         return self.item.get_name()
+    def __unicode__(self):
+        return self.item.get_name()
 
-#     class Meta:
-#         verbose_name = 'Shop Inventory'
-#         verbose_name_plural = 'Shop Inventory'
+    class Meta:
+        unique_together = ("item", "warehouse")
+        verbose_name = 'Warehouse Inventory'
+        verbose_name_plural = 'Warehouse Inventory'
+
+
+class ShopInventory(Inventory):
+    item = models.ForeignKey(Item)
+    shop = models.ForeignKey(Shop)
+
+    def __unicode__(self):
+        return self.item.get_name()
+
+    class Meta:
+        unique_together = ("item", "shop")
+        verbose_name = 'Shop Inventory'
+        verbose_name_plural = 'Shop Inventory'
