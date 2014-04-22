@@ -45,7 +45,7 @@
     height: 22px;
 }
 
-/*.top_bar .top_menu_wrapper .link {
+/*.top_bar .top_menu_wrapper .sign_btn {
     outline: 0px;
     float: right;
     color: #58B7EA;
@@ -53,7 +53,7 @@
     padding-top: 15px;
 }
 
-.top_bar .top_menu_wrapper .link:hover {
+.top_bar .top_menu_wrapper .sign_btn:hover {
     color: #FFF;
     text-decoration: none;
 }
@@ -87,6 +87,11 @@
 	background-color: #782249;
 	margin-top: 10px;
 	border: 0px;
+}
+.top_bar .top_menu_wrapper .login_body input[type="submit"]:hover {
+    color: #FFF;
+    background-color: #660033;
+    text-decoration: none;
 }
 
 
@@ -164,6 +169,12 @@
     border-radius: 2px;
     padding: 0px 5%;
     height: 30px;
+}
+
+#signup_content input[type="submit"]:hover {
+    color: #FFF;
+    background-color: #660033;
+    text-decoration: none;
 }
 
 #signup_content .signup {
