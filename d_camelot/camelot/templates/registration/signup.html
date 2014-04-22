@@ -16,12 +16,12 @@
             <label for="id_password">Confirm Password</label>
             <input ng-model="password_confirm" id="id_password_confirm" type="password" name="password_confirm">
         </div>
-        <input ng-click="signup()" type="submit" value="SignUp" />
+        <input ng-click="signup()" type="submit" value="Sign Up" />
     </form>
     <div class="social_login">
-            <p>Login With</p>
-            <a href="{% url "socialauth_begin" 'facebook' %}" class="button facebook" ng-click="login_by_facebook()">Facebook</a><br />
-            <a href="{% url "socialauth_begin" 'google' %}" class="button gmail" ng-click="login_by_gmail()">Gmail</a>
+            <p>Log in With</p>
+            <a href="{% url "socialauth_begin" 'facebook' %}" class="button facebook" ng-click="login_by_facebook()"><img src="/static/img/fb.jpg" /></a>
+            <a href="{% url "socialauth_begin" 'google' %}" class="button gmail" ng-click="login_by_gmail()"><img src="/static/img/google-icon.png" /></a>
     </div>
 </div>
 

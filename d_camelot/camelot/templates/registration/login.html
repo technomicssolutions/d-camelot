@@ -10,10 +10,11 @@
             <input ng-model="password" id="id_password" type="password" name="password">
         </div>
 
-        <input ng-click="login()" type="submit" value="login" />
+        <input class="link" ng-click="login()" type="submit" value="Sign in" />
     </form>
     <div>
         <div class="social_login">
+            <p>Log in With</p>
             <a href="{% url "socialauth_begin" 'facebook' %}" class="button facebook" ng-click="login_by_facebook()"><img src="/static/img/fb.jpg" /></a>
             <a href="{% url "socialauth_begin" 'google' %}" class="button gmail" ng-click="login_by_gmail()"><img src="/static/img/google-icon.png" /></a>
         </div>
