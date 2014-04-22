@@ -996,9 +996,13 @@ function HomeController($scope, $element, $http, $timeout, share, $location)
     $scope.error_flag = '';
     $scope.signup_flag = false;
     $scope.popup = '';
+
+    $scope.facebook_login = false;
+    $scope.gmail_login = false;
+
     $scope.init = function(csrf_token)
     {
-        $scope.csrf_token = csrf_token;
+      $scope.csrf_token = csrf_token;
     }
     $scope.show_popup = function(name){
       show_popup(name, $scope);
@@ -1016,6 +1020,15 @@ function HomeController($scope, $element, $http, $timeout, share, $location)
     }
     $scope.login = function() {
         login($scope, $http, $timeout);
+    }
+    $scope.login_by_facebook = function()
+    {
+      alert("Hi");
+      $scope.facebook_login = true; 
+    }
+    $scope.login_by_gmail = function()
+    {
+      $scope.gmail_login = true;
     }
 }
 
@@ -1488,3 +1501,17 @@ function ProfileController($scope, $element, $http, $timeout, share, $location)
         });
     }
 }
+
+
+  $scope.facebook_login = false;
+  $scope.gmail_login = false;
+
+  $scope.login_by_facebook = function(token)
+  {
+    $scope.facebook_login = true;  
+
+  }
+  $scope.login_by_gmail = function(token)
+  {
+    $scope.gmail_login = true;
+  }

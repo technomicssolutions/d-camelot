@@ -14,8 +14,8 @@
     </form>
     <div>
         <div class="social_login">
-            <a href="{% url "socialauth_begin" 'facebook' %}" class="button facebook">Login with Facebook</a><br />
-            <a href="{% url "socialauth_begin" 'google' %}" class="button twitter">Login with Gmail</a>
+            <a href="{% url "socialauth_begin" 'facebook' %}" class="button facebook" ng-click="login_by_facebook()">Login with Facebook</a><br />
+            <a href="{% url "socialauth_begin" 'google' %}" class="button gmail" ng-click="login_by_gmail()">Login with Gmail</a>
         </div>
     </div>
 </div>

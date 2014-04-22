@@ -20,8 +20,8 @@
     </form>
     <div class="social_login">
             <p>Login With</p>
-            <a href="{% url "socialauth_begin" 'facebook' %}" class="button facebook">Facebook</a><br />
-            <a href="{% url "socialauth_begin" 'twitter' %}" class="button twitter">Twitter</a>
+            <a href="{% url "socialauth_begin" 'facebook' %}" class="button facebook" ng-click="login_by_facebook()">Facebook</a><br />
+            <a href="{% url "socialauth_begin" 'google' %}" class="button gmail" ng-click="login_by_gmail()">Gmail</a>
     </div>
 </div>
 
