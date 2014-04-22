@@ -45,6 +45,11 @@
     height: 22px;
 }
 
+.top_bar .top_menu_wrapper .social_login {
+    text-align: center;
+    
+}
+
 .validation {
     font-size: 11px;
     color: red;
