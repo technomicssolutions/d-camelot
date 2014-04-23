@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load inventory_tags %}
+
+{% block title %}Shop Index{% endblock title %}
+{% block extrahead%}
+
+{% endblock extrahead%}
+
+{% comment %}
+{% block controller %}
+  ng-controller="HomeController" ng-init="init('{{ csrf_token }}')"
+{% endblock controller %}
+{% endcomment %}
+
+{% block header %}
+    {% get_category_menu shop %}
+{% endblock header %}
+
+{% block body_id %}shop{% endblock %}"
+{% block content %}
+    <h1>Shop Landing Page</h1>
+{% endblock content %}

@@ -6,5 +6,5 @@ from shop.views import ShopIndexView
 
 
 urlpatterns = patterns('',
-    url(r'test/$', ShopIndexView.as_view(), name="shop_index"),
+    url(r'(?P<shop>.+)/$', ShopIndexView.as_view(), name="shop_landing"),
 )

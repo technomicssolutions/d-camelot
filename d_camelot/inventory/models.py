@@ -81,12 +81,24 @@ class WarehouseInventory(Inventory):
         verbose_name_plural = 'Warehouse Inventory'
 
 
+class ShopInventoryManager(models.Manager):
+    def get_items_by_shop(self, shop):
+        q = super(ShopInventoryManager, self).get_query_set().filter(shop_id=shop)
+        return q
+
+    def get_categories_by_shop(self, shop):
+        q = self.get_items_by_shop(shop)
+        return [x.item.category for x in q] if q else []
+
+
 class ShopInventory(Inventory):
     item = models.ForeignKey(Item)
     shop = models.ForeignKey(Shop)
 
     def __unicode__(self):
         return self.item.get_name()
+
+    objects = ShopInventoryManager()
 
     class Meta:
         unique_together = ("item", "shop")
