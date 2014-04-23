@@ -134,7 +134,9 @@ INSTALLED_APPS = (
     'shop',
     'payment',
     'report',
-    'inventory'
+    'inventory',
+    # 'categories',
+    'categories.editor',
 )
 
 AUTHENTICATION_BACKENDS = (
@@ -158,7 +160,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.media',
     'django.core.context_processors.static',
     'django.core.context_processors.tz',
-#    'django.core.context_processors.request',
+    'django.core.context_processors.request',
     'django.contrib.messages.context_processors.messages',
 )
 
@@ -194,7 +196,9 @@ LOGGING = {
     }
 }
 
-
+CATEGORIES_SETTINGS = {
+    'REGISTER_ADMIN': False
+}
 
 
 FACEBOOK_APP_ID = '652645768116929' #'629348583813867'
