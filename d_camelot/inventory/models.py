@@ -87,7 +87,7 @@ class ShopInventoryManager(models.Manager):
         return q
 
     def get_categories_by_shop(self, shop):
-        q = self.get_items_by_shop(shop)
+        q = self.get_items_by_shop(shop).order_by('item__category')
         return [x.item.category for x in q] if q else []
 
 

@@ -22,6 +22,6 @@ class ShopIndexView(ShopBaseView):
         shops = Shop.objects.all().order_by('id')
         self.context_vars = {
             'shops': shops,
-            'current_shop': shop
+            'current_shop': shop,
         }
         return super(ShopIndexView, self).get(request, *args, **kwargs)

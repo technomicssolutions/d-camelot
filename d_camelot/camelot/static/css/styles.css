@@ -507,3 +507,12 @@ header #main_logo img {
 }
 
 /*************** popup styles end ******************/
+
+
+body#shop .content_wrapper{
+  height: 400px;
+}
+
+body#shop .content_wrapper h2 {
+  color: #000;
+}
