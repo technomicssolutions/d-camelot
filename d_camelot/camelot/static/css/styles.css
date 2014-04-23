@@ -331,13 +331,14 @@ a {
 }
 
 .prev_arrow {
-  float: left;
-  display: block;
-  cursor: pointer;
-  width: 20px;
-  height: 20px;
-  text-decoration: none;
-  /*background: url('../img/arrow_left.png') no-repeat;*/
+    outline: 0px;
+    float: left;
+    display: block;
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    text-decoration: none;
+    /*background: url('../img/arrow_left.png') no-repeat;*/
 }
 
 .next_arrow img,
@@ -351,13 +352,14 @@ a {
 }
 
 .next_arrow {
-  float: right;
-  display: block;
-  cursor: pointer;
-  width: 20px;
-  height: 20px;
-  text-decoration: none;
-  /*background: url('../img/arrow_right.png') no-repeat;*/
+    outline: 0px;
+    float: right;
+    display: block;
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    text-decoration: none;
+    /*background: url('../img/arrow_right.png') no-repeat;*/
 }
 
 .shop_logo {
