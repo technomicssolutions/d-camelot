@@ -3,6 +3,8 @@ from django.db import models
 from camelot.models import Dates
 from shop.models import Shop
 
+from categories.models import CategoryBase
+
 
 class Brand(Dates):
     brand_name = models.CharField('Name', max_length=100, unique=True)
@@ -22,9 +24,17 @@ class UnitOfMeasure(models.Model):
         return self.unit
 
 
+class CustomCategory(CategoryBase):
+
+    class Meta(CategoryBase.Meta):
+        verbose_name = 'Category'
+        verbose_name_plural = 'Categories'
+
+
 class Item(models.Model):
     code = models.CharField('Product Code', max_length=20, unique=True)
     name = models.CharField('Product Name', max_length=50, unique=False)
+    category = models.ForeignKey(CustomCategory, null=True, blank=True)
     description = models.TextField('Description', null=True, blank=True)
     unit = models.ForeignKey(UnitOfMeasure)
     brand = models.ForeignKey(Brand)

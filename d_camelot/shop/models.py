@@ -20,7 +20,6 @@ class Shop(Dates):
     shop_type = models.CharField('Shop Type', max_length=10, choices=SHOPE_TYPE)
     slider_image = models.ImageField('Slider Image', upload_to="uploads/shop/")
     logo = models.ImageField('Logo', upload_to="uploads/shop/")
-    # brands = models.ManyToManyField(Brand)
 
     # objects = ShopManager()
 
