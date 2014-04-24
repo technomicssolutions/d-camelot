@@ -1024,7 +1024,7 @@ function HomeController($scope, $element, $http, $timeout, share, $location)
     $scope.login_by_facebook = function()
     {
       alert("Hi");
-      $scope.facebook_login = true; 
+      $scope.facebook_login = true;
     }
     $scope.login_by_gmail = function()
     {
@@ -1032,475 +1032,506 @@ function HomeController($scope, $element, $http, $timeout, share, $location)
     }
 }
 
-function BlogController($scope, $element, $http, $timeout, share, $location)
-{
-    $scope.blog_list = [];
-    $scope.list_view = true;
-    $scope.detail_view = false;
-    $scope.current_blog = '';
-    $scope.blog_board = false;
-    $scope.get_top_writers = '';
-    $scope.subscribe_message = false;
-    $scope.init = function(csrf_token, id, blog_board)
-    {
+function ShopController($scope, $element, $http, $timeout, share, $location) {
+    $scope.error_message = '';
+    $scope.error_flag = '';
+
+    $scope.init = function(csrf_token){
         $scope.csrf_token = csrf_token;
-        //$scope.get_blog_list();
-        $scope.get_archive();
-        $scope.archive_flag = false;
-        $scope.get_top_writers();
-        if(id != ''){
-            $scope.detail_view = true;
-        }
-        if(blog_board != ''){
-            $scope.blog_board = true;
-        }
-    }
-    $scope.get_archive = function(){
-        $http.get('/blog/archive/').success(function(data)
-        {
-            $scope.year_blog_list = data.year_blog_list;
-        }).error(function(data, status)
-        {
-            console.log(data || "Request failed");
-        });
-    }
-    $scope.archive_view = function(){
-        if(!$scope.archive_flag) {
-            new Archive($('.archive'));
-            $scope.archive_flag = true;
-        }
-    }
-    $scope.show_blog_board = function(){
-        $scope.blog_board = true;
-        $scope.list_view = false;
-        $scope.detail_view = false;
-    }
-    $scope.subscribe_now = function(){
-        subscribe_now($scope, $http, $timeout);
-    }
-    $scope.get_blog_list = function(){
-        $http.get('/blog_list/').success(function(data)
-        {
-            $location.path('/blog_list/')
-            $scope.blog_list = data.blog_list;
-            $scope.list_view = true;
-            $scope.detail_view = false;
-            $scope.blog_board = false;
-        }).error(function(data, status)
-        {
-            console.log(data || "Request failed");
-        });
-    }
-    $scope.blog_detail = function(blog, source){
-        var url = "/blog/"+blog.slug+"/";
-        window.location.href = url;
-        $http.get(url).success(function(data)
-        {
-            $scope.current_blog = data.blog;
-            $location.path(blog.slug+"/");
-            $scope.list_view = false;
-            $scope.detail_view = true;
-            $scope.blog_board = false;
-            $timeout(function() {
-                if(source == "comment_button"){
-                    var pos = $("#comment_plugin").position().top;
-                } else {
-                    var pos = 100;
-                }
-                $("body,html").animate({scrollTop: pos}, 1000);
-            }, 1000);
-
-        }).error(function(data, status)
-        {
-            console.log(data || "Request failed");
-        });
-    }
-    $scope.search_blog = function(){
-        var search_key = $scope.blog_search_key;
-        params = {
-            'search_key': search_key
-        }
-        $http({
-           method : 'get',
-           url : "/blog/search/?search_key="+search_key,
-           data : $.param(params),
-           headers : {
-               'Content-Type' : 'application/x-www-form-urlencoded'
-           }
-        }).success(function(data, status)
-        {
-            $location.path('/blog/search/').search('search_key', search_key)
-            $scope.blog_list = data.blog_list;
-            $scope.list_view = true;
-            $scope.detail_view = false;
-            $scope.blog_board = false;
-        }).error(function(data, status)
-        {
-            console.log(data);
-        });
-    }
-    $scope.tag_blog = function(tag){
-        var url = '/blog/tag/'+tag;
-        $http.get(url).success(function(data)
-        {
-            $location.path(url);
-            $scope.blog_list = data.blog_list;
-            $scope.list_view = true;
-            $scope.detail_view = false;
-            $scope.blog_board = false;
-        }).error(function(data, status)
-        {
-            console.log(data || "Request failed");
-        });
-    }
-    $scope.get_blog_tags = function(id){
-        var url = '/blog/'+id+'/tags/';
-        $http.get(url).success(function(data)
-        {
-            $scope.blog_tags = data.blog_tags;
-            $scope.list_view = true;
-            $scope.detail_view = false;
-            $scope.blog_board = false;
-        }).error(function(data, status)
-        {
-            console.log(data || "Request failed");
-        });
-    }
-    $scope.get_top_writers = function(){
-        var url = '/blog/top_writers/';
-        $http.get(url).success(function(data)
-        {
-            $scope.top_writers = data.writers;
-        }).error(function(data, status)
-        {
-            console.log(data || "Request failed");
-        });
-    }
-}
-
-function AboutUsController($scope, $element, $http, $timeout, share, $location)
-{
-    $scope.init = function(csrf_token)
-    {
-        $scope.csrf_token = csrf_token;
-        var url = '/brand_ambassadors/';
-        $http.get(url).success(function(data)
-        {
-            $scope.brandambassadors = data.brand_ambassadors;
-        }).error(function(data, status)
-        {
-            console.log(data || "Request failed");
-        });
-        var url = '/leadership_team/';
-        $http.get(url).success(function(data)
-        {
-            $scope.leaders = data.leaders;
-        }).error(function(data, status)
-        {
-            console.log(data || "Request failed");
-        });
-    }
-}
-
-function ContactUsController($scope, $element, $http, $timeout, share, $location)
-{
-    $scope.progressing_flag = false;
-    $scope.init = function(csrf_token)
-    {
-        $scope.csrf_token = csrf_token;
-        $scope.error_message = '';
-        $scope.error_flag = false;
-        $scope.success_flag =false;
     }
 
-    $scope.validate_form = function(){
-        if($scope.name == undefined || $scope.name == '' ) {
-            $scope.error_message = 'Please Enter Name';
-            $scope.error_flag = true;
-            return false;
-        } else if($scope.phone == undefined || $scope.phone == '') {
-            $scope.error_message = 'Please Enter Phone';
-            $scope.error_flag = true;
-            return false;
-        } else if(!(validateEmail($scope.email))) {
-            $scope.error_message = 'Please use the correct email format example@emailprovider.com';
-            $scope.error_flag = true;
-            return false;
-        }else if($scope.category == undefined || $scope.category == '' ){
-            $scope.error_message = 'Please Choose the category';
-            $scope.error_flag = true;
-            return false;
-        } else if($scope.message == undefined || $scope.message == '') {
-            $scope.error_message = 'Please Enter Message';
-            $scope.error_flag = true;
-            return false;
-        }
-        return true;
-    };
-
-    $scope.send = function(){
-        $scope.is_valid = $scope.validate_form();
-        if($scope.is_valid) {
-            $scope.progressing_flag = true;
-            params = {
-                'name': $scope.name,
-                'phone': $scope.phone,
-                'email': $scope.email,
-                'category': $scope.category,
-                'message': $scope.message,
-                "csrfmiddlewaretoken" : $scope.csrf_token
-            }
+    $scope.get_subcategory = function(id, is_leaf){
+        if (is_leaf == 'False') {
+            // params = {
+            //     'category_id': id
+            // }
             $http({
-               method : 'Post',
-               url : "/contact_us/",
-               data : $.param(params),
+               method : 'GET',
+               url : "/get_category/?id="+id,
+               // data : $.param(params),
                headers : {
                    'Content-Type' : 'application/x-www-form-urlencoded'
                }
             }).success(function(data, status)
             {
-                if(data.result == 'error'){
-                    $scope.error_message = data.message;
-                    $scope.error_flag = true;
-                    console.log('error');
-                } else {
-                    $scope.progressing_flag = false;
-                    $scope.error_flag = false;
-                    $scope.success_message = 'Thank you. We will be in touch shortly.';
-                    $scope.success_flag = true;
-                    $scope.name = '';
-                    $scope.phone = '';
-                    $scope.email = '';
-                    $scope.category = '';
-                    $scope.message = '';
-                    $timeout(function() {
-                        $scope.success_flag = false;
-                    }, 5000);
-                }
-
+                console.log(data);
             }).error(function(data, status)
             {
-                $scope.error_message = data.message;
-                $scope.error_flag = true;
-            });
-        } else {
-           // $scope.subscribe_message_error = true;
-        }
-    }
-}
-
-function SellerController($scope, $element, $http, $timeout, share, $location)
-{
-    $scope.init = function(csrf_token)
-    {
-        $scope.csrf_token = csrf_token;
-    }
-    $scope.show_popup = function(name){
-      show_popup(name, $scope);
-    }
-    $scope.hide_popup = function(name){
-      $scope.username = '';
-      $scope.email = '';
-      $scope.password = '';
-    }
-    $scope.validate_form = function(){
-        if($scope.first_name == undefined || $scope.first_name == '' ) {
-            $scope.error_message = 'Please Enter First Name';
-            $scope.error_flag = true;
-            return false;
-        } else if($scope.sur_name == undefined || $scope.sur_name == '' ) {
-            $scope.error_message = 'Please Enter Surname';
-            $scope.error_flag = true;
-            return false;
-        } else if(!(validateEmail($scope.email))) {
-            $scope.error_message = 'Please Enter a valid email';
-            $scope.error_flag = true;
-            return false;
-        } else if($scope.password == undefined || $scope.password == '') {
-            $scope.error_message = 'Please Enter Password';
-            $scope.error_flag = true;
-            return false;
-        } else if($scope.password.length <=6) {
-            $scope.error_message = 'Please use more than 6 letters in the password field';
-            $scope.error_flag = true;
-            return false;
-        }
-        return true;
-    };
-    $scope.mail_signup = function(){
-        $scope.is_valid = $scope.validate_form()
-        if ($scope.is_valid) {
-            params = {
-                /*'first_name': $scope.first_name,
-                'sur_name': $scope.sur_name,*/
-                'email': $scope.email,
-                'password': $scope.password,
-                "csrfmiddlewaretoken" : $scope.csrf_token
-            }
-            $http({
-               method : 'Post',
-               url : "/signup/",
-               data : $.param(params),
-               headers : {
-                   'Content-Type' : 'application/x-www-form-urlencoded'
-               }
-            }).success(function(data, status)
-            {
-                if(data.result == 'error'){
-                    $scope.error_message = data.error;
-                    $scope.error_flag = true;
-                } else {
-                    $scope.error_message = data.message;
-                    $scope.error_flag = true;
-                    $timeout(function() {
-                        $scope.error_flag = false;
-                        $scope.popup.hide_popup();
-                    }, 5000);
-                }
-
-            }).error(function(data, status)
-            {
-                $scope.error_message = data.message;
-                $scope.error_flag = true;
-            });
-        }
-
-    }
-}
-
-function RegisterYourInterestController($scope, $element, $http, $timeout, share, $location)
-{
-    $scope.progressing_flag = false;
-    $scope.services = [];
-    $scope.init = function(csrf_token)
-    {
-        $scope.csrf_token = csrf_token;
-        $scope.error_message = '';
-        $scope.error_flag = false;
-        $scope.success_flag =false;
-    }
-    $scope.add_services = function(title) {
-        if($scope.services.indexOf(title) == -1){
-            $scope.services.push(title);
-        } else {
-            var index = $scope.services.indexOf(title);
-            $scope.services.splice(index, 1);
-        }
-    }
-
-    $scope.validate_form = function(){
-        if($scope.name == undefined || $scope.name == '' ) {
-            $scope.error_message = 'Please Enter Name';
-            $scope.error_flag = true;
-            return false;
-        } else if($scope.phone == undefined || $scope.phone == '') {
-            $scope.error_message = 'Please Enter Phone';
-            $scope.error_flag = true;
-            return false;
-        } else if($scope.phone.length < 0 || parseInt($scope.phone.charAt(0)) != 0 || !Number($scope.phone)) {
-            $scope.error_message = 'Please Enter Valid phone number';
-            $scope.error_flag = true;
-            return false;
-        } else if(!(validateEmail($scope.email))) {
-            $scope.error_message = 'Please use the correct email format example@emailprovider.com';
-            $scope.error_flag = true;
-            return false;
-        } else if($scope.profession == undefined || $scope.profession == '' ){
-            $scope.error_message = 'Please Choose the profession';
-            $scope.error_flag = true;
-            return false;
-        }
-        return true;
-    };
-    $scope.send = function(){
-        $scope.is_valid = $scope.validate_form();
-        if($scope.is_valid) {
-            $scope.progressing_flag = true;
-            params = {
-                'name': $scope.name,
-                'phone': $scope.phone,
-                'email': $scope.email,
-                'profession': $scope.profession,
-                'services': JSON.stringify($scope.services),
-                "csrfmiddlewaretoken" : $scope.csrf_token,
-            }
-            $http({
-               method : 'Post',
-               url : "/register_your_interest/",
-               data : $.param(params),
-               headers : {
-                   'Content-Type' : 'application/x-www-form-urlencoded'
-               }
-            }).success(function(data, status)
-            {
-
-                if(data.result == 'error'){
-                    console.log('error');
-                } else {
-                    $scope.progressing_flag = false;
-                    $scope.error_flag = false;
-                    $scope.success_message = 'Thanks. We will be in touch closer to our launch date';
-                    $scope.success_flag = true;
-                    $scope.name = '';
-                    $scope.phone = '';
-                    $scope.email = '';
-                    $scope.profession = '';
-                    $scope.services = [];
-                    $scope.boot_camps = false;
-                    $scope.one_on_one_personal_training = false;
-                    $scope.fitness_programs = false;
-                    $scope.group_workouts = false;
-                    $scope.nutrition_guides = false;
-                    $scope.online_mentoring = false;
-                    $timeout(function() {
-                        $scope.success_flag = false;
-                    }, 5000);
-                }
-            }).error(function(data, status)
-            {
-                // $scope.progressing_flag = false;
-                $scope.error_message = data.message;
-                $scope.error_flag = true;
+                console.log(data);
             });
         }
     }
 }
 
-function ProfileController($scope, $element, $http, $timeout, share, $location)
-{
-    $scope.init = function(csrf_token, user_id, user_slug, user_type)
-    {
-        $scope.csrf_token = csrf_token;
-        $scope.user_id = user_id;
-        $scope.user_slug = user_slug;
-        $scope.user_type = user_type;
-        $selected_timezones = [];
-        get_countries($scope);
-    }
-    $scope.client_verification = function(token) {
-        $scope.client_token = token;
-        var url = '/'+$scope.user_type+'/'+$scope.user_slug+'/profile/'+$scope.client_token+'/';
-        params = {
-            'token': $scope.client_token,
-            "csrfmiddlewaretoken" : $scope.csrf_token,
-        }
-        $http({
-           method : 'Post',
-           url : url,
-           data : $.param(params),
-           headers : {
-               'Content-Type' : 'application/x-www-form-urlencoded'
-           }
-        }).success(function(data, status)
-        {
-            if ( data.result == 'success' ) {
-                document.location.href = url;
-            }
-        }).error(function(data, status)
-        {
-        });
-    }
-}
+// function BlogController($scope, $element, $http, $timeout, share, $location)
+// {
+//     $scope.blog_list = [];
+//     $scope.list_view = true;
+//     $scope.detail_view = false;
+//     $scope.current_blog = '';
+//     $scope.blog_board = false;
+//     $scope.get_top_writers = '';
+//     $scope.subscribe_message = false;
+//     $scope.init = function(csrf_token, id, blog_board)
+//     {
+//         $scope.csrf_token = csrf_token;
+//         //$scope.get_blog_list();
+//         $scope.get_archive();
+//         $scope.archive_flag = false;
+//         $scope.get_top_writers();
+//         if(id != ''){
+//             $scope.detail_view = true;
+//         }
+//         if(blog_board != ''){
+//             $scope.blog_board = true;
+//         }
+//     }
+//     $scope.get_archive = function(){
+//         $http.get('/blog/archive/').success(function(data)
+//         {
+//             $scope.year_blog_list = data.year_blog_list;
+//         }).error(function(data, status)
+//         {
+//             console.log(data || "Request failed");
+//         });
+//     }
+//     $scope.archive_view = function(){
+//         if(!$scope.archive_flag) {
+//             new Archive($('.archive'));
+//             $scope.archive_flag = true;
+//         }
+//     }
+//     $scope.show_blog_board = function(){
+//         $scope.blog_board = true;
+//         $scope.list_view = false;
+//         $scope.detail_view = false;
+//     }
+//     $scope.subscribe_now = function(){
+//         subscribe_now($scope, $http, $timeout);
+//     }
+//     $scope.get_blog_list = function(){
+//         $http.get('/blog_list/').success(function(data)
+//         {
+//             $location.path('/blog_list/')
+//             $scope.blog_list = data.blog_list;
+//             $scope.list_view = true;
+//             $scope.detail_view = false;
+//             $scope.blog_board = false;
+//         }).error(function(data, status)
+//         {
+//             console.log(data || "Request failed");
+//         });
+//     }
+//     $scope.blog_detail = function(blog, source){
+//         var url = "/blog/"+blog.slug+"/";
+//         window.location.href = url;
+//         $http.get(url).success(function(data)
+//         {
+//             $scope.current_blog = data.blog;
+//             $location.path(blog.slug+"/");
+//             $scope.list_view = false;
+//             $scope.detail_view = true;
+//             $scope.blog_board = false;
+//             $timeout(function() {
+//                 if(source == "comment_button"){
+//                     var pos = $("#comment_plugin").position().top;
+//                 } else {
+//                     var pos = 100;
+//                 }
+//                 $("body,html").animate({scrollTop: pos}, 1000);
+//             }, 1000);
+
+//         }).error(function(data, status)
+//         {
+//             console.log(data || "Request failed");
+//         });
+//     }
+//     $scope.search_blog = function(){
+//         var search_key = $scope.blog_search_key;
+//         params = {
+//             'search_key': search_key
+//         }
+//         $http({
+//            method : 'get',
+//            url : "/blog/search/?search_key="+search_key,
+//            data : $.param(params),
+//            headers : {
+//                'Content-Type' : 'application/x-www-form-urlencoded'
+//            }
+//         }).success(function(data, status)
+//         {
+//             $location.path('/blog/search/').search('search_key', search_key)
+//             $scope.blog_list = data.blog_list;
+//             $scope.list_view = true;
+//             $scope.detail_view = false;
+//             $scope.blog_board = false;
+//         }).error(function(data, status)
+//         {
+//             console.log(data);
+//         });
+//     }
+//     $scope.tag_blog = function(tag){
+//         var url = '/blog/tag/'+tag;
+//         $http.get(url).success(function(data)
+//         {
+//             $location.path(url);
+//             $scope.blog_list = data.blog_list;
+//             $scope.list_view = true;
+//             $scope.detail_view = false;
+//             $scope.blog_board = false;
+//         }).error(function(data, status)
+//         {
+//             console.log(data || "Request failed");
+//         });
+//     }
+//     $scope.get_blog_tags = function(id){
+//         var url = '/blog/'+id+'/tags/';
+//         $http.get(url).success(function(data)
+//         {
+//             $scope.blog_tags = data.blog_tags;
+//             $scope.list_view = true;
+//             $scope.detail_view = false;
+//             $scope.blog_board = false;
+//         }).error(function(data, status)
+//         {
+//             console.log(data || "Request failed");
+//         });
+//     }
+//     $scope.get_top_writers = function(){
+//         var url = '/blog/top_writers/';
+//         $http.get(url).success(function(data)
+//         {
+//             $scope.top_writers = data.writers;
+//         }).error(function(data, status)
+//         {
+//             console.log(data || "Request failed");
+//         });
+//     }
+// }
+
+// function AboutUsController($scope, $element, $http, $timeout, share, $location)
+// {
+//     $scope.init = function(csrf_token)
+//     {
+//         $scope.csrf_token = csrf_token;
+//         var url = '/brand_ambassadors/';
+//         $http.get(url).success(function(data)
+//         {
+//             $scope.brandambassadors = data.brand_ambassadors;
+//         }).error(function(data, status)
+//         {
+//             console.log(data || "Request failed");
+//         });
+//         var url = '/leadership_team/';
+//         $http.get(url).success(function(data)
+//         {
+//             $scope.leaders = data.leaders;
+//         }).error(function(data, status)
+//         {
+//             console.log(data || "Request failed");
+//         });
+//     }
+// }
+
+// function ContactUsController($scope, $element, $http, $timeout, share, $location)
+// {
+//     $scope.progressing_flag = false;
+//     $scope.init = function(csrf_token)
+//     {
+//         $scope.csrf_token = csrf_token;
+//         $scope.error_message = '';
+//         $scope.error_flag = false;
+//         $scope.success_flag =false;
+//     }
+
+//     $scope.validate_form = function(){
+//         if($scope.name == undefined || $scope.name == '' ) {
+//             $scope.error_message = 'Please Enter Name';
+//             $scope.error_flag = true;
+//             return false;
+//         } else if($scope.phone == undefined || $scope.phone == '') {
+//             $scope.error_message = 'Please Enter Phone';
+//             $scope.error_flag = true;
+//             return false;
+//         } else if(!(validateEmail($scope.email))) {
+//             $scope.error_message = 'Please use the correct email format example@emailprovider.com';
+//             $scope.error_flag = true;
+//             return false;
+//         }else if($scope.category == undefined || $scope.category == '' ){
+//             $scope.error_message = 'Please Choose the category';
+//             $scope.error_flag = true;
+//             return false;
+//         } else if($scope.message == undefined || $scope.message == '') {
+//             $scope.error_message = 'Please Enter Message';
+//             $scope.error_flag = true;
+//             return false;
+//         }
+//         return true;
+//     };
+
+//     $scope.send = function(){
+//         $scope.is_valid = $scope.validate_form();
+//         if($scope.is_valid) {
+//             $scope.progressing_flag = true;
+//             params = {
+//                 'name': $scope.name,
+//                 'phone': $scope.phone,
+//                 'email': $scope.email,
+//                 'category': $scope.category,
+//                 'message': $scope.message,
+//                 "csrfmiddlewaretoken" : $scope.csrf_token
+//             }
+//             $http({
+//                method : 'Post',
+//                url : "/contact_us/",
+//                data : $.param(params),
+//                headers : {
+//                    'Content-Type' : 'application/x-www-form-urlencoded'
+//                }
+//             }).success(function(data, status)
+//             {
+//                 if(data.result == 'error'){
+//                     $scope.error_message = data.message;
+//                     $scope.error_flag = true;
+//                     console.log('error');
+//                 } else {
+//                     $scope.progressing_flag = false;
+//                     $scope.error_flag = false;
+//                     $scope.success_message = 'Thank you. We will be in touch shortly.';
+//                     $scope.success_flag = true;
+//                     $scope.name = '';
+//                     $scope.phone = '';
+//                     $scope.email = '';
+//                     $scope.category = '';
+//                     $scope.message = '';
+//                     $timeout(function() {
+//                         $scope.success_flag = false;
+//                     }, 5000);
+//                 }
+
+//             }).error(function(data, status)
+//             {
+//                 $scope.error_message = data.message;
+//                 $scope.error_flag = true;
+//             });
+//         } else {
+//            // $scope.subscribe_message_error = true;
+//         }
+//     }
+// }
+
+// function SellerController($scope, $element, $http, $timeout, share, $location)
+// {
+//     $scope.init = function(csrf_token)
+//     {
+//         $scope.csrf_token = csrf_token;
+//     }
+//     $scope.show_popup = function(name){
+//       show_popup(name, $scope);
+//     }
+//     $scope.hide_popup = function(name){
+//       $scope.username = '';
+//       $scope.email = '';
+//       $scope.password = '';
+//     }
+//     $scope.validate_form = function(){
+//         if($scope.first_name == undefined || $scope.first_name == '' ) {
+//             $scope.error_message = 'Please Enter First Name';
+//             $scope.error_flag = true;
+//             return false;
+//         } else if($scope.sur_name == undefined || $scope.sur_name == '' ) {
+//             $scope.error_message = 'Please Enter Surname';
+//             $scope.error_flag = true;
+//             return false;
+//         } else if(!(validateEmail($scope.email))) {
+//             $scope.error_message = 'Please Enter a valid email';
+//             $scope.error_flag = true;
+//             return false;
+//         } else if($scope.password == undefined || $scope.password == '') {
+//             $scope.error_message = 'Please Enter Password';
+//             $scope.error_flag = true;
+//             return false;
+//         } else if($scope.password.length <=6) {
+//             $scope.error_message = 'Please use more than 6 letters in the password field';
+//             $scope.error_flag = true;
+//             return false;
+//         }
+//         return true;
+//     };
+//     $scope.mail_signup = function(){
+//         $scope.is_valid = $scope.validate_form()
+//         if ($scope.is_valid) {
+//             params = {
+//                 /*'first_name': $scope.first_name,
+//                 'sur_name': $scope.sur_name,*/
+//                 'email': $scope.email,
+//                 'password': $scope.password,
+//                 "csrfmiddlewaretoken" : $scope.csrf_token
+//             }
+//             $http({
+//                method : 'Post',
+//                url : "/signup/",
+//                data : $.param(params),
+//                headers : {
+//                    'Content-Type' : 'application/x-www-form-urlencoded'
+//                }
+//             }).success(function(data, status)
+//             {
+//                 if(data.result == 'error'){
+//                     $scope.error_message = data.error;
+//                     $scope.error_flag = true;
+//                 } else {
+//                     $scope.error_message = data.message;
+//                     $scope.error_flag = true;
+//                     $timeout(function() {
+//                         $scope.error_flag = false;
+//                         $scope.popup.hide_popup();
+//                     }, 5000);
+//                 }
+
+//             }).error(function(data, status)
+//             {
+//                 $scope.error_message = data.message;
+//                 $scope.error_flag = true;
+//             });
+//         }
+
+//     }
+// }
+
+// function RegisterYourInterestController($scope, $element, $http, $timeout, share, $location)
+// {
+//     $scope.progressing_flag = false;
+//     $scope.services = [];
+//     $scope.init = function(csrf_token)
+//     {
+//         $scope.csrf_token = csrf_token;
+//         $scope.error_message = '';
+//         $scope.error_flag = false;
+//         $scope.success_flag =false;
+//     }
+//     $scope.add_services = function(title) {
+//         if($scope.services.indexOf(title) == -1){
+//             $scope.services.push(title);
+//         } else {
+//             var index = $scope.services.indexOf(title);
+//             $scope.services.splice(index, 1);
+//         }
+//     }
+
+//     $scope.validate_form = function(){
+//         if($scope.name == undefined || $scope.name == '' ) {
+//             $scope.error_message = 'Please Enter Name';
+//             $scope.error_flag = true;
+//             return false;
+//         } else if($scope.phone == undefined || $scope.phone == '') {
+//             $scope.error_message = 'Please Enter Phone';
+//             $scope.error_flag = true;
+//             return false;
+//         } else if($scope.phone.length < 0 || parseInt($scope.phone.charAt(0)) != 0 || !Number($scope.phone)) {
+//             $scope.error_message = 'Please Enter Valid phone number';
+//             $scope.error_flag = true;
+//             return false;
+//         } else if(!(validateEmail($scope.email))) {
+//             $scope.error_message = 'Please use the correct email format example@emailprovider.com';
+//             $scope.error_flag = true;
+//             return false;
+//         } else if($scope.profession == undefined || $scope.profession == '' ){
+//             $scope.error_message = 'Please Choose the profession';
+//             $scope.error_flag = true;
+//             return false;
+//         }
+//         return true;
+//     };
+//     $scope.send = function(){
+//         $scope.is_valid = $scope.validate_form();
+//         if($scope.is_valid) {
+//             $scope.progressing_flag = true;
+//             params = {
+//                 'name': $scope.name,
+//                 'phone': $scope.phone,
+//                 'email': $scope.email,
+//                 'profession': $scope.profession,
+//                 'services': JSON.stringify($scope.services),
+//                 "csrfmiddlewaretoken" : $scope.csrf_token,
+//             }
+//             $http({
+//                method : 'Post',
+//                url : "/register_your_interest/",
+//                data : $.param(params),
+//                headers : {
+//                    'Content-Type' : 'application/x-www-form-urlencoded'
+//                }
+//             }).success(function(data, status)
+//             {
+
+//                 if(data.result == 'error'){
+//                     console.log('error');
+//                 } else {
+//                     $scope.progressing_flag = false;
+//                     $scope.error_flag = false;
+//                     $scope.success_message = 'Thanks. We will be in touch closer to our launch date';
+//                     $scope.success_flag = true;
+//                     $scope.name = '';
+//                     $scope.phone = '';
+//                     $scope.email = '';
+//                     $scope.profession = '';
+//                     $scope.services = [];
+//                     $scope.boot_camps = false;
+//                     $scope.one_on_one_personal_training = false;
+//                     $scope.fitness_programs = false;
+//                     $scope.group_workouts = false;
+//                     $scope.nutrition_guides = false;
+//                     $scope.online_mentoring = false;
+//                     $timeout(function() {
+//                         $scope.success_flag = false;
+//                     }, 5000);
+//                 }
+//             }).error(function(data, status)
+//             {
+//                 // $scope.progressing_flag = false;
+//                 $scope.error_message = data.message;
+//                 $scope.error_flag = true;
+//             });
+//         }
+//     }
+// }
+
+// function ProfileController($scope, $element, $http, $timeout, share, $location)
+// {
+//     $scope.init = function(csrf_token, user_id, user_slug, user_type)
+//     {
+//         $scope.csrf_token = csrf_token;
+//         $scope.user_id = user_id;
+//         $scope.user_slug = user_slug;
+//         $scope.user_type = user_type;
+//         $selected_timezones = [];
+//         get_countries($scope);
+//     }
+//     $scope.client_verification = function(token) {
+//         $scope.client_token = token;
+//         var url = '/'+$scope.user_type+'/'+$scope.user_slug+'/profile/'+$scope.client_token+'/';
+//         params = {
+//             'token': $scope.client_token,
+//             "csrfmiddlewaretoken" : $scope.csrf_token,
+//         }
+//         $http({
+//            method : 'Post',
+//            url : url,
+//            data : $.param(params),
+//            headers : {
+//                'Content-Type' : 'application/x-www-form-urlencoded'
+//            }
+//         }).success(function(data, status)
+//         {
+//             if ( data.result == 'success' ) {
+//                 document.location.href = url;
+//             }
+//         }).error(function(data, status)
+//         {
+//         });
+//     }
+// }
 
 
   $scope.facebook_login = false;
@@ -1508,7 +1539,7 @@ function ProfileController($scope, $element, $http, $timeout, share, $location)
 
   $scope.login_by_facebook = function(token)
   {
-    $scope.facebook_login = true;  
+    $scope.facebook_login = true;
 
   }
   $scope.login_by_gmail = function(token)

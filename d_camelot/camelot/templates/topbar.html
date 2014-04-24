@@ -1,4 +1,9 @@
 <div class="row top_bar">
+      {% if d_camelot.logo %}
+        <div id="main_logo">
+          <a href="{% url 'home' %}"><img src="{{ d_camelot.get_logo }}"></a>
+        </div>
+      {% endif %}
 	<div class="top_menu_wrapper">
     {% if user.is_anonymous %}
         <a ng-click="show_popup('login')" class="link login" href="#">Login</a>

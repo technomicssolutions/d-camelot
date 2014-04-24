@@ -1,3 +1,4 @@
+
 .top_bar .top_menu_wrapper {
     position: relative;
     width: 80%;
@@ -16,6 +17,24 @@
 .top_bar .top_menu_wrapper .link:hover {
     color: #FFF;
     text-decoration: none;
+}
+
+.top_bar #main_logo {
+    width: 15%;
+    left: 2%;
+    overflow: hidden;
+    position: absolute;
+    z-index: 100;
+}
+
+.top_bar #main_logo a  {
+    display: block;
+}
+
+.top_bar #main_logo img {
+    margin-top: 5px;
+    height: 40px;
+    width: 100%;
 }
 
 /********* Login *********/
@@ -60,7 +79,7 @@
 */
 .top_bar .top_menu_wrapper .social_login {
     text-align: center;
-    
+
 }
 
 .validation {

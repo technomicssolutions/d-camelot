@@ -6,19 +6,35 @@
 
 {% endblock extrahead%}
 
-{% comment %}
+
 {% block controller %}
-  ng-controller="HomeController" ng-init="init('{{ csrf_token }}')"
+  ng-controller="ShopController" ng-init="init('{{ csrf_token }}')"
 {% endblock controller %}
-{% endcomment %}
+
 
 {% block header %}
-    {% get_category_menu shop %}
+
 {% endblock header %}
 
 {% block body_id %}shop{% endblock %}"
 {% block content %}
     <div class="content_wrapper">
-        <h2>Shop Landing Page for {{ current_shop }}</h2>
+
+        <div class="menu_container">
+            {% get_category_menu shop %}
+        </div>
+
+        <div class="content_container">
+            <h2>Shop Landing Page for {{ current_shop }}</h2>
+            <div class="product_wrapper">
+                {% for product in products %}
+                    <a href="#" class="product">
+                        <img src="{{ product.item.get_image }}">
+                        <div> {{ product.item.get_name }} </div>
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+
     </div>
 {% endblock content %}

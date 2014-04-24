@@ -445,7 +445,7 @@ header {
   width: 17%;
 }
 
-header #main_logo {
+/*header #main_logo {
   height: 40px;
   width: 100%;
   overflow: hidden;
@@ -454,7 +454,7 @@ header #main_logo {
 header #main_logo img {
   height: 40px;
   width: 100%;
-}
+}*/
 
 /*************** header styles end *************/
 
@@ -509,10 +509,3 @@ header #main_logo img {
 /*************** popup styles end ******************/
 
 
-body#shop .content_wrapper{
-  height: 400px;
-}
-
-body#shop .content_wrapper h2 {
-  color: #000;
-}

@@ -1,9 +1,24 @@
-<header>
-<div>
-{% for category in categories %}
+{% load category_tags %}
+
+
+<div id="menu_category">
     <ul>
-        <li>{{ category }}</li>
+        {% for p in parents %}
+            <li><a ng-click="get_subcategory({{ p.id }} ,'{{ p.is_leaf_node }}')" href="#">{{ p.name }}</a></li>
+        {% endfor %}
     </ul>
-{% endfor %}
+    {% comment %}
+    <ul>
+      {% recursetree parents %}
+        <li>
+            {{ node.name }}
+            {% if not node.is_leaf_node %}
+                <ul>
+                    {{ children }}
+                </ul>
+            {% endif %}
+        </li>
+        {% endrecursetree %}
+    </ul>
+    {% endcomment %}
 </div>
-</header>

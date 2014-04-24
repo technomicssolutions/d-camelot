@@ -19,6 +19,7 @@ from django.contrib.auth.forms import AuthenticationForm
 
 from shop.models import Shop
 from camelot.models import DCamelot
+from inventory.models import CustomCategory
 
 
 class HomeView(View):
@@ -79,3 +80,14 @@ class SignUpView(FormView):
         except:
             data['error'] = 'Email already registered'
         return HttpResponse(simplejson.dumps(data))
+
+
+class CategoryView(View):
+    def get(self, request, *args, **kwargs):
+        category_id = request.GET.get('id', False)
+        print '\ncategory_id', category_id
+        if category_id:
+            cat = CustomCategory.objects.get(id=category_id)
+            d = cat.get_children()
+        return HttpResponse('Ok')
+

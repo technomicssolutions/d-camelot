@@ -34,6 +34,7 @@ class CustomCategory(CategoryBase):
 class Item(models.Model):
     code = models.CharField('Product Code', max_length=20, unique=True)
     name = models.CharField('Product Name', max_length=50, unique=False)
+    image = models.ImageField('Product Image', null=True, blank=True, upload_to="uploads/products/")
     category = models.ForeignKey(CustomCategory, null=True, blank=True)
     description = models.TextField('Description', null=True, blank=True)
     unit = models.ForeignKey(UnitOfMeasure)
@@ -46,6 +47,11 @@ class Item(models.Model):
 
     def get_name(self):
         return self.name + ' - ' + self.code
+
+    def get_image(self):
+        if self.image:
+            return self.image.url
+        return '/static/img/product_missing.png'
 
 
 class Warehouse(models.Model):
@@ -87,8 +93,15 @@ class ShopInventoryManager(models.Manager):
         return q
 
     def get_categories_by_shop(self, shop):
+        result = []
+        t = []
         q = self.get_items_by_shop(shop).order_by('item__category')
-        return [x.item.category for x in q] if q else []
+        if q:
+            for x in q:
+                if x.item.category.id not in t:
+                    result.append(x.item.category)
+                t.append(x.item.category.id)
+        return result
 
 
 class ShopInventory(Inventory):

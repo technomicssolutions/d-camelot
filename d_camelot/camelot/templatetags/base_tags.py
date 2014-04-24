@@ -19,5 +19,3 @@ def navactive(request, pattern):
 #     if request.path in (reverse(url) for url in urls.split()):
 #         return "active"
 #     return ""
-
-
