@@ -84,10 +84,14 @@ class SignUpView(FormView):
 
 class CategoryView(View):
     def get(self, request, *args, **kwargs):
+        result = {}
         category_id = request.GET.get('id', False)
         print '\ncategory_id', category_id
         if category_id:
             cat = CustomCategory.objects.get(id=category_id)
             d = cat.get_children()
-        return HttpResponse('Ok')
+            for i in d:
+                result[i.id] = (i.name, i.is_leaf_node())
+        return HttpResponse(simplejson.dumps(result))
+
 

@@ -461,7 +461,12 @@ header #main_logo img {
 
 /*************** popup styles ******************/
 
+#content_container {
+  position: relative;
+}
+
 #overlay {
+  top: 0px;
   background-color: #000000;
   opacity: 0.5;
   z-index: 1;

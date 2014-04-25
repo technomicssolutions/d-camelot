@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.urlresolvers import reverse
 
 from camelot.models import Dates
 from shop.models import Shop
@@ -29,6 +30,9 @@ class CustomCategory(CategoryBase):
     class Meta(CategoryBase.Meta):
         verbose_name = 'Category'
         verbose_name_plural = 'Categories'
+
+    # def get_category_url(self, shop):
+    #     return reverse('product_list', args=(shop, self.id))
 
 
 class Item(models.Model):
@@ -92,16 +96,25 @@ class ShopInventoryManager(models.Manager):
         q = super(ShopInventoryManager, self).get_query_set().filter(shop_id=shop)
         return q
 
-    def get_categories_by_shop(self, shop):
+# returns the root nodes of categories in shop
+    def get_categories_by_shop(self, shop_id):
         result = []
         t = []
-        q = self.get_items_by_shop(shop).order_by('item__category')
+        q = self.get_items_by_shop(shop_id).order_by('item__category')
         if q:
             for x in q:
-                if x.item.category.id not in t:
-                    result.append(x.item.category)
-                t.append(x.item.category.id)
+                root = x.item.category.get_root()
+                if root.id not in t:
+                    result.append(root)
+                t.append(root.id)
         return result
+
+    def get_items_by_shop_by_category(self, shop_id, category_id):
+        q = self.get_items_by_shop(shop_id).filter(item__category_id=category_id)
+        return q
+
+    def product_exist_for_category(self, shop_id, category_id):
+        return self.get_items_by_shop(shop_id).filter(item__category_id=category_id).exists()
 
 
 class ShopInventory(Inventory):

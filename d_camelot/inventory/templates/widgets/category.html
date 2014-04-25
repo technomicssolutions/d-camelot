@@ -1,24 +1,41 @@
-{% load category_tags %}
+{% load mptt_tags %}
 
 
 <div id="menu_category">
-    <ul>
-        {% for p in parents %}
-            <li><a ng-click="get_subcategory({{ p.id }} ,'{{ p.is_leaf_node }}')" href="#">{{ p.name }}</a></li>
-        {% endfor %}
-    </ul>
-    {% comment %}
-    <ul>
-      {% recursetree parents %}
-        <li>
-            {{ node.name }}
-            {% if not node.is_leaf_node %}
-                <ul>
-                    {{ children }}
-                </ul>
-            {% endif %}
-        </li>
-        {% endrecursetree %}
-    </ul>
-    {% endcomment %}
+    {% for pnode in parents %}
+        {% drilldown_tree_for_node pnode as drillnode %}
+        <div>
+            {% for node,structure in drillnode|tree_info %}
+                {% if structure.new_level %}<ul><li>
+                {% else %}</li><li>
+                {% endif %}
+                {% ifequal node category %}<strong>{{ node.name }}</strong>
+                {% else %}<a href="{% url 'product_list' shop_obj.slug node.id %}">{{ node.name }}</a>
+                {% endifequal %}
+                {% for level in structure.closed_levels %}</li></ul>{% endfor %}
+            {% endfor %}
+        </div>
+    {% endfor %}
 </div>
+
+
+{% comment %}
+<ul>
+    {% for p in parents %}
+        <li><a ng-click="get_subcategory({{ p.id }} ,'{{ p.is_leaf_node }}')" href="#">{{ p.name }}</a></li>
+    {% endfor %}
+</ul>
+<div>-----</div>
+<ul>
+  {% recursetree parents %}
+    <li>
+        {{ node.name }}
+        {% if not node.is_leaf_node %}
+            <ul>
+                {{ children }}
+            </ul>
+        {% endif %}
+    </li>
+    {% endrecursetree %}
+</ul>
+{% endcomment %}

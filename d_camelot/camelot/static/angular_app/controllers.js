@@ -1023,7 +1023,6 @@ function HomeController($scope, $element, $http, $timeout, share, $location)
     }
     $scope.login_by_facebook = function()
     {
-      alert("Hi");
       $scope.facebook_login = true;
     }
     $scope.login_by_gmail = function()
@@ -1032,36 +1031,37 @@ function HomeController($scope, $element, $http, $timeout, share, $location)
     }
 }
 
-function ShopController($scope, $element, $http, $timeout, share, $location) {
-    $scope.error_message = '';
-    $scope.error_flag = '';
+// function ShopController($scope, $element, $http, $timeout, share, $location) {
+//     $scope.error_message = '';
+//     $scope.error_flag = '';
 
-    $scope.init = function(csrf_token){
-        $scope.csrf_token = csrf_token;
-    }
+//     $scope.init = function(csrf_token){
+//         $scope.csrf_token = csrf_token;
+//     }
 
-    $scope.get_subcategory = function(id, is_leaf){
-        if (is_leaf == 'False') {
-            // params = {
-            //     'category_id': id
-            // }
-            $http({
-               method : 'GET',
-               url : "/get_category/?id="+id,
-               // data : $.param(params),
-               headers : {
-                   'Content-Type' : 'application/x-www-form-urlencoded'
-               }
-            }).success(function(data, status)
-            {
-                console.log(data);
-            }).error(function(data, status)
-            {
-                console.log(data);
-            });
-        }
-    }
-}
+//     $scope.get_subcategory = function(id, is_leaf){
+//         console.log('is_leaf', is_leaf);
+//         if (is_leaf == 'False') {
+//             // params = {
+//             //     'category_id': id
+//             // }
+//             $http({
+//                method : 'GET',
+//                url : "/get_category/?id="+id,
+//                // data : $.param(params),
+//                headers : {
+//                    'Content-Type' : 'application/x-www-form-urlencoded'
+//                }
+//             }).success(function(data, status)
+//             {
+//                 console.log(data);
+//             }).error(function(data, status)
+//             {
+//                 console.log(data);
+//             });
+//         }
+//     }
+// }
 
 // function BlogController($scope, $element, $http, $timeout, share, $location)
 // {

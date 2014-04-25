@@ -5,7 +5,9 @@ from shop.models import Shop
 from camelot.models import DCamelot
 from inventory.models import ShopInventory
 
+
 class ShopBaseView(TemplateView):
+    template_name = 'shop_landing.html'
     context_vars = {}
 
     def get_context_data(self, **kwargs):
@@ -18,7 +20,6 @@ class ShopBaseView(TemplateView):
 
 
 class ShopIndexView(ShopBaseView):
-    template_name = 'shop_landing.html'
 
     def get(self, request, *args, **kwargs):
         shop = kwargs.get('shop', '')
@@ -29,7 +30,27 @@ class ShopIndexView(ShopBaseView):
         except:
             pass
         self.context_vars = {
-            'current_shop': shop,
-            'products': products
+            'shop': shop_obj,
+            'products': products,
+            'category': ''
         }
         return super(ShopIndexView, self).get(request, *args, **kwargs)
+
+
+class ProductListView(ShopBaseView):
+    def get(self, request, *args, **kwargs):
+        print '\n=rached\n',args
+        shop = kwargs.get('shop', '')
+        category = kwargs.get('category_id', '')
+        products = []
+        try:
+            shop_obj = Shop.objects.get(slug=shop)
+            products = ShopInventory.objects.get_items_by_shop_by_category(shop_obj.id, category)
+        except:
+            pass
+        self.context_vars = {
+            'shop': shop_obj,
+            'products': products,
+            'category': category
+        }
+        return super(ProductListView, self).get(request, *args, **kwargs)

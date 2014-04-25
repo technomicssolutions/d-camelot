@@ -8,14 +8,14 @@ register = Library()
 
 
 @register.inclusion_tag('widgets/category.html')
-def get_category_menu(shop_slug):
+def get_category_menu(shop_id, category_id=None):
     results = {}
-    shop = Shop.objects.get(slug=shop_slug)
-    categories = ShopInventory.objects.get_categories_by_shop(shop.id)
-    c = CustomCategory.objects.filter(parent=None)
-    results['shop'] = shop
-    results['categories'] = categories
-    results['category'] = categories[0]
-    results['parents'] = c
+    shop = Shop.objects.get(id=shop_id)
+    if category_id:
+        categories = CustomCategory.objects.filter(id=category_id)
+    else:
+        categories = ShopInventory.objects.get_categories_by_shop(shop_id)
+    results['parents'] = categories
+    results['shop_obj'] = shop
     return results
 # {% get_category_menu %}

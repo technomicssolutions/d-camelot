@@ -17,13 +17,24 @@
 	<div class="container-fluid">
 		{% include 'topbar.html' %}
 	</div>
-	<div class="container-fluid">
+	<div id="content_container"  class="container-fluid">
 		{% block header %}
 			{% include 'header.html' %}
 		{% endblock header %}
 
 		{% block content %}
 		{% endblock content %}
+
+		{% block extra-content %}
+			<div id="overlay"></div>
+		    <div id="signup_popup_container">
+		        <div id="signup_popup">
+		            <div class="close_pop"></div>
+		            {% include 'registration/signup.html' %}
+		        </div>
+		    </div>
+		{% endblock extra-content %}
+
 	</div>
 	{% block footer %}
 		{% include 'footer.html' %}
